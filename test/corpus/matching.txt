@@ -1,0 +1,52 @@
+==================
+Match expressions
+==================
+
+match payload {
+  Payload::Plain => print("Plain text"),
+  Payload::Rich => {
+    // block
+    print("Rich text")
+  }
+}
+
+---
+
+(program
+  (statement
+    (expression
+      (match_expression
+        (expression
+          (identifier))
+        (match_case
+          (member_access
+            (expression
+              (identifier))
+            (double_colon)
+            (identifier))
+          (expression
+            (function_call
+              (identifier)
+              (paren_arguments
+                (expression
+                  (primitive_value
+                    (string
+                      (string_content))))))))
+        (match_case
+          (member_access
+            (expression
+              (identifier))
+            (double_colon)
+            (identifier))
+          (block
+            (statement
+              (comment))
+            (statement
+              (expression
+                (function_call
+                  (identifier)
+                  (paren_arguments
+                    (expression
+                      (primitive_value
+                        (string
+                          (string_content))))))))))))))

@@ -1,0 +1,54 @@
+==================
+Variable declaration
+==================
+
+let name: Str = "John"
+mut age: Num = 25
+let is_something = false
+mut negative = -1
+
+---
+
+(program
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (primitive_type
+          (str)))
+      (assign)
+      value: (expression
+        expr: (primitive_value
+          primitive: (string
+            chunk: (string_content))))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (primitive_type
+          (num)))
+      (assign)
+      value: (expression
+        expr: (primitive_value
+          primitive: (number)))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      (assign)
+      value: (expression
+        expr: (primitive_value
+          primitive: (boolean)))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      (assign)
+      value: (expression
+        expr: (unary_expression
+          operator: (minus)
+          operand: (expression
+            expr: (primitive_value
+              primitive: (number))))))))

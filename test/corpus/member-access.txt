@@ -1,0 +1,77 @@
+==================
+Member Access
+==================
+
+let initialized: [Str:Bool] = [:]
+initialized.count
+initialized.put("key", true)
+location.point.x
+---
+
+(program
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (map_type
+          key: (str)
+          value: (type
+            (primitive_type
+              (bool)))))
+      (assign)
+      value: (expression
+        expr: (map_value))))
+  (statement
+    (expression
+      expr: (member_access
+        target: (expression
+          expr: (identifier))
+        operator: (period)
+        member: (identifier))))
+  (statement
+    (expression
+      expr: (member_access
+        target: (expression
+          expr: (identifier))
+        operator: (period)
+        member: (function_call
+          target: (identifier)
+          arguments: (paren_arguments
+            argument: (expression
+              expr: (primitive_value
+                primitive: (string
+                  chunk: (string_content))))
+            argument: (expression
+              expr: (primitive_value
+                primitive: (boolean))))))))
+  (statement
+    (expression
+      expr: (member_access
+        target: (expression
+          expr: (member_access
+            target: (expression
+              expr: (identifier))
+            operator: (period)
+            member: (identifier)))
+        operator: (period)
+        member: (identifier)))))
+
+==================
+Members on string literals
+==================
+
+"fizzbuzz".size
+
+---
+
+(program
+  (statement
+    (expression
+      (member_access
+        (expression
+          (primitive_value
+            (string
+              (string_content))))
+        (period)
+        (identifier)))))

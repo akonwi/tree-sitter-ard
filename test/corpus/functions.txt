@@ -1,0 +1,203 @@
+==================
+empty params
+==================
+
+fn get_hello() {
+  "Hello, world!"
+}
+
+get_hello()
+---
+
+(program
+  (statement
+    (function_definition
+      name: (identifier)
+      parameters: (parameters)
+      body: (block
+        (statement
+          (expression
+            expr: (primitive_value
+              primitive: (string
+                chunk: (string_content))))))))
+  (statement
+    (expression
+      expr: (function_call
+        target: (identifier)
+        arguments: (paren_arguments)))))
+
+==================
+one param with return
+==================
+fn greet(person: Str) Str {
+  "Hello, {{person}}!"
+}
+
+greet("Alice")
+greet(get_hello())
+
+---
+
+(program
+  (statement
+    (function_definition
+      (identifier)
+      (parameters
+        (param_def
+          (identifier)
+          (type
+            (primitive_type
+              (str)))))
+      (type
+        (primitive_type
+          (str)))
+      (block
+        (statement
+          (expression
+            (primitive_value
+              (string
+                (string_content)
+                (string_interpolation
+                  (expression
+                    (identifier)))
+                (string_content))))))))
+  (statement
+    (expression
+      (function_call
+        (identifier)
+        (paren_arguments
+          (expression
+            (primitive_value
+              (string
+                (string_content))))))))
+  (statement
+    (expression
+      (function_call
+        (identifier)
+        (paren_arguments
+          (expression
+            (function_call
+              (identifier)
+              (paren_arguments))))))))
+
+==================
+two params
+==================
+
+fn add(x: Num, y: Num) Num {
+}
+
+
+add(1, 2)
+
+---
+
+(program
+  (statement
+    (function_definition
+      (identifier)
+      (parameters
+        (param_def
+          (identifier)
+          (type
+            (primitive_type
+              (num))))
+        (param_def
+          (identifier)
+          (type
+            (primitive_type
+              (num)))))
+      (type
+        (primitive_type
+          (num)))
+      (block)))
+  (statement
+    (expression
+      (function_call
+        (identifier)
+        (paren_arguments
+          (expression
+            (primitive_value
+              (number)))
+          (expression
+            (primitive_value
+              (number))))))))
+
+==================
+anonymous functions
+==================
+() {
+  print("Hello, anon!")
+}
+
+(n: Num) Num {
+  do_stuff()
+  n + 1
+}
+
+list.map((n) { n + 1 })
+---
+
+(program
+  (statement
+    (expression
+      (anonymous_function
+        (block
+          (statement
+            (expression
+              (function_call
+                (identifier)
+                (paren_arguments
+                  (expression
+                    (primitive_value
+                      (string
+                        (string_content))))))))))))
+  (statement
+    (expression
+      (anonymous_function
+        (anonymous_parameter
+          (identifier)
+          (type
+            (primitive_type
+              (num))))
+        (type
+          (primitive_type
+            (num)))
+        (block
+          (statement
+            (expression
+              (function_call
+                (identifier)
+                (paren_arguments))))
+          (statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (plus)
+                (expression
+                  (primitive_value
+                    (number))))))))))
+  (statement
+    (expression
+      (member_access
+        (expression
+          (identifier))
+        (period)
+        (function_call
+          (identifier)
+          (paren_arguments
+            (expression
+              (anonymous_function
+                (anonymous_parameter
+                  (identifier))
+                (block
+                  (statement
+                    (expression
+                      (binary_expression
+                        (expression
+                          (identifier))
+                        (plus)
+                        (expression
+                          (primitive_value
+                            (number)))))))))))))))

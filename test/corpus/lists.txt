@@ -1,0 +1,66 @@
+==================
+lists
+==================
+
+let empty: [Num] = []
+let numbers = [1, 2, 3]
+let strings: [Str] = ["a", "b","c"]
+let booleans: [Bool] = [true, false]
+
+---
+
+(program
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (list_type
+          element_type: (type
+            (primitive_type
+              (num)))))
+      (assign)
+      value: (expression
+        expr: (list_value))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      (assign)
+      value: (expression
+        expr: (list_value
+          element: (number)
+          element: (number)
+          element: (number)))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (list_type
+          element_type: (type
+            (primitive_type
+              (str)))))
+      (assign)
+      value: (expression
+        expr: (list_value
+          element: (string
+            chunk: (string_content))
+          element: (string
+            chunk: (string_content))
+          element: (string
+            chunk: (string_content))))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (list_type
+          element_type: (type
+            (primitive_type
+              (bool)))))
+      (assign)
+      value: (expression
+        expr: (list_value
+          element: (boolean)
+          element: (boolean))))))

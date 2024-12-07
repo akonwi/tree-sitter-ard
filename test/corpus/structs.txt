@@ -1,0 +1,84 @@
+==================
+structs
+==================
+
+struct Person {
+	name: Str,
+	age: Num,
+	employed: Bool
+}
+
+let john = Person {	name: "John", age: 30, employed: true }
+let people: [Person] = [
+  john,
+  Person {	name: "Alice", age: 30, employed: true }
+]
+---
+
+(program
+  (statement
+    (struct_definition
+      name: (identifier)
+      field: (struct_property
+        name: (identifier)
+        type: (type
+          (primitive_type
+            (str))))
+      field: (struct_property
+        name: (identifier)
+        type: (type
+          (primitive_type
+            (num))))
+      field: (struct_property
+        name: (identifier)
+        type: (type
+          (primitive_type
+            (bool))))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      (assign)
+      value: (expression
+        expr: (struct_instance
+          name: (identifier)
+          field: (struct_prop_pair
+            name: (identifier)
+            value: (primitive_value
+              primitive: (string
+                chunk: (string_content))))
+          field: (struct_prop_pair
+            name: (identifier)
+            value: (primitive_value
+              primitive: (number)))
+          field: (struct_prop_pair
+            name: (identifier)
+            value: (primitive_value
+              primitive: (boolean)))))))
+  (statement
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      type: (type
+        (list_type
+          element_type: (type
+            (identifier))))
+      (assign)
+      value: (expression
+        expr: (list_value
+          element: (identifier)
+          element: (struct_instance
+            name: (identifier)
+            field: (struct_prop_pair
+              name: (identifier)
+              value: (primitive_value
+                primitive: (string
+                  chunk: (string_content))))
+            field: (struct_prop_pair
+              name: (identifier)
+              value: (primitive_value
+                primitive: (number)))
+            field: (struct_prop_pair
+              name: (identifier)
+              value: (primitive_value
+                primitive: (boolean)))))))))

@@ -1,0 +1,78 @@
+==================
+loops
+==================
+
+while count <= 9 {
+	count =+ 1
+}
+
+while is_true or count > 0 {
+	count =- 1
+}
+
+do while count == 9 {
+	count =- 1
+}
+
+---
+
+(program
+  (statement
+    (while_loop
+      condition: (expression
+        expr: (binary_expression
+          left: (expression
+            expr: (identifier))
+          operator: (less_than_or_equal)
+          right: (expression
+            expr: (primitive_value
+              primitive: (number)))))
+      body: (block
+        (statement
+          (reassignment
+            name: (identifier)
+            operator: (increment)
+            value: (expression
+              expr: (primitive_value
+                primitive: (number))))))))
+  (statement
+    (while_loop
+      condition: (expression
+        expr: (binary_expression
+          left: (expression
+            expr: (identifier))
+          operator: (or)
+          right: (expression
+            expr: (binary_expression
+              left: (expression
+                expr: (identifier))
+              operator: (greater_than)
+              right: (expression
+                expr: (primitive_value
+                  primitive: (number)))))))
+      body: (block
+        (statement
+          (reassignment
+            name: (identifier)
+            operator: (decrement)
+            value: (expression
+              expr: (primitive_value
+                primitive: (number))))))))
+  (statement
+    (while_loop
+      condition: (expression
+        expr: (binary_expression
+          left: (expression
+            expr: (identifier))
+          operator: (equal)
+          right: (expression
+            expr: (primitive_value
+              primitive: (number)))))
+      body: (block
+        (statement
+          (reassignment
+            name: (identifier)
+            operator: (decrement)
+            value: (expression
+              expr: (primitive_value
+                primitive: (number)))))))))
