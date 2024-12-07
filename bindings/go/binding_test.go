@@ -1,14 +1,13 @@
-package tree_sitter_ard_test
+package tree_sitter_ard
 
 import (
 	"testing"
 
 	tree_sitter "github.com/tree-sitter/go-tree-sitter"
-	tree_sitter_ard "github.com/akonwi/tree-sitter-ard/bindings/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {
-	language := tree_sitter.NewLanguage(tree_sitter_ard.Language())
+	language := tree_sitter.NewLanguage(Language())
 	if language == nil {
 		t.Errorf("Error loading Ard grammar")
 	}
