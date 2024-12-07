@@ -42,10 +42,12 @@
     }
   },
   "scripts": {
-    "build": "node-gyp rebuild",
+    "generate": "rm -rf ./build && node-gyp rebuild && tree-sitter generate",
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "test": "go test bindings/go/binding_test.go"
+    "test": "tree-sitter test",
+    "test:update": "tree-sitter test --update",
+    "test:binding": "go test bindings/go/binding_test.go"
   }
 }
