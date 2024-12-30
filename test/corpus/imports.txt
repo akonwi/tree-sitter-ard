@@ -2,6 +2,7 @@
 imports
 ==================
 
+use std/io
 use fmt
 use testing
 use github.com/google/go-cmp/cmp
