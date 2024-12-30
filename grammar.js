@@ -48,7 +48,7 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
 
   rules: {
-    program: ($) => repeat($.statement),
+    program: ($) => seq(repeat($.import), repeat($.statement)),
 
     statement: ($) =>
       choice(
@@ -62,6 +62,14 @@ module.exports = grammar({
         $._expression_statement,
         $.struct_definition,
         $.enum_definition,
+      ),
+
+    //// imports
+    import: ($) =>
+      seq(
+        "use",
+        field("path", $.module_path),
+        optional(seq("as", field("alias", $.identifier))),
       ),
 
     //// definitions
@@ -386,6 +394,7 @@ module.exports = grammar({
     primitive_value: ($) =>
       field("primitive", choice($.string, $.number, $.boolean)),
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    module_path: ($) => /[a-zA-Z][a-zA-Z0-9_\-\.\/]*/,
     string: ($) =>
       seq(
         '"',

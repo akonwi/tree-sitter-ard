@@ -442,6 +442,32 @@
     }
   },
   {
+    "type": "import",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "module_path",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "list_type",
     "named": true,
     "fields": {
@@ -795,6 +821,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "import",
+          "named": true
+        },
         {
           "type": "statement",
           "named": true
@@ -1228,6 +1258,10 @@
     "named": true
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "assign",
     "named": true
   },
@@ -1332,6 +1366,10 @@
     "named": true
   },
   {
+    "type": "module_path",
+    "named": true
+  },
+  {
     "type": "modulo",
     "named": true
   },
@@ -1381,6 +1419,10 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "use",
     "named": false
   },
   {
