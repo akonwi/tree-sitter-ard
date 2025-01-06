@@ -9,6 +9,11 @@ enum Payload {
 
 let data = Payload::Plain
 
+enum Option {
+  None,
+  Some(T?)
+}
+
 ---
 
 (program

@@ -211,7 +211,7 @@
       },
       "variant": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "enum_variant",
@@ -632,7 +632,11 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_access",
             "named": true
           }
         ]
@@ -1068,6 +1072,22 @@
     }
   },
   {
+    "type": "tuple_type",
+    "named": true,
+    "fields": {
+      "element_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {},
@@ -1089,6 +1109,10 @@
         },
         {
           "type": "primitive_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
           "named": true
         }
       ]

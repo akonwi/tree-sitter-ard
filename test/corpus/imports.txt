@@ -18,5 +18,7 @@ use github.com/tree-sitter/go-tree-sitter as ts
   (import
     (module_path))
   (import
+    (module_path))
+  (import
     (module_path)
     (identifier)))

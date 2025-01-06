@@ -43,6 +43,7 @@ module.exports = grammar({
     [$._expression_statement, $.binary_expression],
     [$.binary_expression, $.variable_definition],
     [$.anonymous_parameter, $.expression],
+    [$.tuple_type, $.list_type],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -90,7 +91,7 @@ module.exports = grammar({
         $._enum,
         field("name", $.identifier),
         $._left_brace,
-        sepBy1(field("variant", $.enum_variant), $._comma),
+        sepBy(field("variant", $.enum_variant), $._comma),
         $._right_brace,
       ),
 
@@ -234,6 +235,7 @@ module.exports = grammar({
           ),
         ),
       ),
+
     paren_expression: ($) =>
       seq($._left_paren, field("expr", $.expression), $._right_paren),
 
@@ -336,10 +338,24 @@ module.exports = grammar({
 
     ///// types
     type: ($) =>
-      choice($.map_type, $.list_type, $.primitive_type, $.identifier),
+      choice(
+        $.map_type,
+        $.list_type,
+        $.tuple_type,
+        $.primitive_type,
+        $.identifier,
+      ),
 
     list_type: ($) =>
       seq($._left_bracket, field("element_type", $.type), $._right_bracket),
+
+    tuple_type: ($) =>
+      seq(
+        $._left_bracket,
+        sepBy(field("element_type", $.type), $._comma),
+        $._right_bracket,
+      ),
+
     map_type: ($) =>
       seq(
         $._left_bracket,
@@ -369,6 +385,7 @@ module.exports = grammar({
         ),
         $._right_bracket,
       ),
+
     map_value: ($) =>
       choice(
         seq($._left_bracket, $._colon, $._right_bracket),
