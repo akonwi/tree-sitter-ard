@@ -11,7 +11,7 @@ let data = Payload::Plain
 
 enum Option {
   None,
-  Some(T?)
+  Some
 }
 
 ---
@@ -34,4 +34,11 @@ enum Option {
           target: (expression
             expr: (identifier))
           operator: (double_colon)
-          member: (identifier))))))
+          member: (identifier)))))
+  (statement
+    (enum_definition
+      name: (identifier)
+      variant: (enum_variant
+        variant: (identifier))
+      variant: (enum_variant
+        variant: (identifier)))))

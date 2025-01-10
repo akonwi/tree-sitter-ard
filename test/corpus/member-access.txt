@@ -6,6 +6,7 @@ let initialized: [Str:Bool] = [:]
 initialized.count
 initialized.put("key", true)
 location.point.x
+!todo.done
 ---
 
 (program
@@ -54,6 +55,16 @@ location.point.x
               expr: (identifier))
             operator: (period)
             member: (identifier)))
+        operator: (period)
+        member: (identifier))))
+  (statement
+    (expression
+      expr: (member_access
+        target: (expression
+          expr: (unary_expression
+            operator: (bang)
+            operand: (expression
+              expr: (identifier))))
         operator: (period)
         member: (identifier)))))
 

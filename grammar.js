@@ -51,6 +51,15 @@ module.exports = grammar({
   rules: {
     program: ($) => seq(repeat($.import), repeat($.statement)),
 
+    //// imports
+    import: ($) =>
+      seq(
+        "use",
+        field("path", $.module_path),
+        optional(seq("as", field("alias", $.identifier))),
+      ),
+
+    //// Statements
     statement: ($) =>
       choice(
         $.comment,
@@ -63,14 +72,6 @@ module.exports = grammar({
         $._expression_statement,
         $.struct_definition,
         $.enum_definition,
-      ),
-
-    //// imports
-    import: ($) =>
-      seq(
-        "use",
-        field("path", $.module_path),
-        optional(seq("as", field("alias", $.identifier))),
       ),
 
     //// definitions
@@ -95,16 +96,7 @@ module.exports = grammar({
         $._right_brace,
       ),
 
-    // todo: struct/tuple variants
     enum_variant: ($) => field("variant", choice($.identifier)),
-
-    enum_struct_variant: ($) =>
-      seq(
-        field("name", $.identifier),
-        $._left_brace,
-        sepBy($.struct_property, $._comma),
-        $._right_brace,
-      ),
 
     variable_definition: ($) =>
       seq(
@@ -126,53 +118,9 @@ module.exports = grammar({
         field("body", $.block),
       ),
 
-    anonymous_function: ($) =>
-      seq(
-        seq(
-          $._left_paren,
-          sepBy(field("parameter", $.anonymous_parameter), $._comma),
-          $._right_paren,
-        ),
-        field("return", optional($.type)),
-        field("body", $.block),
-      ),
-
-    anonymous_parameter: ($) =>
-      choice(
-        seq(field("name", $.identifier), $._colon, field("type", $.type)),
-        field("name", $.identifier),
-      ),
-
-    function_call: ($) =>
-      prec(
-        "function_call",
-        seq(
-          field("target", $.identifier),
-          field("arguments", $.paren_arguments),
-        ),
-      ),
-
-    paren_arguments: ($) =>
-      seq(
-        $._left_paren,
-        sepBy(field("argument", $.expression), $._comma),
-        $._right_paren,
-      ),
-
-    parameters: ($) =>
-      seq(
-        $._left_paren,
-        sepBy(field("parameter", $.param_def), $._comma),
-        $._right_paren,
-      ),
-
-    param_def: ($) =>
-      seq(field("name", $.identifier), $._colon, field("type", $.type)),
-
     block: ($) =>
       seq($._left_brace, optional(repeat($.statement)), $._right_brace),
 
-    //// Statements
     while_loop: ($) =>
       seq(
         optional(field("do", "do")),
@@ -238,6 +186,49 @@ module.exports = grammar({
 
     paren_expression: ($) =>
       seq($._left_paren, field("expr", $.expression), $._right_paren),
+
+    anonymous_function: ($) =>
+      seq(
+        seq(
+          $._left_paren,
+          sepBy(field("parameter", $.anonymous_parameter), $._comma),
+          $._right_paren,
+        ),
+        field("return", optional($.type)),
+        field("body", $.block),
+      ),
+
+    anonymous_parameter: ($) =>
+      choice(
+        seq(field("name", $.identifier), $._colon, field("type", $.type)),
+        field("name", $.identifier),
+      ),
+
+    function_call: ($) =>
+      prec(
+        "function_call",
+        seq(
+          field("target", $.identifier),
+          field("arguments", $.paren_arguments),
+        ),
+      ),
+
+    paren_arguments: ($) =>
+      seq(
+        $._left_paren,
+        sepBy(field("argument", $.expression), $._comma),
+        $._right_paren,
+      ),
+
+    parameters: ($) =>
+      seq(
+        $._left_paren,
+        sepBy(field("parameter", $.param_def), $._comma),
+        $._right_paren,
+      ),
+
+    param_def: ($) =>
+      seq(field("name", $.identifier), $._colon, field("type", $.type)),
 
     match_expression: ($) =>
       seq(
