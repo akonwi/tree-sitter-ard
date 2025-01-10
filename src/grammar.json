@@ -636,6 +636,10 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "member_access"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "identifier"
               },
               {
@@ -657,10 +661,6 @@
               {
                 "type": "SYMBOL",
                 "name": "binary_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "member_access"
               },
               {
                 "type": "SYMBOL",
@@ -1197,7 +1197,7 @@
       }
     },
     "unary_expression": {
-      "type": "PREC",
+      "type": "PREC_RIGHT",
       "value": "unary",
       "content": {
         "type": "CHOICE",
@@ -2417,6 +2417,11 @@
     [
       "tuple_type",
       "list_type"
+    ],
+    [
+      "expression",
+      "identifier",
+      "struct_instance"
     ]
   ],
   "precedences": [
