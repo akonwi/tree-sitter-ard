@@ -2,6 +2,8 @@
 control flow
 ==================
 
+if !has_served {}
+
 if age > 18 or something_else {
 } else if age == 18 {
 } else {
@@ -10,6 +12,14 @@ if age > 18 or something_else {
 ---
 
 (program
+  (statement
+    (if_statement
+      condition: (expression
+        expr: (unary_expression
+          operator: (bang)
+          operand: (expression
+            expr: (identifier))))
+      body: (block)))
   (statement
     (if_statement
       condition: (expression
