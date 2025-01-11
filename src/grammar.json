@@ -1061,6 +1061,10 @@
               {
                 "type": "SYMBOL",
                 "name": "primitive_value"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
               }
             ]
           }

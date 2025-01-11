@@ -606,6 +606,10 @@
         "required": true,
         "types": [
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "member_access",
             "named": true
           },
