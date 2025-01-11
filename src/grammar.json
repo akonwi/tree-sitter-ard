@@ -636,10 +636,6 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "member_access"
-              },
-              {
-                "type": "SYMBOL",
                 "name": "identifier"
               },
               {
@@ -661,6 +657,10 @@
               {
                 "type": "SYMBOL",
                 "name": "binary_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "member_access"
               },
               {
                 "type": "SYMBOL",
@@ -1052,8 +1052,17 @@
           "type": "FIELD",
           "name": "pattern",
           "content": {
-            "type": "SYMBOL",
-            "name": "member_access"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "member_access"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "primitive_value"
+              }
+            ]
           }
         },
         {
@@ -1197,7 +1206,7 @@
       }
     },
     "unary_expression": {
-      "type": "PREC_RIGHT",
+      "type": "PREC",
       "value": "unary",
       "content": {
         "type": "CHOICE",
@@ -2417,11 +2426,6 @@
     [
       "tuple_type",
       "list_type"
-    ],
-    [
-      "expression",
-      "identifier",
-      "struct_instance"
     ]
   ],
   "precedences": [

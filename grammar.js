@@ -241,7 +241,7 @@ module.exports = grammar({
 
     match_case: ($) =>
       seq(
-        field("pattern", $.member_access),
+        field("pattern", choice($.member_access, $.primitive_value)),
         $._fat_arrow,
         field("body", choice($.block, $.expression)),
       ),

@@ -1,5 +1,5 @@
 ==================
-Match expressions
+Matching enums
 ==================
 
 match payload {
@@ -50,3 +50,35 @@ match payload {
                       (primitive_value
                         (string
                           (string_content))))))))))))))
+
+==================
+Matching booleans
+==================
+
+match boolean {
+  true => "yep",
+  false => "nope"
+}
+
+---
+
+(program
+  (statement
+    (expression
+      (match_expression
+        (expression
+          (identifier))
+        (match_case
+          (primitive_value
+            (boolean))
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (primitive_value
+            (boolean))
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))))))
