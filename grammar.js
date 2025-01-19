@@ -332,12 +332,15 @@ module.exports = grammar({
 
     ///// types
     type: ($) =>
-      choice(
-        $.map_type,
-        $.list_type,
-        $.tuple_type,
-        $.primitive_type,
-        $.identifier,
+      seq(
+        choice(
+          $.map_type,
+          $.list_type,
+          $.tuple_type,
+          $.primitive_type,
+          $.identifier,
+        ),
+        field("optional", optional($._question)),
       ),
 
     list_type: ($) =>
@@ -448,6 +451,7 @@ module.exports = grammar({
     double_colon: ($) => "::",
     assign: ($) => "=",
     _dollar: ($) => "$",
+    _question: ($) => "?",
     _left_paren: ($) => "(",
     _right_paren: ($) => ")",
     _left_brace: ($) => "{",
