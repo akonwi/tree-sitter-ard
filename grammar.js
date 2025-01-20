@@ -71,6 +71,7 @@ module.exports = grammar({
         $.reassignment,
         $._expression_statement,
         $.struct_definition,
+        $.implements_definition,
         $.enum_definition,
       ),
 
@@ -86,6 +87,8 @@ module.exports = grammar({
 
     struct_property: ($) =>
       seq(field("name", $.identifier), $._colon, field("type", $.type)),
+
+    implements_definition: ($) => seq("impl", $.parameters, $.block),
 
     enum_definition: ($) =>
       seq(

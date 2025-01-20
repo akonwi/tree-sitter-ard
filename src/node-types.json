@@ -442,6 +442,25 @@
     }
   },
   {
+    "type": "implements_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import",
     "named": true,
     "fields": {
@@ -917,6 +936,10 @@
           "named": true
         },
         {
+          "type": "implements_definition",
+          "named": true
+        },
+        {
           "type": "reassignment",
           "named": true
         },
@@ -1374,6 +1397,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "impl",
     "named": false
   },
   {

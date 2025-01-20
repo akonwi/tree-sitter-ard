@@ -1,5 +1,5 @@
 ==================
-structs
+basic struct usage
 ==================
 
 struct Person {
@@ -13,6 +13,7 @@ let people: [Person] = [
   john,
   Person {	name: "Alice", age: 30, employed: true }
 ]
+
 ---
 
 (program
@@ -82,3 +83,95 @@ let people: [Person] = [
               name: (identifier)
               value: (primitive_value
                 primitive: (boolean)))))))))
+
+==================
+struct methods
+==================
+
+impl (self: Person) {
+  fn describe() Str {
+    io.print("Name: {{self.name}}")
+    io.print("Age: {{self.age}}")
+    io.print("Employed: {{self.employed}}")
+  }
+}
+
+---
+
+(program
+  (statement
+    (implements_definition
+      (parameters
+        (param_def
+          (identifier)
+          (type
+            (identifier))))
+      (block
+        (statement
+          (function_definition
+            (identifier)
+            (parameters)
+            (type
+              (primitive_type
+                (str)))
+            (block
+              (statement
+                (expression
+                  (member_access
+                    (expression
+                      (identifier))
+                    (period)
+                    (function_call
+                      (identifier)
+                      (paren_arguments
+                        (expression
+                          (primitive_value
+                            (string
+                              (string_content)
+                              (string_interpolation
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (period)
+                                    (identifier))))))))))))
+              (statement
+                (expression
+                  (member_access
+                    (expression
+                      (identifier))
+                    (period)
+                    (function_call
+                      (identifier)
+                      (paren_arguments
+                        (expression
+                          (primitive_value
+                            (string
+                              (string_content)
+                              (string_interpolation
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (period)
+                                    (identifier))))))))))))
+              (statement
+                (expression
+                  (member_access
+                    (expression
+                      (identifier))
+                    (period)
+                    (function_call
+                      (identifier)
+                      (paren_arguments
+                        (expression
+                          (primitive_value
+                            (string
+                              (string_content)
+                              (string_interpolation
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (period)
+                                    (identifier)))))))))))))))))))
