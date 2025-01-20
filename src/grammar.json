@@ -104,6 +104,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "implements_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "enum_definition"
         }
       ]
@@ -196,6 +200,23 @@
             "type": "SYMBOL",
             "name": "type"
           }
+        }
+      ]
+    },
+    "implements_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "impl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parameters"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
         }
       ]
     },
