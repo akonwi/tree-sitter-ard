@@ -73,9 +73,15 @@ module.exports = grammar({
         $.struct_definition,
         $.implements_definition,
         $.enum_definition,
+        $.type_declaration,
       ),
 
     //// definitions
+    type_declaration: ($) =>
+      seq("type", field("name", $.identifier), $.assign, $.type_union),
+
+    type_union: ($) => sepBy1($.type, $._pipe),
+
     struct_definition: ($) =>
       seq(
         $._struct,
@@ -464,5 +470,6 @@ module.exports = grammar({
     _comma: ($) => ",",
     period: ($) => ".",
     _fat_arrow: ($) => "=>",
+    _pipe: ($) => "|",
   },
 });
