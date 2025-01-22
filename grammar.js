@@ -408,12 +408,7 @@ module.exports = grammar({
         field("value", $.primitive_value),
       ),
     struct_prop_pair: ($) =>
-      seq(
-        field("name", $.identifier),
-        $._colon,
-        // todo?: just allow expressions
-        field("value", $.primitive_value),
-      ),
+      seq(field("name", $.identifier), $._colon, field("value", $.expression)),
     primitive_value: ($) =>
       field("primitive", choice($.string, $.number, $.boolean)),
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,

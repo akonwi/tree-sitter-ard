@@ -1069,7 +1069,7 @@
         "required": true,
         "types": [
           {
-            "type": "primitive_value",
+            "type": "expression",
             "named": true
           }
         ]

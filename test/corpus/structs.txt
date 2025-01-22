@@ -11,7 +11,7 @@ struct Person {
 let john = Person {	name: "John", age: 30, employed: true }
 let people: [Person] = [
   john,
-  Person {	name: "Alice", age: 30, employed: true }
+  Person {	name: "Alice", age: age_value, employed: true }
 ]
 
 ---
@@ -45,17 +45,20 @@ let people: [Person] = [
           name: (identifier)
           field: (struct_prop_pair
             name: (identifier)
-            value: (primitive_value
-              primitive: (string
-                chunk: (string_content))))
+            value: (expression
+              expr: (primitive_value
+                primitive: (string
+                  chunk: (string_content)))))
           field: (struct_prop_pair
             name: (identifier)
-            value: (primitive_value
-              primitive: (number)))
+            value: (expression
+              expr: (primitive_value
+                primitive: (number))))
           field: (struct_prop_pair
             name: (identifier)
-            value: (primitive_value
-              primitive: (boolean)))))))
+            value: (expression
+              expr: (primitive_value
+                primitive: (boolean))))))))
   (statement
     (variable_definition
       binding: (variable_binding)
@@ -72,17 +75,19 @@ let people: [Person] = [
             name: (identifier)
             field: (struct_prop_pair
               name: (identifier)
-              value: (primitive_value
-                primitive: (string
-                  chunk: (string_content))))
+              value: (expression
+                expr: (primitive_value
+                  primitive: (string
+                    chunk: (string_content)))))
             field: (struct_prop_pair
               name: (identifier)
-              value: (primitive_value
-                primitive: (number)))
+              value: (expression
+                expr: (identifier)))
             field: (struct_prop_pair
               name: (identifier)
-              value: (primitive_value
-                primitive: (boolean)))))))))
+              value: (expression
+                expr: (primitive_value
+                  primitive: (boolean))))))))))
 
 ==================
 struct methods
