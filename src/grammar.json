@@ -1886,10 +1886,6 @@
             },
             {
               "type": "SYMBOL",
-              "name": "tuple_type"
-            },
-            {
-              "type": "SYMBOL",
               "name": "primitive_type"
             },
             {
@@ -1930,60 +1926,6 @@
             "type": "SYMBOL",
             "name": "type"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_right_bracket"
-        }
-      ]
-    },
-    "tuple_type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_left_bracket"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "element_type",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "type"
-                  }
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_comma"
-                      },
-                      {
-                        "type": "FIELD",
-                        "name": "element_type",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "type"
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         },
         {
           "type": "SYMBOL",
@@ -2530,10 +2472,6 @@
     [
       "anonymous_parameter",
       "expression"
-    ],
-    [
-      "tuple_type",
-      "list_type"
     ]
   ],
   "precedences": [

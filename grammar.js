@@ -43,7 +43,6 @@ module.exports = grammar({
     [$._expression_statement, $.binary_expression],
     [$.binary_expression, $.variable_definition],
     [$.anonymous_parameter, $.expression],
-    [$.tuple_type, $.list_type],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -342,25 +341,12 @@ module.exports = grammar({
     ///// types
     type: ($) =>
       seq(
-        choice(
-          $.map_type,
-          $.list_type,
-          $.tuple_type,
-          $.primitive_type,
-          $.identifier,
-        ),
+        choice($.map_type, $.list_type, $.primitive_type, $.identifier),
         field("optional", optional($._question)),
       ),
 
     list_type: ($) =>
       seq($._left_bracket, field("element_type", $.type), $._right_bracket),
-
-    tuple_type: ($) =>
-      seq(
-        $._left_bracket,
-        sepBy(field("element_type", $.type), $._comma),
-        $._right_bracket,
-      ),
 
     map_type: ($) =>
       seq(
