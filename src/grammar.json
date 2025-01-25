@@ -1945,7 +1945,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "str"
+            "name": "type"
           }
         },
         {
@@ -2158,13 +2158,8 @@
           "type": "FIELD",
           "name": "key",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "string"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "primitive_value"
           }
         },
         {

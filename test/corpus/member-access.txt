@@ -16,7 +16,9 @@ location.point.x
       name: (identifier)
       type: (type
         (map_type
-          key: (str)
+          key: (type
+            (primitive_type
+              (str)))
           value: (type
             (primitive_type
               (bool)))))

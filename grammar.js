@@ -351,7 +351,7 @@ module.exports = grammar({
     map_type: ($) =>
       seq(
         $._left_bracket,
-        field("key", $.str),
+        field("key", $.type),
         $._colon,
         field("value", $.type),
         $._right_bracket,
@@ -389,7 +389,7 @@ module.exports = grammar({
       ),
     map_pair: ($) =>
       seq(
-        field("key", choice($.string)),
+        field("key", $.primitive_value),
         $._colon,
         field("value", $.primitive_value),
       ),

@@ -543,7 +543,7 @@
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "primitive_value",
             "named": true
           }
         ]
@@ -569,7 +569,7 @@
         "required": true,
         "types": [
           {
-            "type": "str",
+            "type": "type",
             "named": true
           }
         ]
