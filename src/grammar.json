@@ -72,6 +72,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "break"
+        },
+        {
+          "type": "SYMBOL",
           "name": "while_loop"
         },
         {
@@ -2379,6 +2383,10 @@
     "_fn": {
       "type": "STRING",
       "value": "fn"
+    },
+    "break": {
+      "type": "STRING",
+      "value": "break"
     },
     "_colon": {
       "type": "STRING",

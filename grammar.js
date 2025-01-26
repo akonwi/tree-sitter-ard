@@ -62,6 +62,7 @@ module.exports = grammar({
     statement: ($) =>
       choice(
         $.comment,
+        $.break,
         $.while_loop,
         $.if_statement,
         $.for_loop,
@@ -435,6 +436,7 @@ module.exports = grammar({
     _struct: ($) => "struct",
     _match: ($) => "match",
     _fn: ($) => "fn",
+    break: ($) => "break",
 
     /// symbols + punctuation
     _colon: ($) => ":",
