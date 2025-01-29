@@ -3,7 +3,7 @@ maps
 ==================
 
 let empty: [Str:Num] = [:]
-let initialized: [Str:Bool] = [ "John": true, "Jane": false ]
+let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
 ---
 
 (program

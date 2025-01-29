@@ -5,7 +5,7 @@ basic struct usage
 struct Person {
 	name: Str,
 	age: Num,
-	employed: Bool
+	employed: Bool,
 }
 
 let john = Person {	name: "John", age: 30, employed: true }

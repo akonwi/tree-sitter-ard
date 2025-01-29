@@ -7,11 +7,14 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-// match rule at least once, with separator
-const sepBy1 = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
+// match rule at least once, with comma separator
+const sepByComma1 = (rule) => seq(rule, repeat(seq(",", optional(rule))));
 
-// match 0 or more of rule, with separator
-const sepBy = (rule, separator) => optional(sepBy1(rule, separator));
+// match 0 or more of rule, with comma separator
+const sepByComma = (rule) => optional(sepByComma1(rule));
+
+// match rule at least once, with pipe separator
+const sepByPipe = (rule) => seq(rule, repeat(seq("|", rule)));
 
 // underscore prefix is used to hide rules from the syntax tree
 module.exports = grammar({
@@ -81,14 +84,14 @@ module.exports = grammar({
     type_declaration: ($) =>
       seq("type", field("name", $.identifier), $.assign, $.type_union),
 
-    type_union: ($) => sepBy1($.type, $._pipe),
+    type_union: ($) => sepByPipe($.type),
 
     struct_definition: ($) =>
       seq(
         $._struct,
         field("name", $.identifier),
         $._left_brace,
-        sepBy(field("field", $.struct_property), $._comma),
+        sepByComma(field("field", $.struct_property), $._comma),
         $._right_brace,
       ),
 
@@ -102,7 +105,7 @@ module.exports = grammar({
         $._enum,
         field("name", $.identifier),
         $._left_brace,
-        sepBy(field("variant", $.enum_variant), $._comma),
+        sepByComma(field("variant", $.enum_variant), $._comma),
         $._right_brace,
       ),
 
@@ -212,7 +215,7 @@ module.exports = grammar({
       seq(
         seq(
           $._left_paren,
-          sepBy(field("parameter", $.anonymous_parameter), $._comma),
+          sepByComma(field("parameter", $.anonymous_parameter), $._comma),
           $._right_paren,
         ),
         field("return", optional($.type)),
@@ -237,14 +240,14 @@ module.exports = grammar({
     paren_arguments: ($) =>
       seq(
         $._left_paren,
-        sepBy(field("argument", $.expression), $._comma),
+        sepByComma(field("argument", $.expression), $._comma),
         $._right_paren,
       ),
 
     parameters: ($) =>
       seq(
         $._left_paren,
-        sepBy(field("parameter", $.param_def), $._comma),
+        sepByComma(field("parameter", $.param_def), $._comma),
         $._right_paren,
       ),
 
@@ -256,7 +259,7 @@ module.exports = grammar({
         $._match,
         field("expr", $.expression),
         $._left_brace,
-        sepBy1(field("case", $.match_case), $._comma),
+        sepByComma1(field("case", $.match_case), $._comma),
         $._right_brace,
       ),
 
@@ -274,7 +277,7 @@ module.exports = grammar({
       seq(
         field("name", $.identifier),
         $._left_brace,
-        sepBy(field("field", $.struct_prop_pair), $._comma),
+        sepByComma(field("field", $.struct_prop_pair), $._comma),
         $._right_brace,
       ),
 
@@ -375,7 +378,7 @@ module.exports = grammar({
     list_value: ($) =>
       seq(
         $._left_bracket,
-        sepBy(
+        sepByComma(
           field(
             "element",
             choice(
@@ -396,7 +399,7 @@ module.exports = grammar({
         seq($._left_bracket, $._colon, $._right_bracket),
         seq(
           $._left_bracket,
-          sepBy1(field("entry", $.map_pair), $._comma),
+          sepByComma1(field("entry", $.map_pair), $._comma),
           $._right_bracket,
         ),
       ),

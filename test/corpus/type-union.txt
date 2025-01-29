@@ -10,7 +10,7 @@ match some_shape {
   },
   Circle => {
     print("Circle radius: {{some_shape.radius.as_str}}")
-  }
+  },
 }
 ---
 
