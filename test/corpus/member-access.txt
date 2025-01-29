@@ -6,7 +6,7 @@ let initialized: [Str:Bool] = [:]
 initialized.count
 initialized.put("key", true)
 location.point.x
-!todo.done
+let falsy = not something.done
 ---
 
 (program
@@ -60,15 +60,19 @@ location.point.x
         operator: (period)
         member: (identifier))))
   (statement
-    (expression
-      expr: (member_access
-        target: (expression
-          expr: (unary_expression
-            operator: (bang)
-            operand: (expression
-              expr: (identifier))))
-        operator: (period)
-        member: (identifier)))))
+    (variable_definition
+      binding: (variable_binding)
+      name: (identifier)
+      (assign)
+      value: (expression
+        expr: (member_access
+          target: (expression
+            expr: (unary_expression
+              operator: (not)
+              operand: (expression
+                expr: (identifier))))
+          operator: (period)
+          member: (identifier))))))
 
 ==================
 Members on string literals

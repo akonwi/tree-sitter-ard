@@ -1254,11 +1254,11 @@
         "required": true,
         "types": [
           {
-            "type": "bang",
+            "type": "minus",
             "named": true
           },
           {
-            "type": "minus",
+            "type": "not",
             "named": true
           }
         ]
@@ -1415,10 +1415,6 @@
     "named": true
   },
   {
-    "type": "bang",
-    "named": true
-  },
-  {
     "type": "bool",
     "named": true
   },
@@ -1537,6 +1533,10 @@
   {
     "type": "mut",
     "named": false
+  },
+  {
+    "type": "not",
+    "named": true
   },
   {
     "type": "not_equal",

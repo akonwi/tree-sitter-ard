@@ -2,7 +2,7 @@
 control flow
 ==================
 
-if !has_served {}
+if not is_true {}
 
 if age > 18 or something_else {
 } else if age == 18 {
@@ -16,7 +16,7 @@ if age > 18 or something_else {
     (if_statement
       condition: (expression
         expr: (unary_expression
-          operator: (bang)
+          operator: (not)
           operand: (expression
             expr: (identifier))))
       body: (block)))

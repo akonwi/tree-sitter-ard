@@ -299,7 +299,7 @@ module.exports = grammar({
         "unary",
         choice(
           seq(field("operator", $.minus), field("operand", $.expression)),
-          seq(field("operator", $.bang), field("operand", $.expression)),
+          seq(field("operator", $.not), field("operand", $.expression)),
         ),
       ),
 
@@ -451,6 +451,7 @@ module.exports = grammar({
     _match: ($) => "match",
     _fn: ($) => "fn",
     break: ($) => "break",
+    not: ($) => "not",
 
     /// symbols + punctuation
     _colon: ($) => ":",
