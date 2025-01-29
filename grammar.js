@@ -91,7 +91,7 @@ module.exports = grammar({
         $._struct,
         field("name", $.identifier),
         $._left_brace,
-        sepByComma(field("field", $.struct_property), $._comma),
+        sepByComma(field("field", $.struct_property)),
         $._right_brace,
       ),
 
@@ -105,7 +105,7 @@ module.exports = grammar({
         $._enum,
         field("name", $.identifier),
         $._left_brace,
-        sepByComma(field("variant", $.enum_variant), $._comma),
+        sepByComma(field("variant", $.enum_variant)),
         $._right_brace,
       ),
 
@@ -215,7 +215,7 @@ module.exports = grammar({
       seq(
         seq(
           $._left_paren,
-          sepByComma(field("parameter", $.anonymous_parameter), $._comma),
+          sepByComma(field("parameter", $.anonymous_parameter)),
           $._right_paren,
         ),
         field("return", optional($.type)),
@@ -240,14 +240,14 @@ module.exports = grammar({
     paren_arguments: ($) =>
       seq(
         $._left_paren,
-        sepByComma(field("argument", $.expression), $._comma),
+        sepByComma(field("argument", $.expression)),
         $._right_paren,
       ),
 
     parameters: ($) =>
       seq(
         $._left_paren,
-        sepByComma(field("parameter", $.param_def), $._comma),
+        sepByComma(field("parameter", $.param_def)),
         $._right_paren,
       ),
 
@@ -259,7 +259,7 @@ module.exports = grammar({
         $._match,
         field("expr", $.expression),
         $._left_brace,
-        sepByComma1(field("case", $.match_case), $._comma),
+        sepByComma1(field("case", $.match_case)),
         $._right_brace,
       ),
 
@@ -277,7 +277,7 @@ module.exports = grammar({
       seq(
         field("name", $.identifier),
         $._left_brace,
-        sepByComma(field("field", $.struct_prop_pair), $._comma),
+        sepByComma(field("field", $.struct_prop_pair)),
         $._right_brace,
       ),
 
@@ -389,7 +389,6 @@ module.exports = grammar({
               $.struct_instance,
             ),
           ),
-          $._comma,
         ),
         $._right_bracket,
       ),
@@ -399,7 +398,7 @@ module.exports = grammar({
         seq($._left_bracket, $._colon, $._right_bracket),
         seq(
           $._left_bracket,
-          sepByComma1(field("entry", $.map_pair), $._comma),
+          sepByComma1(field("entry", $.map_pair)),
           $._right_bracket,
         ),
       ),
