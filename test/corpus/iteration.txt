@@ -13,7 +13,7 @@ for i in 1..(something - other) {
 
 (program
   (statement
-    (for_loop
+    (for_in_loop
       cursor: (identifier)
       range: (expression
         expr: (binary_expression
@@ -33,7 +33,7 @@ for i in 1..(something - other) {
                 argument: (expression
                   expr: (identifier)))))))))
   (statement
-    (for_loop
+    (for_in_loop
       cursor: (identifier)
       range: (expression
         expr: (binary_expression

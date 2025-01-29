@@ -1,5 +1,5 @@
 ==================
-loops
+While Loop
 ==================
 
 while count <= 9 {
@@ -76,3 +76,73 @@ do while count == 9 {
             value: (expression
               expr: (primitive_value
                 primitive: (number)))))))))
+
+==================
+For Loop
+==================
+
+for mut count = 0; count <= 9; count = count + 1 {
+  foobar
+}
+
+---
+
+(program
+  (statement
+    (for_loop
+      (variable_definition
+        (variable_binding)
+        (identifier)
+        (assign)
+        (expression
+          (primitive_value
+            (number))))
+      (expression
+        (binary_expression
+          (expression
+            (identifier))
+          (less_than_or_equal)
+          (expression
+            (primitive_value
+              (number)))))
+      (statement
+        (reassignment
+          (identifier)
+          (assign)
+          (expression
+            (binary_expression
+              (expression
+                (identifier))
+              (plus)
+              (expression
+                (primitive_value
+                  (number)))))))
+      (block
+        (statement
+          (expression
+            (identifier)))))))
+
+==================
+For In Loop
+==================
+
+for item in items {
+	foo_bar(item)
+}
+
+---
+
+(program
+  (statement
+    (for_in_loop
+      (identifier)
+      (expression
+        (identifier))
+      (block
+        (statement
+          (expression
+            (function_call
+              (identifier)
+              (paren_arguments
+                (expression
+                  (identifier))))))))))

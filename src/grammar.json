@@ -88,6 +88,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "for_in_loop"
+        },
+        {
+          "type": "SYMBOL",
           "name": "variable_definition"
         },
         {
@@ -547,6 +551,55 @@
       ]
     },
     "for_loop": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "for"
+        },
+        {
+          "type": "FIELD",
+          "name": "cursor",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_definition"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_semi_colon"
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "expression"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_semi_colon"
+        },
+        {
+          "type": "FIELD",
+          "name": "step",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "block"
+          }
+        }
+      ]
+    },
+    "for_in_loop": {
       "type": "SEQ",
       "members": [
         {
@@ -2391,6 +2444,10 @@
     "_colon": {
       "type": "STRING",
       "value": ":"
+    },
+    "_semi_colon": {
+      "type": "STRING",
+      "value": ";"
     },
     "double_colon": {
       "type": "STRING",

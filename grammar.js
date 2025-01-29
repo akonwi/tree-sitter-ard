@@ -66,6 +66,7 @@ module.exports = grammar({
         $.while_loop,
         $.if_statement,
         $.for_loop,
+        $.for_in_loop,
         $.variable_definition,
         $.function_definition,
         $.reassignment,
@@ -139,6 +140,17 @@ module.exports = grammar({
       ),
 
     for_loop: ($) =>
+      seq(
+        "for",
+        field("cursor", $.variable_definition),
+        $._semi_colon,
+        field("condition", $.expression),
+        $._semi_colon,
+        field("step", $.statement),
+        field("body", $.block),
+      ),
+
+    for_in_loop: ($) =>
       seq(
         "for",
         field("cursor", $.identifier),
@@ -440,6 +452,7 @@ module.exports = grammar({
 
     /// symbols + punctuation
     _colon: ($) => ":",
+    _semi_colon: ($) => ";",
     double_colon: ($) => "::",
     assign: ($) => "=",
     _dollar: ($) => "$",
