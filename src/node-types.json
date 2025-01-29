@@ -853,10 +853,6 @@
         {
           "type": "str",
           "named": true
-        },
-        {
-          "type": "void",
-          "named": true
         }
       ]
     }
@@ -1589,10 +1585,6 @@
   {
     "type": "use",
     "named": false
-  },
-  {
-    "type": "void",
-    "named": true
   },
   {
     "type": "while",

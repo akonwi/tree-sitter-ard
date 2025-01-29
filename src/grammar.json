@@ -2093,10 +2093,6 @@
         {
           "type": "SYMBOL",
           "name": "bool"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "void"
         }
       ]
     },
@@ -2488,10 +2484,6 @@
     "bool": {
       "type": "STRING",
       "value": "Bool"
-    },
-    "void": {
-      "type": "STRING",
-      "value": "Void"
     },
     "_enum": {
       "type": "STRING",
