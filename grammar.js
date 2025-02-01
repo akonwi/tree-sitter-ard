@@ -252,7 +252,12 @@ module.exports = grammar({
       ),
 
     param_def: ($) =>
-      seq(field("name", $.identifier), $._colon, field("type", $.type)),
+      seq(
+        optional(field("binding", "mut")),
+        field("name", $.identifier),
+        $._colon,
+        field("type", $.type),
+      ),
 
     match_expression: ($) =>
       seq(

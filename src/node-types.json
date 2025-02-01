@@ -764,6 +764,16 @@
     "type": "param_def",
     "named": true,
     "fields": {
+      "binding": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "mut",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,

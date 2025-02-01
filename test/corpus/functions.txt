@@ -201,3 +201,30 @@ list.map((n) { n + 1 })
                         (expression
                           (primitive_value
                             (number)))))))))))))))
+
+==================
+Mutating semantics
+==================
+
+fn grow(mut t: Thing, size: Num) Num {}
+
+---
+
+(program
+  (statement
+    (function_definition
+      (identifier)
+      (parameters
+        (param_def
+          (identifier)
+          (type
+            (identifier)))
+        (param_def
+          (identifier)
+          (type
+            (primitive_type
+              (num)))))
+      (type
+        (primitive_type
+          (num)))
+      (block))))

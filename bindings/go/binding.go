@@ -11,7 +11,7 @@ import (
 	tree_sitter "github.com/tree-sitter/go-tree-sitter"
 )
 
-// 0.1.4
+// 0.0.26
 func Language() unsafe.Pointer {
 	return unsafe.Pointer(C.tree_sitter_ard())
 }
