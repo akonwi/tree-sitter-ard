@@ -101,6 +101,12 @@ impl (self: Person) {
   }
 }
 
+impl (mut self: Person) {
+  fn age() {
+    self.age =+ 1
+  }
+}
+
 ---
 
 (program
@@ -179,4 +185,28 @@ impl (self: Person) {
                                     (expression
                                       (identifier))
                                     (period)
-                                    (identifier)))))))))))))))))))
+                                    (identifier))))))))))))))))))
+  (statement
+    (implements_definition
+      (parameters
+        (param_def
+          (identifier)
+          (type
+            (identifier))))
+      (block
+        (statement
+          (function_definition
+            (identifier)
+            (parameters)
+            (block
+              (statement
+                (reassignment
+                  (member_access
+                    (expression
+                      (identifier))
+                    (period)
+                    (identifier))
+                  (increment)
+                  (expression
+                    (primitive_value
+                      (number))))))))))))

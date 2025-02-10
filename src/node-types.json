@@ -915,16 +915,6 @@
     "type": "reassignment",
     "named": true,
     "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "operator": {
         "multiple": false,
         "required": true,
@@ -939,6 +929,20 @@
           },
           {
             "type": "increment",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_access",
             "named": true
           }
         ]

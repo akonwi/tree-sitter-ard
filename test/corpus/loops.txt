@@ -30,7 +30,7 @@ do while count == 9 {
       body: (block
         (statement
           (reassignment
-            name: (identifier)
+            target: (identifier)
             operator: (increment)
             value: (expression
               expr: (primitive_value
@@ -53,7 +53,7 @@ do while count == 9 {
       body: (block
         (statement
           (reassignment
-            name: (identifier)
+            target: (identifier)
             operator: (decrement)
             value: (expression
               expr: (primitive_value
@@ -71,7 +71,7 @@ do while count == 9 {
       body: (block
         (statement
           (reassignment
-            name: (identifier)
+            target: (identifier)
             operator: (decrement)
             value: (expression
               expr: (primitive_value

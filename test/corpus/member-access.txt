@@ -5,7 +5,7 @@ Member Access
 let initialized: [Str:Bool] = [:]
 initialized.count
 initialized.put("key", true)
-location.point.x
+location.point.x = 1
 let falsy = not something.done
 ---
 
@@ -49,8 +49,8 @@ let falsy = not something.done
               expr: (primitive_value
                 primitive: (boolean))))))))
   (statement
-    (expression
-      expr: (member_access
+    (reassignment
+      target: (member_access
         target: (expression
           expr: (member_access
             target: (expression
@@ -58,7 +58,11 @@ let falsy = not something.done
             operator: (period)
             member: (identifier)))
         operator: (period)
-        member: (identifier))))
+        member: (identifier))
+      operator: (assign)
+      value: (expression
+        expr: (primitive_value
+          primitive: (number)))))
   (statement
     (variable_definition
       binding: (variable_binding)

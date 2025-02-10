@@ -6,10 +6,10 @@ type Shape = Square|Circle
 
 match some_shape {
   Square => {
-    print("Square size: {{some_shape.size.as_str}}")
+    print("Square size: {{some_shape.size.to_str()}}")
   },
   Circle => {
-    print("Circle radius: {{some_shape.radius.as_str}}")
+    print("Circle radius: {{some_shape.radius.to_str()}}")
   },
 }
 ---
@@ -51,7 +51,9 @@ match some_shape {
                                     (period)
                                     (identifier)))
                                 (period)
-                                (identifier)))))))))))))
+                                (function_call
+                                  (identifier)
+                                  (paren_arguments))))))))))))))
         (match_case
           (identifier)
           (block
@@ -74,4 +76,6 @@ match some_shape {
                                     (period)
                                     (identifier)))
                                 (period)
-                                (identifier)))))))))))))))))
+                                (function_call
+                                  (identifier)
+                                  (paren_arguments))))))))))))))))))

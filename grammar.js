@@ -178,7 +178,7 @@ module.exports = grammar({
       prec(
         "assignment",
         seq(
-          field("name", $.identifier),
+          field("target", choice($.identifier, $.member_access)),
           field("operator", choice($.assign, $.increment, $.decrement)),
           field("value", $.expression),
         ),
