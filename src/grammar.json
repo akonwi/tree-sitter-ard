@@ -2118,6 +2118,14 @@
         {
           "type": "SYMBOL",
           "name": "bool"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "int"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "float"
         }
       ]
     },
@@ -2505,6 +2513,14 @@
     "num": {
       "type": "STRING",
       "value": "Num"
+    },
+    "int": {
+      "type": "STRING",
+      "value": "Int"
+    },
+    "float": {
+      "type": "STRING",
+      "value": "Float"
     },
     "bool": {
       "type": "STRING",

@@ -857,6 +857,14 @@
           "named": true
         },
         {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
           "type": "num",
           "named": true
         },
@@ -1473,6 +1481,10 @@
     "named": false
   },
   {
+    "type": "float",
+    "named": true
+  },
+  {
     "type": "fn",
     "named": false
   },
@@ -1510,6 +1522,10 @@
   },
   {
     "type": "increment",
+    "named": true
+  },
+  {
+    "type": "int",
     "named": true
   },
   {
