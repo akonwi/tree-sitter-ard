@@ -84,7 +84,7 @@ greet(get_hello())
 two params
 ==================
 
-fn add(x: Num, y: Num) Num {
+fn add(x: Int, y: Int) Int {
 }
 
 
@@ -101,15 +101,15 @@ add(1, 2)
           (identifier)
           (type
             (primitive_type
-              (num))))
+              (int))))
         (param_def
           (identifier)
           (type
             (primitive_type
-              (num)))))
+              (int)))))
       (type
         (primitive_type
-          (num)))
+          (int)))
       (block)))
   (statement
     (expression
@@ -130,7 +130,7 @@ anonymous functions
   print("Hello, anon!")
 }
 
-(n: Num) Num {
+(n: Int) Int {
   do_stuff()
   n + 1
 }
@@ -159,10 +159,10 @@ list.map((n) { n + 1 })
           (identifier)
           (type
             (primitive_type
-              (num))))
+              (int))))
         (type
           (primitive_type
-            (num)))
+            (int)))
         (block
           (statement
             (expression
@@ -206,7 +206,7 @@ list.map((n) { n + 1 })
 Mutating semantics
 ==================
 
-fn grow(mut t: Thing, size: Num) Num {}
+fn grow(mut t: Thing, size: Int) Int {}
 
 ---
 
@@ -223,8 +223,8 @@ fn grow(mut t: Thing, size: Num) Num {}
           (identifier)
           (type
             (primitive_type
-              (num)))))
+              (int)))))
       (type
         (primitive_type
-          (num)))
+          (int)))
       (block))))

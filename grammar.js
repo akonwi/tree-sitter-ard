@@ -377,7 +377,7 @@ module.exports = grammar({
         field("value", $.type),
         $._right_bracket,
       ),
-    primitive_type: ($) => choice($.str, $.num, $.bool, $.int, $.float),
+    primitive_type: ($) => choice($.str, $.bool, $.int, $.float),
 
     ///// values
     list_value: ($) =>
@@ -448,7 +448,6 @@ module.exports = grammar({
     /// keywords
     boolean: ($) => choice("true", "false"),
     str: ($) => "Str",
-    num: ($) => "Num",
     int: ($) => "Int",
     float: ($) => "Float",
     bool: ($) => "Bool",

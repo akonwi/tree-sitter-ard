@@ -3,7 +3,7 @@ optionals
 ==================
 
 let name: Str? = optional.new()
-mut age: Num? = 25
+mut age: Int? = 25
 
 ---
 
@@ -30,7 +30,7 @@ mut age: Num? = 25
       (identifier)
       (type
         (primitive_type
-          (num)))
+          (int)))
       (assign)
       (expression
         (primitive_value

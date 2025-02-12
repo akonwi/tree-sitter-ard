@@ -1,6 +1,6 @@
 struct Account {
   id: Str
-  balance: Num
+  balance: Int
 }
 
 // todo: implementations
@@ -15,11 +15,11 @@ impl Account {
 	}
 
 	// self as a first argument makes this an instance method
-  fn deposit(self, amount: Num) {
+  fn deposit(self, amount: Int) {
 		self.balance =+ amount
 	}
 
-	fn withdraw(self, amount: Num) {
+	fn withdraw(self, amount: Int) {
 		self.balance =- amount
 	}
 }

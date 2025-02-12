@@ -865,10 +865,6 @@
           "named": true
         },
         {
-          "type": "num",
-          "named": true
-        },
-        {
           "type": "str",
           "named": true
         }
@@ -1570,10 +1566,6 @@
   },
   {
     "type": "not_equal",
-    "named": true
-  },
-  {
-    "type": "num",
     "named": true
   },
   {

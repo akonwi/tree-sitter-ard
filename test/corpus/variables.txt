@@ -3,7 +3,7 @@ Variable declaration
 ==================
 
 let name: Str = "John"
-mut age: Num = 25
+mut age: Int = 25
 let is_something = false
 mut negative = -1
 
@@ -28,7 +28,7 @@ mut negative = -1
       name: (identifier)
       type: (type
         (primitive_type
-          (num)))
+          (int)))
       (assign)
       value: (expression
         expr: (primitive_value

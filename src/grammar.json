@@ -2113,10 +2113,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "num"
-        },
-        {
-          "type": "SYMBOL",
           "name": "bool"
         },
         {
@@ -2509,10 +2505,6 @@
     "str": {
       "type": "STRING",
       "value": "Str"
-    },
-    "num": {
-      "type": "STRING",
-      "value": "Num"
     },
     "int": {
       "type": "STRING",
