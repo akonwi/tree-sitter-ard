@@ -38,14 +38,18 @@ let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
       value: (expression
         expr: (map_value
           entry: (map_pair
-            key: (primitive_value
-              primitive: (string
-                chunk: (string_content)))
-            value: (primitive_value
-              primitive: (boolean)))
+            key: (expression
+              expr: (primitive_value
+                primitive: (string
+                  chunk: (string_content))))
+            value: (expression
+              expr: (primitive_value
+                primitive: (boolean))))
           entry: (map_pair
-            key: (primitive_value
-              primitive: (string
-                chunk: (string_content)))
-            value: (primitive_value
-              primitive: (boolean))))))))
+            key: (expression
+              expr: (primitive_value
+                primitive: (string
+                  chunk: (string_content))))
+            value: (expression
+              expr: (primitive_value
+                primitive: (boolean)))))))))

@@ -6,10 +6,10 @@ type Shape = Square|Circle
 
 match some_shape {
   Square => {
-    print("Square size: {{some_shape.size.to_str()}}")
+    io::print("Square size: {some_shape.size.to_str()}")
   },
   Circle => {
-    print("Circle radius: {{some_shape.radius.to_str()}}")
+    io::print("Circle radius: {some_shape.radius.to_str()}")
   },
 }
 ---
@@ -34,48 +34,56 @@ match some_shape {
           (block
             (statement
               (expression
-                (function_call
-                  (identifier)
-                  (paren_arguments
-                    (expression
-                      (primitive_value
-                        (string
-                          (string_content)
-                          (string_interpolation
-                            (expression
-                              (member_access
-                                (expression
-                                  (member_access
-                                    (expression
-                                      (identifier))
-                                    (period)
-                                    (identifier)))
-                                (period)
-                                (function_call
-                                  (identifier)
-                                  (paren_arguments))))))))))))))
+                (member_access
+                  (expression
+                    (identifier))
+                  (double_colon)
+                  (function_call
+                    (identifier)
+                    (paren_arguments
+                      (expression
+                        (primitive_value
+                          (string
+                            (string_content)
+                            (string_interpolation
+                              (expression
+                                (member_access
+                                  (expression
+                                    (member_access
+                                      (expression
+                                        (identifier))
+                                      (period)
+                                      (identifier)))
+                                  (period)
+                                  (function_call
+                                    (identifier)
+                                    (paren_arguments)))))))))))))))
         (match_case
           (identifier)
           (block
             (statement
               (expression
-                (function_call
-                  (identifier)
-                  (paren_arguments
-                    (expression
-                      (primitive_value
-                        (string
-                          (string_content)
-                          (string_interpolation
-                            (expression
-                              (member_access
-                                (expression
-                                  (member_access
-                                    (expression
-                                      (identifier))
-                                    (period)
-                                    (identifier)))
-                                (period)
-                                (function_call
-                                  (identifier)
-                                  (paren_arguments))))))))))))))))))
+                (member_access
+                  (expression
+                    (identifier))
+                  (double_colon)
+                  (function_call
+                    (identifier)
+                    (paren_arguments
+                      (expression
+                        (primitive_value
+                          (string
+                            (string_content)
+                            (string_interpolation
+                              (expression
+                                (member_access
+                                  (expression
+                                    (member_access
+                                      (expression
+                                        (identifier))
+                                      (period)
+                                      (identifier)))
+                                  (period)
+                                  (function_call
+                                    (identifier)
+                                    (paren_arguments)))))))))))))))))))

@@ -54,12 +54,7 @@ module.exports = grammar({
     program: ($) => seq(repeat($.import), repeat($.statement)),
 
     //// imports
-    import: ($) =>
-      seq(
-        "use",
-        field("path", $.module_path),
-        optional(seq("as", field("alias", $.identifier))),
-      ),
+    import: ($) => seq("use", field("path", $.module_path)),
 
     //// Statements
     statement: ($) =>
@@ -127,7 +122,7 @@ module.exports = grammar({
         $._fn,
         field("name", $.identifier),
         field("parameters", $.parameters),
-        optional(field("return", $.type)),
+        field("return", optional($.type)),
         field("body", $.block),
       ),
 
@@ -136,7 +131,6 @@ module.exports = grammar({
 
     while_loop: ($) =>
       seq(
-        optional(field("do", "do")),
         "while",
         field("condition", $.expression),
         field("body", $.block),
@@ -158,7 +152,6 @@ module.exports = grammar({
         "for",
         field("cursor", $.identifier),
         "in",
-        // limit what can be used as a range
         field("range", $.expression),
         field("body", $.block),
       ),
@@ -188,23 +181,17 @@ module.exports = grammar({
 
     //// Expressions
     expression: ($) =>
-      choice(
-        field(
-          "expr",
-          choice(
-            $.identifier,
-            $.primitive_value,
-            $.list_value,
-            $.map_value,
-            $.unary_expression,
-            $.binary_expression,
-            $.member_access,
-            $.function_call,
-            $.struct_instance,
-            $.paren_expression,
-            $.match_expression,
-            $.anonymous_function,
-          ),
+      choice($.identifier, $.primitive_value, $.list_value, $.map_value, $.unary_expression,
+        $.binary_expression, $.member_access, $.function_call, $.struct_instance,
+        $.paren_expression, $.match_expression, $.anonymous_function, $.range_expression, $.wildcard),
+
+    range_expression: ($) =>
+      prec.left(
+        "range",
+        seq(
+          field("left", $.expression),
+          field("operator", $.inclusive_range),
+          field("right", $.expression),
         ),
       ),
 
@@ -264,7 +251,7 @@ module.exports = grammar({
         $._match,
         field("expr", $.expression),
         $._left_brace,
-        sepByComma1(field("case", $.match_case)),
+        sepByComma(field("case", $.match_case)),
         $._right_brace,
       ),
 
@@ -272,11 +259,13 @@ module.exports = grammar({
       seq(
         field(
           "pattern",
-          choice($.member_access, $.primitive_value, $.identifier),
+          choice($.member_access, $.primitive_value, $.identifier, $.wildcard, $.function_call),
         ),
         $._fat_arrow,
         field("body", choice($.block, $.expression)),
       ),
+
+    wildcard: ($) => "_",
 
     struct_instance: ($) =>
       seq(
@@ -322,7 +311,6 @@ module.exports = grammar({
           [$.less_than_or_equal, "comparison"],
           [$.equal, "comparison"],
           [$.not_equal, "comparison"],
-          [$.inclusive_range, "range"],
           [$.or, "or"],
           [$.and, "and"],
         ].map(([operator, precedence]) =>
@@ -362,8 +350,31 @@ module.exports = grammar({
     ///// types
     type: ($) =>
       seq(
-        choice($.map_type, $.list_type, $.primitive_type, $.identifier),
+        choice(
+          $.generic_type,
+          $.map_type, 
+          $.list_type, 
+          $.primitive_type, 
+          $.identifier,
+          $.result_type,
+        ),
         field("optional", optional($._question)),
+      ),
+
+    generic_type: ($) =>
+      seq(
+        $._dollar,
+        field("name", $.identifier)
+      ),
+
+    result_type: ($) =>
+      seq(
+        "Result",
+        $._left_angle,
+        field("type", $.type),
+        $._comma,
+        field("type", $.type),
+        $._right_angle,
       ),
 
     list_type: ($) =>
@@ -377,24 +388,13 @@ module.exports = grammar({
         field("value", $.type),
         $._right_bracket,
       ),
-    primitive_type: ($) => choice($.str, $.bool, $.int, $.float),
+    primitive_type: ($) => choice($.str, $.bool, $.int, $.float, $.void),
 
     ///// values
     list_value: ($) =>
       seq(
         $._left_bracket,
-        sepByComma(
-          field(
-            "element",
-            choice(
-              $.number,
-              $.string,
-              $.boolean,
-              $.identifier,
-              $.struct_instance,
-            ),
-          ),
-        ),
+        sepByComma($.expression),
         $._right_bracket,
       ),
 
@@ -409,9 +409,9 @@ module.exports = grammar({
       ),
     map_pair: ($) =>
       seq(
-        field("key", $.primitive_value),
+        field("key", $.expression),
         $._colon,
-        field("value", $.primitive_value),
+        field("value", $.expression),
       ),
     struct_prop_pair: ($) =>
       seq(field("name", $.identifier), $._colon, field("value", $.expression)),
@@ -425,7 +425,7 @@ module.exports = grammar({
         repeat(
           field(
             "chunk",
-            choice(alias(/[^"{}]+/, $.string_content), $.string_interpolation),
+            choice(alias(/[^"{\\]+/, $.string_content), $.string_interpolation, $.escape_sequence),
           ),
         ),
         '"',
@@ -433,11 +433,10 @@ module.exports = grammar({
     string_interpolation: ($) =>
       seq(
         $._left_brace,
-        $._left_brace,
         field("expression", $.expression),
         $._right_brace,
-        $._right_brace,
       ),
+    escape_sequence: ($) => token.immediate(seq('\\', /[tnr"'\\]/)),
     /// comments
     comment: ($) =>
       token(
@@ -451,6 +450,7 @@ module.exports = grammar({
     int: ($) => "Int",
     float: ($) => "Float",
     bool: ($) => "Bool",
+    void: ($) => "Void",
     _enum: ($) => "enum",
     _struct: ($) => "struct",
     _match: ($) => "match",
@@ -471,6 +471,8 @@ module.exports = grammar({
     _right_brace: ($) => "}",
     _left_bracket: ($) => "[",
     _right_bracket: ($) => "]",
+    _left_angle: ($) => "<",
+    _right_angle: ($) => ">",
     _comma: ($) => ",",
     period: ($) => ".",
     _fat_arrow: ($) => "=>",

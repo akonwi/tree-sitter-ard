@@ -3,11 +3,11 @@ iteration
 ==================
 
 for i in 1..10 {
-	print(i)
+	io::print(i.to_str())
 }
 
 for i in 1..(something - other) {
-	print(i)
+	io::print(i.to_str())
 }
 ---
 
@@ -16,32 +16,42 @@ for i in 1..(something - other) {
     (for_in_loop
       cursor: (identifier)
       range: (expression
-        expr: (binary_expression
-          left: (expression
+        expr: (range_expression
+          start: (expression
             expr: (primitive_value
               primitive: (number)))
           operator: (inclusive_range)
-          right: (expression
+          end: (expression
             expr: (primitive_value
               primitive: (number)))))
       body: (block
         (statement
           (expression
-            expr: (function_call
-              target: (identifier)
-              arguments: (paren_arguments
-                argument: (expression
-                  expr: (identifier)))))))))
+            expr: (member_access
+              target: (expression
+                expr: (identifier))
+              operator: (double_colon)
+              member: (function_call
+                target: (identifier)
+                arguments: (paren_arguments
+                  argument: (expression
+                    expr: (member_access
+                      target: (expression
+                        expr: (identifier))
+                      operator: (period)
+                      member: (function_call
+                        target: (identifier)
+                        arguments: (paren_arguments))))))))))))
   (statement
     (for_in_loop
       cursor: (identifier)
       range: (expression
-        expr: (binary_expression
-          left: (expression
+        expr: (range_expression
+          start: (expression
             expr: (primitive_value
               primitive: (number)))
           operator: (inclusive_range)
-          right: (expression
+          end: (expression
             expr: (paren_expression
               expr: (expression
                 expr: (binary_expression
@@ -53,8 +63,18 @@ for i in 1..(something - other) {
       body: (block
         (statement
           (expression
-            expr: (function_call
-              target: (identifier)
-              arguments: (paren_arguments
-                argument: (expression
-                  expr: (identifier))))))))))
+            expr: (member_access
+              target: (expression
+                expr: (identifier))
+              operator: (double_colon)
+              member: (function_call
+                target: (identifier)
+                arguments: (paren_arguments
+                  argument: (expression
+                    expr: (member_access
+                      target: (expression
+                        expr: (identifier))
+                      operator: (period)
+                      member: (function_call
+                        target: (identifier)
+                        arguments: (paren_arguments)))))))))))))

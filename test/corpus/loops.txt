@@ -10,10 +10,6 @@ while is_true or count > 0 {
 	count =- 1
 }
 
-do while count == 9 {
-	count =- 1
-}
-
 ---
 
 (program
@@ -50,24 +46,6 @@ do while count == 9 {
               right: (expression
                 expr: (primitive_value
                   primitive: (number)))))))
-      body: (block
-        (statement
-          (reassignment
-            target: (identifier)
-            operator: (decrement)
-            value: (expression
-              expr: (primitive_value
-                primitive: (number))))))))
-  (statement
-    (while_loop
-      condition: (expression
-        expr: (binary_expression
-          left: (expression
-            expr: (identifier))
-          operator: (equal)
-          right: (expression
-            expr: (primitive_value
-              primitive: (number)))))
       body: (block
         (statement
           (reassignment

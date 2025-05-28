@@ -70,24 +70,26 @@ let people: [Person] = [
       (assign)
       value: (expression
         expr: (list_value
-          element: (identifier)
-          element: (struct_instance
-            name: (identifier)
-            field: (struct_prop_pair
+          (expression
+            expr: (identifier))
+          (expression
+            expr: (struct_instance
               name: (identifier)
-              value: (expression
-                expr: (primitive_value
-                  primitive: (string
-                    chunk: (string_content)))))
-            field: (struct_prop_pair
-              name: (identifier)
-              value: (expression
-                expr: (identifier)))
-            field: (struct_prop_pair
-              name: (identifier)
-              value: (expression
-                expr: (primitive_value
-                  primitive: (boolean))))))))))
+              field: (struct_prop_pair
+                name: (identifier)
+                value: (expression
+                  expr: (primitive_value
+                    primitive: (string
+                      chunk: (string_content)))))
+              field: (struct_prop_pair
+                name: (identifier)
+                value: (expression
+                  expr: (identifier)))
+              field: (struct_prop_pair
+                name: (identifier)
+                value: (expression
+                  expr: (primitive_value
+                    primitive: (boolean)))))))))))
 
 ==================
 struct methods
@@ -95,9 +97,9 @@ struct methods
 
 impl (self: Person) {
   fn describe() Str {
-    io.print("Name: {{self.name}}")
-    io.print("Age: {{self.age}}")
-    io.print("Employed: {{self.employed}}")
+    io::print("Name: {self.name}")
+    io::print("Age: {self.age}")
+    io::print("Employed: {self.employed}")
   }
 }
 
@@ -131,7 +133,7 @@ impl (mut self: Person) {
                   (member_access
                     (expression
                       (identifier))
-                    (period)
+                    (double_colon)
                     (function_call
                       (identifier)
                       (paren_arguments
@@ -151,7 +153,7 @@ impl (mut self: Person) {
                   (member_access
                     (expression
                       (identifier))
-                    (period)
+                    (double_colon)
                     (function_call
                       (identifier)
                       (paren_arguments
@@ -171,7 +173,7 @@ impl (mut self: Person) {
                   (member_access
                     (expression
                       (identifier))
-                    (period)
+                    (double_colon)
                     (function_call
                       (identifier)
                       (paren_arguments
