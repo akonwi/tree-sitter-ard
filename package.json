@@ -43,6 +43,7 @@
   },
   "scripts": {
     "generate": "rm -rf ./build && node-gyp rebuild && tree-sitter generate",
+    "highlight": "tree-sitter highlight",
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",

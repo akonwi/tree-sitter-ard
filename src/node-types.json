@@ -236,69 +236,68 @@
   {
     "type": "expression",
     "named": true,
-    "fields": {
-      "expr": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "anonymous_function",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "list_value",
-            "named": true
-          },
-          {
-            "type": "map_value",
-            "named": true
-          },
-          {
-            "type": "match_expression",
-            "named": true
-          },
-          {
-            "type": "member_access",
-            "named": true
-          },
-          {
-            "type": "paren_expression",
-            "named": true
-          },
-          {
-            "type": "primitive_value",
-            "named": true
-          },
-          {
-            "type": "range_expression",
-            "named": true
-          },
-          {
-            "type": "struct_instance",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "wildcard",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_function",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list_value",
+          "named": true
+        },
+        {
+          "type": "map_value",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "member_access",
+          "named": true
+        },
+        {
+          "type": "paren_expression",
+          "named": true
+        },
+        {
+          "type": "primitive_value",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "struct_instance",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -535,16 +534,6 @@
     "type": "import",
     "named": true,
     "fields": {
-      "alias": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "path": {
         "multiple": false,
         "required": true,
@@ -683,6 +672,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "function_call",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -940,7 +933,7 @@
     "type": "range_expression",
     "named": true,
     "fields": {
-      "end": {
+      "left": {
         "multiple": false,
         "required": true,
         "types": [
@@ -960,7 +953,7 @@
           }
         ]
       },
-      "start": {
+      "right": {
         "multiple": false,
         "required": true,
         "types": [
@@ -1024,18 +1017,8 @@
     "type": "result_type",
     "named": true,
     "fields": {
-      "err_type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      },
-      "ok_type": {
-        "multiple": false,
+      "type": {
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1524,10 +1507,6 @@
   {
     "type": "and",
     "named": true
-  },
-  {
-    "type": "as",
-    "named": false
   },
   {
     "type": "assign",

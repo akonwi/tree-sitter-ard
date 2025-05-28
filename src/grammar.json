@@ -35,31 +35,6 @@
             "type": "SYMBOL",
             "name": "module_path"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "as"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "alias",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "identifier"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },
@@ -770,69 +745,60 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "FIELD",
-          "name": "expr",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "primitive_value"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "list_value"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "map_value"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "unary_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "binary_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "member_access"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "function_call"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "struct_instance"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "paren_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "match_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "anonymous_function"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "range_expression"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "wildcard"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "primitive_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "map_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "member_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "struct_instance"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paren_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "match_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "anonymous_function"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "range_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "wildcard"
         }
       ]
     },
@@ -844,7 +810,7 @@
         "members": [
           {
             "type": "FIELD",
-            "name": "start",
+            "name": "left",
             "content": {
               "type": "SYMBOL",
               "name": "expression"
@@ -860,7 +826,7 @@
           },
           {
             "type": "FIELD",
-            "name": "end",
+            "name": "right",
             "content": {
               "type": "SYMBOL",
               "name": "expression"
@@ -1307,6 +1273,10 @@
               {
                 "type": "SYMBOL",
                 "name": "wildcard"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_call"
               }
             ]
           }
@@ -2096,7 +2066,7 @@
         },
         {
           "type": "FIELD",
-          "name": "ok_type",
+          "name": "type",
           "content": {
             "type": "SYMBOL",
             "name": "type"
@@ -2108,7 +2078,7 @@
         },
         {
           "type": "FIELD",
-          "name": "err_type",
+          "name": "type",
           "content": {
             "type": "SYMBOL",
             "name": "type"
@@ -2250,31 +2220,6 @@
         {
           "type": "SYMBOL",
           "name": "_right_bracket"
-        }
-      ]
-    },
-    "_list_element": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "boolean"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "struct_instance"
         }
       ]
     },
@@ -2706,10 +2651,6 @@
     [
       "anonymous_parameter",
       "expression"
-    ],
-    [
-      "expression",
-      "_list_element"
     ]
   ],
   "precedences": [
@@ -2795,26 +2736,6 @@
       {
         "type": "SYMBOL",
         "name": "struct_instance"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "list_value"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "expression"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "expression"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "_list_element"
       }
     ]
   ],

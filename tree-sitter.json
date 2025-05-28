@@ -4,8 +4,10 @@
       "name": "ard",
       "camelcase": "Ard",
       "scope": "source.ard",
-      "file-types": [".ard"],
-      "injection-regex": "^ard$"
+      "file-types": ["ard"],
+      "highlights": "queries/highlights.scm",
+      "tags": "queries/tags.scm",
+      "injection-regex": "ard"
     }
   ],
   "metadata": {
