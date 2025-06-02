@@ -15,36 +15,36 @@ if age > 18 or something_else {
   (statement
     (if_statement
       condition: (expression
-        expr: (unary_expression
+        (unary_expression
           operator: (not)
           operand: (expression
-            expr: (identifier))))
+            (identifier))))
       body: (block)))
   (statement
     (if_statement
       condition: (expression
-        expr: (binary_expression
+        (binary_expression
           left: (expression
-            expr: (binary_expression
+            (binary_expression
               left: (expression
-                expr: (identifier))
+                (identifier))
               operator: (greater_than)
               right: (expression
-                expr: (primitive_value
+                (primitive_value
                   primitive: (number)))))
           operator: (or)
           right: (expression
-            expr: (identifier))))
+            (identifier))))
       body: (block)
       else: (else_clause
         if: (if_statement
           condition: (expression
-            expr: (binary_expression
+            (binary_expression
               left: (expression
-                expr: (identifier))
+                (identifier))
               operator: (equal)
               right: (expression
-                expr: (primitive_value
+                (primitive_value
                   primitive: (number)))))
           body: (block)
           else: (else_clause

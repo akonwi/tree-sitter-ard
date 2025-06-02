@@ -21,7 +21,7 @@ let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
               (int)))))
       (assign)
       value: (expression
-        expr: (map_value))))
+        (map_value))))
   (statement
     (variable_definition
       binding: (variable_binding)
@@ -36,20 +36,20 @@ let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
               (bool)))))
       (assign)
       value: (expression
-        expr: (map_value
+        (map_value
           entry: (map_pair
             key: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (string
                   chunk: (string_content))))
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (boolean))))
           entry: (map_pair
             key: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (string
                   chunk: (string_content))))
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (boolean)))))))))

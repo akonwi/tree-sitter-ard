@@ -16,12 +16,12 @@ while is_true or count > 0 {
   (statement
     (while_loop
       condition: (expression
-        expr: (binary_expression
+        (binary_expression
           left: (expression
-            expr: (identifier))
+            (identifier))
           operator: (less_than_or_equal)
           right: (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (number)))))
       body: (block
         (statement
@@ -29,22 +29,22 @@ while is_true or count > 0 {
             target: (identifier)
             operator: (increment)
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (number))))))))
   (statement
     (while_loop
       condition: (expression
-        expr: (binary_expression
+        (binary_expression
           left: (expression
-            expr: (identifier))
+            (identifier))
           operator: (or)
           right: (expression
-            expr: (binary_expression
+            (binary_expression
               left: (expression
-                expr: (identifier))
+                (identifier))
               operator: (greater_than)
               right: (expression
-                expr: (primitive_value
+                (primitive_value
                   primitive: (number)))))))
       body: (block
         (statement
@@ -52,7 +52,7 @@ while is_true or count > 0 {
             target: (identifier)
             operator: (decrement)
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (number)))))))))
 
 ==================

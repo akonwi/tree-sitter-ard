@@ -258,6 +258,10 @@
           "named": true
         },
         {
+          "type": "instance_property",
+          "named": true
+        },
+        {
           "type": "list_value",
           "named": true
         },
@@ -547,6 +551,22 @@
     }
   },
   {
+    "type": "instance_property",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "less_than",
     "named": true,
     "fields": {}
@@ -771,6 +791,46 @@
     }
   },
   {
+    "type": "member_access_type",
+    "named": true,
+    "fields": {
+      "member": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "double_colon",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "param_def",
     "named": true,
     "fields": {
@@ -798,6 +858,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "member_access_type",
+            "named": true
+          },
           {
             "type": "type",
             "named": true
@@ -1082,6 +1146,14 @@
           "named": true
         },
         {
+          "type": "trait_definition",
+          "named": true
+        },
+        {
+          "type": "trait_implementation",
+          "named": true
+        },
+        {
           "type": "type_declaration",
           "named": true
         },
@@ -1224,6 +1296,154 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "trait_definition",
+    "named": true,
+    "fields": {
+      "function": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "trait_function",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "trait_function",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameters",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "trait_implementation",
+    "named": true,
+    "fields": {
+      "for": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "trait_implementation_function",
+            "named": true
+          }
+        ]
+      },
+      "trait": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_access",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "trait_implementation_function",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameters",
             "named": true
           }
         ]
@@ -1493,6 +1713,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "Result",
     "named": false
   },
@@ -1666,6 +1890,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "trait",
     "named": false
   },
   {

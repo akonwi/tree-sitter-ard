@@ -21,22 +21,22 @@ let booleans: [Bool] = [true, false]
               (int)))))
       (assign)
       value: (expression
-        expr: (list_value))))
+        (list_value))))
   (statement
     (variable_definition
       binding: (variable_binding)
       name: (identifier)
       (assign)
       value: (expression
-        expr: (list_value
+        (list_value
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (number)))
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (number)))
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (number)))))))
   (statement
     (variable_definition
@@ -49,17 +49,17 @@ let booleans: [Bool] = [true, false]
               (str)))))
       (assign)
       value: (expression
-        expr: (list_value
+        (list_value
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (string
                 chunk: (string_content))))
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (string
                 chunk: (string_content))))
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (string
                 chunk: (string_content))))))))
   (statement
@@ -73,10 +73,10 @@ let booleans: [Bool] = [true, false]
               (bool)))))
       (assign)
       value: (expression
-        expr: (list_value
+        (list_value
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (boolean)))
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (boolean))))))))

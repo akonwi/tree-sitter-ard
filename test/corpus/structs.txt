@@ -41,23 +41,23 @@ let people: [Person] = [
       name: (identifier)
       (assign)
       value: (expression
-        expr: (struct_instance
+        (struct_instance
           name: (identifier)
           field: (struct_prop_pair
             name: (identifier)
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (string
                   chunk: (string_content)))))
           field: (struct_prop_pair
             name: (identifier)
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (number))))
           field: (struct_prop_pair
             name: (identifier)
             value: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (boolean))))))))
   (statement
     (variable_definition
@@ -69,26 +69,26 @@ let people: [Person] = [
             (identifier))))
       (assign)
       value: (expression
-        expr: (list_value
+        (list_value
           (expression
-            expr: (identifier))
+            (identifier))
           (expression
-            expr: (struct_instance
+            (struct_instance
               name: (identifier)
               field: (struct_prop_pair
                 name: (identifier)
                 value: (expression
-                  expr: (primitive_value
+                  (primitive_value
                     primitive: (string
                       chunk: (string_content)))))
               field: (struct_prop_pair
                 name: (identifier)
                 value: (expression
-                  expr: (identifier)))
+                  (identifier)))
               field: (struct_prop_pair
                 name: (identifier)
                 value: (expression
-                  expr: (primitive_value
+                  (primitive_value
                     primitive: (boolean)))))))))))
 
 ==================

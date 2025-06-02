@@ -19,7 +19,7 @@ mut negative = -1
           (str)))
       (assign)
       value: (expression
-        expr: (primitive_value
+        (primitive_value
           primitive: (string
             chunk: (string_content))))))
   (statement
@@ -31,7 +31,7 @@ mut negative = -1
           (int)))
       (assign)
       value: (expression
-        expr: (primitive_value
+        (primitive_value
           primitive: (number)))))
   (statement
     (variable_definition
@@ -39,7 +39,7 @@ mut negative = -1
       name: (identifier)
       (assign)
       value: (expression
-        expr: (primitive_value
+        (primitive_value
           primitive: (boolean)))))
   (statement
     (variable_definition
@@ -47,8 +47,8 @@ mut negative = -1
       name: (identifier)
       (assign)
       value: (expression
-        expr: (unary_expression
+        (unary_expression
           operator: (minus)
           operand: (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (number))))))))

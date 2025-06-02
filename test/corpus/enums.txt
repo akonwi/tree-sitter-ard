@@ -30,9 +30,9 @@ enum Option {
       name: (identifier)
       (assign)
       value: (expression
-        expr: (member_access
+        (member_access
           target: (expression
-            expr: (identifier))
+            (identifier))
           operator: (double_colon)
           member: (identifier)))))
   (statement

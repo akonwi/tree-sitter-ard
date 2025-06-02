@@ -16,28 +16,28 @@ for i in 1..(something - other) {
     (for_in_loop
       cursor: (identifier)
       range: (expression
-        expr: (range_expression
-          start: (expression
-            expr: (primitive_value
+        (range_expression
+          left: (expression
+            (primitive_value
               primitive: (number)))
           operator: (inclusive_range)
-          end: (expression
-            expr: (primitive_value
+          right: (expression
+            (primitive_value
               primitive: (number)))))
       body: (block
         (statement
           (expression
-            expr: (member_access
+            (member_access
               target: (expression
-                expr: (identifier))
+                (identifier))
               operator: (double_colon)
               member: (function_call
                 target: (identifier)
                 arguments: (paren_arguments
                   argument: (expression
-                    expr: (member_access
+                    (member_access
                       target: (expression
-                        expr: (identifier))
+                        (identifier))
                       operator: (period)
                       member: (function_call
                         target: (identifier)
@@ -46,34 +46,34 @@ for i in 1..(something - other) {
     (for_in_loop
       cursor: (identifier)
       range: (expression
-        expr: (range_expression
-          start: (expression
-            expr: (primitive_value
+        (range_expression
+          left: (expression
+            (primitive_value
               primitive: (number)))
           operator: (inclusive_range)
-          end: (expression
-            expr: (paren_expression
+          right: (expression
+            (paren_expression
               expr: (expression
-                expr: (binary_expression
+                (binary_expression
                   left: (expression
-                    expr: (identifier))
+                    (identifier))
                   operator: (minus)
                   right: (expression
-                    expr: (identifier))))))))
+                    (identifier))))))))
       body: (block
         (statement
           (expression
-            expr: (member_access
+            (member_access
               target: (expression
-                expr: (identifier))
+                (identifier))
               operator: (double_colon)
               member: (function_call
                 target: (identifier)
                 arguments: (paren_arguments
                   argument: (expression
-                    expr: (member_access
+                    (member_access
                       target: (expression
-                        expr: (identifier))
+                        (identifier))
                       operator: (period)
                       member: (function_call
                         target: (identifier)

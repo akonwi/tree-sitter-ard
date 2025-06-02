@@ -18,6 +18,9 @@
 (or) @keyword.operator.logical
 (not) @keyword.operator.logical
 
+// imports
+(module_path) @link.text
+
 ;; Basic types
 (primitive_type) @type.builtin
 (generic_type) @type.builtin

@@ -20,12 +20,12 @@ get_hello()
       body: (block
         (statement
           (expression
-            expr: (primitive_value
+            (primitive_value
               primitive: (string
                 chunk: (string_content))))))))
   (statement
     (expression
-      expr: (function_call
+      (function_call
         target: (identifier)
         arguments: (paren_arguments)))))
 
@@ -259,3 +259,36 @@ fn grow(mut t: Thing, size: Int) Int {
                 (identifier))
               (period)
               (identifier))))))))
+
+==================
+scoped types
+==================
+fn show(item: Str::ToString) {
+  io::print(item)
+}
+
+-------------
+(program
+  (statement
+    (function_definition
+      name: (identifier)
+      parameters: (parameters
+        parameter: (param_def
+          name: (identifier)
+          type: (member_access_type
+            target: (primitive_type
+              (str))
+            operator: (double_colon)
+            member: (identifier))))
+      body: (block
+        (statement
+          (expression
+            (member_access
+              target: (expression
+                (identifier))
+              operator: (double_colon)
+              member: (function_call
+                target: (identifier)
+                arguments: (paren_arguments
+                  argument: (expression
+                    (identifier)))))))))))

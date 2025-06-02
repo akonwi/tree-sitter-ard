@@ -24,44 +24,44 @@ let falsy = not something.done
               (bool)))))
       (assign)
       value: (expression
-        expr: (map_value))))
+        (map_value))))
   (statement
     (expression
-      expr: (member_access
+      (member_access
         target: (expression
-          expr: (identifier))
+          (identifier))
         operator: (period)
         member: (identifier))))
   (statement
     (expression
-      expr: (member_access
+      (member_access
         target: (expression
-          expr: (identifier))
+          (identifier))
         operator: (period)
         member: (function_call
           target: (identifier)
           arguments: (paren_arguments
             argument: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (string
                   chunk: (string_content))))
             argument: (expression
-              expr: (primitive_value
+              (primitive_value
                 primitive: (boolean))))))))
   (statement
     (reassignment
       target: (member_access
         target: (expression
-          expr: (member_access
+          (member_access
             target: (expression
-              expr: (identifier))
+              (identifier))
             operator: (period)
             member: (identifier)))
         operator: (period)
         member: (identifier))
       operator: (assign)
       value: (expression
-        expr: (primitive_value
+        (primitive_value
           primitive: (number)))))
   (statement
     (variable_definition
@@ -69,12 +69,12 @@ let falsy = not something.done
       name: (identifier)
       (assign)
       value: (expression
-        expr: (member_access
+        (member_access
           target: (expression
-            expr: (unary_expression
+            (unary_expression
               operator: (not)
               operand: (expression
-                expr: (identifier))))
+                (identifier))))
           operator: (period)
           member: (identifier))))))
 

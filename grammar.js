@@ -46,6 +46,8 @@ module.exports = grammar({
     [$._expression_statement, $.binary_expression],
     [$.binary_expression, $.variable_definition],
     [$.anonymous_parameter, $.expression],
+    [$.anonymous_function, $.parameters],
+    [$.anonymous_parameter, $.param_def],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -73,6 +75,8 @@ module.exports = grammar({
         $.implements_definition,
         $.enum_definition,
         $.type_declaration,
+        $.trait_definition,
+        $.trait_implementation,
       ),
 
     //// definitions
@@ -94,6 +98,43 @@ module.exports = grammar({
       seq(field("name", $.identifier), $._colon, field("type", $.type)),
 
     implements_definition: ($) => seq("impl", $.parameters, $.block),
+
+    trait_definition: ($) =>
+      seq(
+        "trait",
+        field("name", $.identifier),
+        $._left_brace,
+        repeat(field("function", $.trait_function)),
+        $._right_brace,
+      ),
+
+    trait_function: ($) =>
+      seq(
+        $._fn,
+        field("name", $.identifier),
+        field("parameters", $.parameters),
+        field("type", $.type),
+      ),
+
+    trait_implementation: ($) =>
+      seq(
+        "impl",
+        field("trait", choice($.identifier, $.member_access)),
+        "for",
+        field("for", $.identifier),
+        $._left_brace,
+        repeat(field("function", $.trait_implementation_function)),
+        $._right_brace,
+      ),
+
+    trait_implementation_function: ($) =>
+      seq(
+        $._fn,
+        field("name", $.identifier),
+        field("parameters", $.parameters),
+        field("type", $.type),
+        field("body", $.block),
+      ),
 
     enum_definition: ($) =>
       seq(
@@ -130,11 +171,7 @@ module.exports = grammar({
       seq($._left_brace, optional(repeat($.statement)), $._right_brace),
 
     while_loop: ($) =>
-      seq(
-        "while",
-        field("condition", $.expression),
-        field("body", $.block),
-      ),
+      seq("while", field("condition", $.expression), field("body", $.block)),
 
     for_loop: ($) =>
       seq(
@@ -181,9 +218,25 @@ module.exports = grammar({
 
     //// Expressions
     expression: ($) =>
-      choice($.identifier, $.primitive_value, $.list_value, $.map_value, $.unary_expression,
-        $.binary_expression, $.member_access, $.function_call, $.struct_instance,
-        $.paren_expression, $.match_expression, $.anonymous_function, $.range_expression, $.wildcard),
+      choice(
+        $.identifier,
+        $.primitive_value,
+        $.list_value,
+        $.map_value,
+        $.unary_expression,
+        $.binary_expression,
+        $.member_access,
+        $.function_call,
+        $.struct_instance,
+        $.paren_expression,
+        $.match_expression,
+        $.anonymous_function,
+        $.range_expression,
+        $.wildcard,
+        $.instance_property,
+      ),
+
+    instance_property: ($) => seq("@", field("name", $.identifier)),
 
     range_expression: ($) =>
       prec.left(
@@ -243,7 +296,14 @@ module.exports = grammar({
         optional(field("binding", "mut")),
         field("name", $.identifier),
         $._colon,
-        field("type", $.type),
+        field("type", choice($.type, $.member_access_type)),
+      ),
+      
+    member_access_type: ($) =>
+      seq(
+        field("target", choice($.identifier, $.primitive_type)),
+        field("operator", $.double_colon),
+        field("member", $.identifier),
       ),
 
     match_expression: ($) =>
@@ -259,7 +319,13 @@ module.exports = grammar({
       seq(
         field(
           "pattern",
-          choice($.member_access, $.primitive_value, $.identifier, $.wildcard, $.function_call),
+          choice(
+            $.member_access,
+            $.primitive_value,
+            $.identifier,
+            $.wildcard,
+            $.function_call,
+          ),
         ),
         $._fat_arrow,
         field("body", choice($.block, $.expression)),
@@ -361,11 +427,7 @@ module.exports = grammar({
         field("optional", optional($._question)),
       ),
 
-    generic_type: ($) =>
-      seq(
-        $._dollar,
-        field("name", $.identifier)
-      ),
+    generic_type: ($) => seq($._dollar, field("name", $.identifier)),
 
     result_type: ($) =>
       seq(
@@ -392,11 +454,7 @@ module.exports = grammar({
 
     ///// values
     list_value: ($) =>
-      seq(
-        $._left_bracket,
-        sepByComma($.expression),
-        $._right_bracket,
-      ),
+      seq($._left_bracket, sepByComma($.expression), $._right_bracket),
 
     map_value: ($) =>
       choice(
@@ -408,11 +466,7 @@ module.exports = grammar({
         ),
       ),
     map_pair: ($) =>
-      seq(
-        field("key", $.expression),
-        $._colon,
-        field("value", $.expression),
-      ),
+      seq(field("key", $.expression), $._colon, field("value", $.expression)),
     struct_prop_pair: ($) =>
       seq(field("name", $.identifier), $._colon, field("value", $.expression)),
     primitive_value: ($) =>
@@ -425,18 +479,18 @@ module.exports = grammar({
         repeat(
           field(
             "chunk",
-            choice(alias(/[^"{\\]+/, $.string_content), $.string_interpolation, $.escape_sequence),
+            choice(
+              alias(/[^"{\\]+/, $.string_content),
+              $.string_interpolation,
+              $.escape_sequence,
+            ),
           ),
         ),
         '"',
       ),
     string_interpolation: ($) =>
-      seq(
-        $._left_brace,
-        field("expression", $.expression),
-        $._right_brace,
-      ),
-    escape_sequence: ($) => token.immediate(seq('\\', /[tnr"'\\]/)),
+      seq($._left_brace, field("expression", $.expression), $._right_brace),
+    escape_sequence: ($) => token.immediate(seq("\\", /[tnr"'\\]/)),
     /// comments
     comment: ($) =>
       token(
