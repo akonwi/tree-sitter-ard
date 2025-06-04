@@ -459,6 +459,21 @@
     }
   },
   {
+    "type": "function_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "generic_type",
     "named": true,
     "fields": {
@@ -1479,6 +1494,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "function_type",
+          "named": true
+        },
         {
           "type": "generic_type",
           "named": true

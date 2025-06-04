@@ -261,13 +261,16 @@ fn grow(mut t: Thing, size: Int) Int {
               (identifier))))))))
 
 ==================
-scoped types
+function signatures as types - simple
 ==================
-fn show(item: Str::ToString) {
-  io::print(item)
+fn map(list: [Int], do: fn(Int) Int) [Int] {
+  list
 }
 
--------------
+map([1,2,3], fn(i: Int) Int { i*2 })
+
+---
+
 (program
   (statement
     (function_definition
@@ -275,20 +278,65 @@ fn show(item: Str::ToString) {
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
-          type: (member_access_type
-            target: (primitive_type
-              (str))
-            operator: (double_colon)
-            member: (identifier))))
+          type: (type
+            (list_type
+              element_type: (type
+                (primitive_type
+                  (int))))))
+        parameter: (param_def
+          name: (identifier)
+          type: (type
+            (function_type
+              (type
+                (primitive_type
+                  (int)))
+              (type
+                (primitive_type
+                  (int)))))))
+      return: (type
+        (list_type
+          element_type: (type
+            (primitive_type
+              (int)))))
       body: (block
         (statement
           (expression
-            (member_access
-              target: (expression
-                (identifier))
-              operator: (double_colon)
-              member: (function_call
-                target: (identifier)
-                arguments: (paren_arguments
-                  argument: (expression
-                    (identifier)))))))))))
+            (identifier))))))
+  (statement
+    (expression
+      (function_call
+        target: (identifier)
+        arguments: (paren_arguments
+          argument: (expression
+            (list_value
+              (expression
+                (primitive_value
+                  primitive: (number)))
+              (expression
+                (primitive_value
+                  primitive: (number)))
+              (expression
+                (primitive_value
+                  primitive: (number)))))
+          argument: (expression
+            (anonymous_function
+              parameter: (anonymous_parameter
+                name: (identifier)
+                type: (type
+                  (primitive_type
+                    (int))))
+              return: (type
+                (primitive_type
+                  (int)))
+              body: (block
+                (statement
+                  (expression
+                    (binary_expression
+                      left: (expression
+                        (identifier))
+                      operator: (multiply)
+                      right: (expression
+                        (primitive_value
+                          primitive: (number))))))))))))))
+
+

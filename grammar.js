@@ -39,6 +39,7 @@ module.exports = grammar({
     [$.member_access, $.expression],
     ["function_call", "expression"],
     [$.expression, $.struct_instance],
+    [$.type, $.function_type],
   ],
 
   conflicts: ($) => [
@@ -48,6 +49,8 @@ module.exports = grammar({
     [$.anonymous_parameter, $.expression],
     [$.anonymous_function, $.parameters],
     [$.anonymous_parameter, $.param_def],
+    [$.function_type, $.type],
+    [$.type, $.function_type],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -252,14 +255,26 @@ module.exports = grammar({
       seq($._left_paren, field("expr", $.expression), $._right_paren),
 
     anonymous_function: ($) =>
-      seq(
+      choice(
         seq(
-          $._left_paren,
-          sepByComma(field("parameter", $.anonymous_parameter)),
-          $._right_paren,
+          seq(
+            $._left_paren,
+            sepByComma(field("parameter", $.anonymous_parameter)),
+            $._right_paren,
+          ),
+          field("return", optional($.type)),
+          field("body", $.block),
         ),
-        field("return", optional($.type)),
-        field("body", $.block),
+        seq(
+          $._fn,
+          seq(
+            $._left_paren,
+            sepByComma(field("parameter", $.anonymous_parameter)),
+            $._right_paren,
+          ),
+          field("return", optional($.type)),
+          field("body", $.block),
+        )
       ),
 
     anonymous_parameter: ($) =>
@@ -415,7 +430,7 @@ module.exports = grammar({
 
     ///// types
     type: ($) =>
-      seq(
+      prec.left(1, seq(
         choice(
           $.generic_type,
           $.map_type, 
@@ -423,9 +438,19 @@ module.exports = grammar({
           $.primitive_type, 
           $.identifier,
           $.result_type,
+          $.function_type,
         ),
         field("optional", optional($._question)),
-      ),
+      )),
+
+    function_type: ($) =>
+      prec(2, seq(
+        "fn",
+        $._left_paren,
+        sepByComma($.type),
+        $._right_paren,
+        $.type
+      )),
 
     generic_type: ($) => seq($._dollar, field("name", $.identifier)),
 
