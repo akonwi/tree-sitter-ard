@@ -49,8 +49,6 @@ module.exports = grammar({
     [$.anonymous_parameter, $.expression],
     [$.anonymous_function, $.parameters],
     [$.anonymous_parameter, $.param_def],
-    [$.function_type, $.type],
-    [$.type, $.function_type],
   ],
 
   extras: ($) => [/\s/, $.comment],
