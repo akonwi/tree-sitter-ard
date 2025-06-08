@@ -18,7 +18,7 @@
 (or) @keyword.operator.logical
 (not) @keyword.operator.logical
 
-// imports
+;; imports
 (module_path) @link.text
 
 ;; Basic types
