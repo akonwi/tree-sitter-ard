@@ -215,6 +215,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pub",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -456,6 +466,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pub",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1247,6 +1267,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pub",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1351,6 +1381,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pub",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1546,6 +1586,10 @@
       "types": [
         {
           "type": "assign",
+          "named": true
+        },
+        {
+          "type": "pub",
           "named": true
         },
         {
@@ -1897,6 +1941,10 @@
   },
   {
     "type": "plus",
+    "named": true
+  },
+  {
+    "type": "pub",
     "named": true
   },
   {

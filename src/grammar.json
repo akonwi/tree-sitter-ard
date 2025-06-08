@@ -111,6 +111,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "type"
         },
@@ -160,6 +172,18 @@
     "struct_definition": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "SYMBOL",
           "name": "_struct"
@@ -276,6 +300,18 @@
     "trait_definition": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "trait"
@@ -444,6 +480,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "_enum"
         },
@@ -601,6 +649,18 @@
     "function_definition": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pub"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "SYMBOL",
           "name": "_fn"
@@ -2969,6 +3029,10 @@
       "type": "STRING",
       "value": "not"
     },
+    "pub": {
+      "type": "STRING",
+      "value": "pub"
+    },
     "_colon": {
       "type": "STRING",
       "value": ":"
@@ -3076,14 +3140,6 @@
     [
       "anonymous_parameter",
       "param_def"
-    ],
-    [
-      "function_type",
-      "type"
-    ],
-    [
-      "type",
-      "function_type"
     ]
   ],
   "precedences": [

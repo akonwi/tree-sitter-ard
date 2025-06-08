@@ -84,12 +84,19 @@ module.exports = grammar({
 
     //// definitions
     type_declaration: ($) =>
-      seq("type", field("name", $.identifier), $.assign, $.type_union),
+      seq(
+        optional($.pub),
+        "type",
+        field("name", $.identifier),
+        $.assign,
+        $.type_union,
+      ),
 
     type_union: ($) => sepByPipe($.type),
 
     struct_definition: ($) =>
       seq(
+        optional($.pub),
         $._struct,
         field("name", $.identifier),
         $._left_brace,
@@ -104,6 +111,7 @@ module.exports = grammar({
 
     trait_definition: ($) =>
       seq(
+        optional($.pub),
         "trait",
         field("name", $.identifier),
         $._left_brace,
@@ -141,6 +149,7 @@ module.exports = grammar({
 
     enum_definition: ($) =>
       seq(
+        optional($.pub),
         $._enum,
         field("name", $.identifier),
         $._left_brace,
@@ -163,6 +172,7 @@ module.exports = grammar({
 
     function_definition: ($) =>
       seq(
+        optional($.pub),
         $._fn,
         field("name", $.identifier),
         field("parameters", $.parameters),
@@ -274,7 +284,7 @@ module.exports = grammar({
           ),
           field("return", optional($.type)),
           field("body", $.block),
-        )
+        ),
       ),
 
     anonymous_parameter: ($) =>
@@ -313,7 +323,7 @@ module.exports = grammar({
         $._colon,
         field("type", choice($.type, $.member_access_type)),
       ),
-      
+
     member_access_type: ($) =>
       seq(
         field("target", choice($.identifier, $.primitive_type)),
@@ -430,27 +440,27 @@ module.exports = grammar({
 
     ///// types
     type: ($) =>
-      prec.left(1, seq(
-        choice(
-          $.generic_type,
-          $.map_type, 
-          $.list_type, 
-          $.primitive_type, 
-          $.identifier,
-          $.result_type,
-          $.function_type,
+      prec.left(
+        1,
+        seq(
+          choice(
+            $.generic_type,
+            $.map_type,
+            $.list_type,
+            $.primitive_type,
+            $.identifier,
+            $.result_type,
+            $.function_type,
+          ),
+          field("optional", optional($._question)),
         ),
-        field("optional", optional($._question)),
-      )),
+      ),
 
     function_type: ($) =>
-      prec(2, seq(
-        "fn",
-        $._left_paren,
-        sepByComma($.type),
-        $._right_paren,
-        $.type
-      )),
+      prec(
+        2,
+        seq("fn", $._left_paren, sepByComma($.type), $._right_paren, $.type),
+      ),
 
     generic_type: ($) => seq($._dollar, field("name", $.identifier)),
 
@@ -536,6 +546,7 @@ module.exports = grammar({
     _fn: ($) => "fn",
     break: ($) => "break",
     not: ($) => "not",
+    pub: ($) => "pub",
 
     /// symbols + punctuation
     _colon: ($) => ":",

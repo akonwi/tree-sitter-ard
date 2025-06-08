@@ -2,7 +2,7 @@
 empty params
 ==================
 
-fn get_hello() Str {
+pub fn get_hello() Str {
   "Hello, world!"
 }
 
@@ -12,6 +12,7 @@ get_hello()
 (program
   (statement
     (function_definition
+      (pub)
       name: (identifier)
       parameters: (parameters)
       return: (type
@@ -338,5 +339,3 @@ map([1,2,3], fn(i: Int) Int { i*2 })
                       right: (expression
                         (primitive_value
                           primitive: (number))))))))))))))
-
-
