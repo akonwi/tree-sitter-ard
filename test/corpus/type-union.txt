@@ -31,6 +31,7 @@ match some_shape {
           (identifier))
         (match_case
           (identifier)
+          (fat_arrow)
           (block
             (statement
               (expression
@@ -60,6 +61,7 @@ match some_shape {
                                     (paren_arguments)))))))))))))))
         (match_case
           (identifier)
+          (fat_arrow)
           (block
             (statement
               (expression

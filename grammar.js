@@ -348,9 +348,10 @@ module.exports = grammar({
             $.identifier,
             $.wildcard,
             $.function_call,
+            $.range_expression,
           ),
         ),
-        $._fat_arrow,
+        $.fat_arrow,
         field("body", choice($.block, $.expression)),
       ),
 
@@ -563,7 +564,7 @@ module.exports = grammar({
     _right_angle: ($) => ">",
     _comma: ($) => ",",
     period: ($) => ".",
-    _fat_arrow: ($) => "=>",
+    fat_arrow: ($) => "=>",
     _pipe: ($) => "|",
   },
 });

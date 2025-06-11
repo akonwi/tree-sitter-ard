@@ -744,11 +744,25 @@
             "named": true
           },
           {
+            "type": "range_expression",
+            "named": true
+          },
+          {
             "type": "wildcard",
             "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fat_arrow",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1764,10 +1778,6 @@
     "named": false
   },
   {
-    "type": "=>",
-    "named": false
-  },
-  {
     "type": ">",
     "named": false
   },
@@ -1842,6 +1852,10 @@
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "fat_arrow",
+    "named": true
   },
   {
     "type": "float",

@@ -25,6 +25,7 @@ match payload {
               (identifier))
             (double_colon)
             (identifier))
+          (fat_arrow)
           (expression
             (function_call
               (identifier)
@@ -39,6 +40,7 @@ match payload {
               (identifier))
             (double_colon)
             (identifier))
+          (fat_arrow)
           (block
             (statement
               (comment))
@@ -53,6 +55,7 @@ match payload {
                           (string_content))))))))))
         (match_case
           (identifier)
+          (fat_arrow)
           (expression
             (function_call
               (identifier)
@@ -82,6 +85,7 @@ match boolean {
         (match_case
           (primitive_value
             (boolean))
+          (fat_arrow)
           (expression
             (primitive_value
               (string
@@ -89,6 +93,88 @@ match boolean {
         (match_case
           (primitive_value
             (boolean))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))))))
+
+==================
+Matching ints
+==================
+
+match number {
+  0 => "zero",
+  1 => "one",
+  2 => "a couple",
+  3..5 => "a few",
+  6..10 => "several",
+  _ => "a ton"
+}
+
+---
+
+(program
+  (statement
+    (expression
+      (match_expression
+        (expression
+          (identifier))
+        (match_case
+          (primitive_value
+            (number))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (primitive_value
+            (number))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (primitive_value
+            (number))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (range_expression
+            (expression
+              (primitive_value
+                (number)))
+            (inclusive_range)
+            (expression
+              (primitive_value
+                (number))))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (range_expression
+            (expression
+              (primitive_value
+                (number)))
+            (inclusive_range)
+            (expression
+              (primitive_value
+                (number))))
+          (fat_arrow)
+          (expression
+            (primitive_value
+              (string
+                (string_content)))))
+        (match_case
+          (wildcard)
+          (fat_arrow)
           (expression
             (primitive_value
               (string

@@ -1,52 +1,50 @@
-;; Keywords
-"if" @keyword.control.conditional
-"else" @keyword.control.conditional
-"while" @keyword.control.repeat
-"for" @keyword.control.repeat
-"in" @keyword.control.repeat
-(break) @keyword.control.break
-"match" @keyword.control.conditional
-"let" @keyword.storage
-"mut" @keyword.storage.modifier
-"use" @keyword.import
-"fn" @keyword.function
-"struct" @keyword.storage.type
-"enum" @keyword.storage.type
-"impl" @keyword.storage.type
-"type" @keyword.storage.type
-(and) @keyword.operator.logical
-(or) @keyword.operator.logical
-(not) @keyword.operator.logical
-
 ;; imports
-(module_path) @link.text
+(import (module_path) @string.special)
 
-;; Basic types
+; ;; Basic types
 (primitive_type) @type.builtin
-(generic_type) @type.builtin
-(result_type) @type.builtin
-(list_type) @type.builtin
-(map_type) @type.builtin
+(type (identifier)) @type.builtin
+; (generic_type) @type
+; (generic_type name: (identifier) @type)
+; (result_type) @type.builtin
+; (list_type) @type.builtin
+(list_type element_type: (type (identifier))) @type.builtin
+; (map_type) @type.builtin
 
-;; Identifiers
+; ;; Identifiers
 (identifier) @variable
-(function_definition name: (identifier) @function)
-(function_call target: (identifier) @function.call)
+(wildcard) @variable.special
+; "@" @variable.special
+
+; Assume uppercase names are types/enum-constructors
+((identifier) @type
+ (#match? @type "^[A-Z]"))
+
+(trait_definition name: (identifier) @type.interface)
 (struct_definition name: (identifier) @type)
+(struct_instance name: (identifier) @type)
 (enum_definition name: (identifier) @type)
+(function_definition name: (identifier) @function.definition)
 (param_def name: (identifier) @variable.parameter)
 (anonymous_parameter name: (identifier) @variable.parameter)
+(trait_function name: (identifier) @function.definition)
 
-;; Attributes
+(function_call target: (identifier) @function)
+(member_access (function_call) @function)
+(member_access (identifier) @property)
+
+; ;; Attributes
 (struct_property name: (identifier) @property)
 (struct_prop_pair name: (identifier) @property)
-(member_access member: (identifier) @property)
 
 ;; Values
-(string) @string
-(escape_sequence) @string.escape
+[
+  (string)
+  (string_content)
+] @string
+; (escape_sequence) @string.escape
 (number) @number
-(boolean) @constant.builtin.boolean
+(boolean) @boolean
 
 ;; Operators
 (assign) @operator.assignment
@@ -64,25 +62,59 @@
 (less_than_or_equal) @operator
 (greater_than_or_equal) @operator
 (inclusive_range) @operator
-"=>" @operator
+(fat_arrow) @operator
 
-;; Punctuation
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"<" @punctuation.bracket
-">" @punctuation.bracket
-"," @punctuation.delimiter
-(period) @punctuation.delimiter
-":" @punctuation.delimiter
-(double_colon) @punctuation.delimiter
-";" @punctuation.delimiter
-"?" @punctuation.special
-"$" @punctuation.special
-(wildcard) @punctuation.special
+;; Keywords
+[
+  "if"
+  "else"
+  "while"
+  "for"
+  "in"
+  (break)
+  "match"
+  "let"
+  "mut"
+  "use"
+  "fn"
+  "struct"
+  "enum"
+  "impl"
+  "type"
+  "trait"
+  (pub)
+ ] @keyword
 
-;; Comments
+[
+  (and)
+  (not)
+  (or)
+] @operator
+
+
+; ;; Punctuation
+[
+  (period)
+  ";"
+  ","
+  (double_colon)
+  ":"
+] @punctuation.delimiter
+
+[
+  "?"
+  "$"
+] @punctuation.special
+
+[
+  "("
+  ")"
+  "{"
+  "}"
+  "["
+  "]"
+  "<"
+  ">"
+] @punctuation.bracket
+
 (comment) @comment

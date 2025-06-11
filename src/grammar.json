@@ -1680,13 +1680,17 @@
               {
                 "type": "SYMBOL",
                 "name": "function_call"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "range_expression"
               }
             ]
           }
         },
         {
           "type": "SYMBOL",
-          "name": "_fat_arrow"
+          "name": "fat_arrow"
         },
         {
           "type": "FIELD",
@@ -3097,7 +3101,7 @@
       "type": "STRING",
       "value": "."
     },
-    "_fat_arrow": {
+    "fat_arrow": {
       "type": "STRING",
       "value": "=>"
     },
