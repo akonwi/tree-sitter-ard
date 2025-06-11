@@ -1690,7 +1690,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fat_arrow"
+          "name": "_fat_arrow"
         },
         {
           "type": "FIELD",
@@ -3101,7 +3101,7 @@
       "type": "STRING",
       "value": "."
     },
-    "fat_arrow": {
+    "_fat_arrow": {
       "type": "STRING",
       "value": "=>"
     },

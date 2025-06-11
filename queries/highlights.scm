@@ -62,7 +62,7 @@
 (less_than_or_equal) @operator
 (greater_than_or_equal) @operator
 (inclusive_range) @operator
-(fat_arrow) @operator
+"=>" @operator
 
 ;; Keywords
 [

@@ -56,7 +56,6 @@ match name {
           (identifier))
         (match_case
           (identifier)
-          (fat_arrow)
           (expression
             (member_access
               (expression
@@ -74,7 +73,6 @@ match name {
                             (identifier)))))))))))
         (match_case
           (wildcard)
-          (fat_arrow)
           (expression
             (member_access
               (expression
