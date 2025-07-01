@@ -2,7 +2,7 @@
 empty params
 ==================
 
-pub fn get_hello() Str {
+private fn get_hello() Str {
   "Hello, world!"
 }
 
@@ -12,7 +12,7 @@ get_hello()
 (program
   (statement
     (function_definition
-      (pub)
+      (private)
       name: (identifier)
       parameters: (parameters)
       return: (type

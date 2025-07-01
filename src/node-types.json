@@ -221,7 +221,7 @@
       "required": false,
       "types": [
         {
-          "type": "pub",
+          "type": "private",
           "named": true
         }
       ]
@@ -472,7 +472,7 @@
       "required": false,
       "types": [
         {
-          "type": "pub",
+          "type": "private",
           "named": true
         }
       ]
@@ -1277,7 +1277,7 @@
       "required": false,
       "types": [
         {
-          "type": "pub",
+          "type": "private",
           "named": true
         }
       ]
@@ -1391,7 +1391,7 @@
       "required": false,
       "types": [
         {
-          "type": "pub",
+          "type": "private",
           "named": true
         }
       ]
@@ -1593,7 +1593,7 @@
           "named": true
         },
         {
-          "type": "pub",
+          "type": "private",
           "named": true
         },
         {
@@ -1948,7 +1948,7 @@
     "named": true
   },
   {
-    "type": "pub",
+    "type": "private",
     "named": true
   },
   {

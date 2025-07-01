@@ -82,7 +82,7 @@
   "impl"
   "type"
   "trait"
-  (pub)
+  (private)
  ] @keyword
 
 [

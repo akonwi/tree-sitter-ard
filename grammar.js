@@ -83,7 +83,7 @@ module.exports = grammar({
     //// definitions
     type_declaration: ($) =>
       seq(
-        optional($.pub),
+        optional($.private),
         "type",
         field("name", $.identifier),
         $.assign,
@@ -94,7 +94,7 @@ module.exports = grammar({
 
     struct_definition: ($) =>
       seq(
-        optional($.pub),
+        optional($.private),
         $._struct,
         field("name", $.identifier),
         $._left_brace,
@@ -109,7 +109,7 @@ module.exports = grammar({
 
     trait_definition: ($) =>
       seq(
-        optional($.pub),
+        optional($.private),
         "trait",
         field("name", $.identifier),
         $._left_brace,
@@ -147,7 +147,7 @@ module.exports = grammar({
 
     enum_definition: ($) =>
       seq(
-        optional($.pub),
+        optional($.private),
         $._enum,
         field("name", $.identifier),
         $._left_brace,
@@ -170,7 +170,7 @@ module.exports = grammar({
 
     function_definition: ($) =>
       seq(
-        optional($.pub),
+        optional($.private),
         $._fn,
         field("name", $.identifier),
         field("parameters", $.parameters),
@@ -545,7 +545,7 @@ module.exports = grammar({
     _fn: ($) => "fn",
     break: ($) => "break",
     not: ($) => "not",
-    pub: ($) => "pub",
+    private: ($) => "private",
 
     /// symbols + punctuation
     _colon: ($) => ":",
