@@ -303,8 +303,15 @@ module.exports = grammar({
     paren_arguments: ($) =>
       seq(
         $._left_paren,
-        sepByComma(field("argument", $.expression)),
+        sepByComma(field("argument", choice($.named_argument, $.expression))),
         $._right_paren,
+      ),
+
+    named_argument: ($) =>
+      seq(
+        field("name", $.identifier),
+        $._colon,
+        field("value", $.expression),
       ),
 
     parameters: ($) =>

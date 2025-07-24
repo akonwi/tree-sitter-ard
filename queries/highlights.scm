@@ -33,6 +33,9 @@
 (member_access (function_call) @function)
 (member_access (identifier) @property)
 
+;; Named arguments
+(named_argument name: (identifier) @variable.parameter)
+
 ; ;; Attributes
 (struct_property name: (identifier) @property)
 (struct_prop_pair name: (identifier) @property)

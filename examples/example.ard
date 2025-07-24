@@ -84,6 +84,8 @@ fn main() {
     return x * y
   }
 
+  multiply(x: 2, y: 3)
+
   // Using the Result type
   let division_result = divide(10, 2)
   match division_result {

@@ -339,3 +339,77 @@ map([1,2,3], fn(i: Int) Int { i*2 })
                       right: (expression
                         (primitive_value
                           primitive: (number))))))))))))))
+
+==================
+named arguments
+==================
+
+fn greet(name: Str, age: Int) Str {
+  "Hello, {name}!"
+}
+
+greet(name: "Alice", age: 25)
+greet(age: 30, name: "Bob")
+
+---
+
+(program
+  (statement
+    (function_definition
+      name: (identifier)
+      parameters: (parameters
+        parameter: (param_def
+          name: (identifier)
+          type: (type
+            (primitive_type
+              (str))))
+        parameter: (param_def
+          name: (identifier)
+          type: (type
+            (primitive_type
+              (int)))))
+      return: (type
+        (primitive_type
+          (str)))
+      body: (block
+        (statement
+          (expression
+            (primitive_value
+              primitive: (string
+                chunk: (string_content)
+                chunk: (string_interpolation
+                  expression: (expression
+                    (identifier)))
+                chunk: (string_content))))))))
+  (statement
+    (expression
+      (function_call
+        target: (identifier)
+        arguments: (paren_arguments
+          argument: (named_argument
+            name: (identifier)
+            value: (expression
+              (primitive_value
+                primitive: (string
+                  chunk: (string_content)))))
+          argument: (named_argument
+            name: (identifier)
+            value: (expression
+              (primitive_value
+                primitive: (number))))))))
+  (statement
+    (expression
+      (function_call
+        target: (identifier)
+        arguments: (paren_arguments
+          argument: (named_argument
+            name: (identifier)
+            value: (expression
+              (primitive_value
+                primitive: (number))))
+          argument: (named_argument
+            name: (identifier)
+            value: (expression
+              (primitive_value
+                primitive: (string
+                  chunk: (string_content))))))))))
