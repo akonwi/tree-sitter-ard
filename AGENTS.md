@@ -6,6 +6,12 @@ This file provides guidance to a coding agent when working with code in this rep
 
 This repository contains a Tree-sitter grammar for the Ard programming language. Tree-sitter is an incremental parsing system that generates language parsers. This grammar defines the syntax for the Ard language, enabling features like syntax highlighting, code folding, and more in text editors that support Tree-sitter.
 
+## Resources
+- https://www.alanwsmith.com/en/2v/6g/gt/nk/
+- https://null.zbr.pt/tree-sitter-tutorial-part-1/
+ - part 2, focused on grammar: https://null.zbr.pt/tree-sitter-tutorial-part-4/
+- https://gist.github.com/Aerijo/df27228d70c633e088b0591b8857eeef
+
 ## Commands
 
 ### Building and Generating the Parser
