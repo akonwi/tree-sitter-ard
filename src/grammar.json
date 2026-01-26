@@ -1104,10 +1104,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "struct_instance"
-        },
-        {
-          "type": "SYMBOL",
           "name": "function_call"
         },
         {
@@ -1141,6 +1137,10 @@
         {
           "type": "SYMBOL",
           "name": "instance_property"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "struct_instance"
         }
       ]
     },
@@ -1931,17 +1931,8 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "member_access"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_struct_name"
           }
         },
         {
@@ -2000,6 +1991,36 @@
         {
           "type": "SYMBOL",
           "name": "_right_brace"
+        }
+      ]
+    },
+    "_struct_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 0,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "double_colon"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            ]
+          }
         }
       ]
     },
@@ -3460,6 +3481,14 @@
     ],
     [
       "struct_instance",
+      "member_access"
+    ],
+    [
+      "expression",
+      "_struct_name"
+    ],
+    [
+      "_struct_name",
       "member_access"
     ]
   ],

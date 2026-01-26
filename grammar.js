@@ -50,6 +50,8 @@ module.exports = grammar({
     [$.anonymous_function, $.parameters],
     [$.anonymous_parameter, $.param_def],
     [$.struct_instance, $.member_access],
+    [$.expression, $._struct_name],
+    [$._struct_name, $.member_access],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -256,7 +258,6 @@ module.exports = grammar({
         $.map_value,
         $.unary_expression,
         $.binary_expression,
-        $.struct_instance,
         $.function_call,
         $.member_access,
         $.paren_expression,
@@ -266,6 +267,7 @@ module.exports = grammar({
         $.range_expression,
         $.wildcard,
         $.instance_property,
+        $.struct_instance,
       ),
 
     instance_property: ($) => seq("@", field("name", $.identifier)),
@@ -402,10 +404,25 @@ module.exports = grammar({
 
     struct_instance: ($) =>
       seq(
-        field("name", choice($.identifier, $.member_access)),
+        field("name", $._struct_name),
         $._left_brace,
         sepByComma(field("field", $.struct_prop_pair)),
         $._right_brace,
+      ),
+
+    // A path to a struct: identifier or module::Type (not a full expression)
+    // This is simpler than member_access and doesn't conflict with expressions
+    // Hidden with underscore so it doesn't appear in the tree
+    _struct_name: ($) =>
+      choice(
+        $.identifier,
+        prec.left(
+          seq(
+            $.identifier,
+            $.double_colon,
+            $.identifier,
+          ),
+        ),
       ),
 
     member_access: ($) =>

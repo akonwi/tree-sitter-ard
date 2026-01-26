@@ -1501,15 +1501,15 @@
         ]
       },
       "name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "double_colon",
             "named": true
           },
           {
-            "type": "member_access",
+            "type": "identifier",
             "named": true
           }
         ]
