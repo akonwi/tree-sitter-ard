@@ -57,7 +57,7 @@ module.exports = grammar({
     program: ($) => seq(repeat($.import), repeat($.statement)),
 
     //// imports
-    import: ($) => seq("use", field("path", $.module_path)),
+    import: ($) => seq($.kw_use, field("path", $.module_path)),
 
     //// Statements
     statement: ($) =>
@@ -85,7 +85,7 @@ module.exports = grammar({
     type_declaration: ($) =>
       seq(
         optional($.private),
-        "type",
+        $.kw_type,
         field("name", $.identifier),
         $.assign,
         $.type_union,
@@ -96,7 +96,7 @@ module.exports = grammar({
     struct_definition: ($) =>
       seq(
         optional($.private),
-        $._struct,
+        $.kw_struct,
         field("name", $.identifier),
         $._left_brace,
         sepByComma(field("field", $.struct_property)),
@@ -106,12 +106,12 @@ module.exports = grammar({
     struct_property: ($) =>
       seq(field("name", $.identifier), $._colon, field("type", $.type)),
 
-    implements_definition: ($) => seq("impl", $.parameters, $.block),
+    implements_definition: ($) => seq($.kw_impl, $.parameters, $.block),
 
     trait_definition: ($) =>
       seq(
         optional($.private),
-        "trait",
+        $.kw_trait,
         field("name", $.identifier),
         $._left_brace,
         repeat(field("function", $.trait_function)),
@@ -128,7 +128,7 @@ module.exports = grammar({
 
     trait_implementation: ($) =>
       seq(
-        "impl",
+        $.kw_impl,
         field("trait", choice($.identifier, $.member_access)),
         "for",
         field("for", $.identifier),
@@ -149,7 +149,7 @@ module.exports = grammar({
     enum_definition: ($) =>
       seq(
         optional($.private),
-        $._enum,
+        $.kw_enum,
         field("name", $.identifier),
         $._left_brace,
         sepByComma(field("variant", $.enum_variant)),
@@ -167,7 +167,7 @@ module.exports = grammar({
         field("value", $.expression),
       ),
 
-    variable_binding: ($) => choice("let", "mut"),
+    variable_binding: ($) => choice($.kw_let, $.kw_mut),
 
     function_definition: ($) =>
       seq(
@@ -182,7 +182,7 @@ module.exports = grammar({
     external_function: ($) =>
       seq(
         optional($.private),
-        "extern",
+        $.kw_extern,
         $._fn,
         field("name", $.identifier),
         field("parameters", $.parameters),
@@ -195,11 +195,11 @@ module.exports = grammar({
       seq($._left_brace, optional(repeat($.statement)), $._right_brace),
 
     while_loop: ($) =>
-      seq("while", field("condition", $.expression), field("body", $.block)),
+      seq($.kw_while, field("condition", $.expression), field("body", $.block)),
 
     for_loop: ($) =>
       seq(
-        "for",
+        $.kw_for,
         field("cursor", $.variable_definition),
         $._semi_colon,
         field("condition", $.expression),
@@ -210,9 +210,9 @@ module.exports = grammar({
 
     for_in_loop: ($) =>
       seq(
-        "for",
+        $.kw_for,
         field("items", $.for_in_items),
-        "in",
+        $.kw_in,
         field("range", $.expression),
         field("body", $.block),
       ),
@@ -225,14 +225,14 @@ module.exports = grammar({
 
     if_statement: ($) =>
       seq(
-        "if",
+        $.kw_if,
         field("condition", $.expression),
         field("body", $.block),
         optional(field("else", $.else_clause)),
       ),
 
     else_clause: ($) =>
-      seq("else", choice(field("if", $.if_statement), field("body", $.block))),
+      seq($.kw_else, choice(field("if", $.if_statement), field("body", $.block))),
 
     reassignment: ($) =>
       prec(
@@ -358,7 +358,7 @@ module.exports = grammar({
 
     match_expression: ($) =>
       seq(
-        $._match,
+        $.kw_match,
         field("expr", $.expression),
         $._left_brace,
         sepByComma(field("case", $.match_case)),
@@ -386,11 +386,11 @@ module.exports = grammar({
       prec.right(
         "assignment",
         choice(
-          seq("try", field("expr", $.expression)),
+          seq($.kw_try, field("expr", $.expression)),
           seq(
-            "try",
+            $.kw_try,
             field("expr", $.expression),
-            "->",
+            $.kw_arrow,
             field("catch_var", $.identifier),
             field("catch_block", $.block),
           ),
@@ -478,6 +478,25 @@ module.exports = grammar({
     // assignment operators
     increment: ($) => "=+",
     decrement: ($) => "=-",
+
+    // keywords (named for syntax highlighting)
+    kw_if: ($) => "if",
+    kw_else: ($) => "else",
+    kw_while: ($) => "while",
+    kw_for: ($) => "for",
+    kw_in: ($) => "in",
+    kw_let: ($) => "let",
+    kw_mut: ($) => "mut",
+    kw_use: ($) => "use",
+    kw_extern: ($) => "extern",
+    kw_try: ($) => "try",
+    kw_impl: ($) => "impl",
+    kw_type: ($) => "type",
+    kw_trait: ($) => "trait",
+    kw_match: ($) => "match",
+    kw_enum: ($) => "enum",
+    kw_struct: ($) => "struct",
+    kw_arrow: ($) => "->",
 
     ///// types
     type: ($) =>

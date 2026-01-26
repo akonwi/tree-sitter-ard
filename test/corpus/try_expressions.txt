@@ -10,6 +10,7 @@ try read_line()
   (statement
     (expression
       (try_expression
+        (kw_try)
         expr: (expression
           (function_call
             target: (identifier)
@@ -27,9 +28,11 @@ try read_line() -> err { }
   (statement
     (expression
       (try_expression
+        (kw_try)
         expr: (expression
           (function_call
             target: (identifier)
             arguments: (paren_arguments)))
+        (kw_arrow)
         catch_var: (identifier)
         catch_block: (block)))))

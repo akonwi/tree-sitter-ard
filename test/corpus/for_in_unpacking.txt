@@ -15,9 +15,11 @@ for a, b, c in items {
 (program
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier)
         (identifier))
+      (kw_in)
       range: (expression
         (identifier))
       body: (block
@@ -34,10 +36,12 @@ for a, b, c in items {
                     (identifier))))))))))
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier)
         (identifier)
         (identifier))
+      (kw_in)
       range: (expression
         (identifier))
       body: (block

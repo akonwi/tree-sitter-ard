@@ -12,7 +12,8 @@ let booleans: [Bool] = [true, false]
 (program
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (list_type
@@ -24,7 +25,8 @@ let booleans: [Bool] = [true, false]
         (list_value))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       (assign)
       value: (expression
@@ -40,7 +42,8 @@ let booleans: [Bool] = [true, false]
               primitive: (number)))))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (list_type
@@ -64,7 +67,8 @@ let booleans: [Bool] = [true, false]
                 chunk: (string_content))))))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (list_type

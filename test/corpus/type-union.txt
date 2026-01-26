@@ -17,6 +17,7 @@ match some_shape {
 (program
   (statement
     (type_declaration
+      (kw_type)
       (identifier)
       (assign)
       (type_union
@@ -27,6 +28,7 @@ match some_shape {
   (statement
     (expression
       (match_expression
+        (kw_match)
         (expression
           (identifier))
         (match_case

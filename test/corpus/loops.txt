@@ -15,6 +15,7 @@ while is_true or count > 0 {
 (program
   (statement
     (while_loop
+      (kw_while)
       condition: (expression
         (binary_expression
           left: (expression
@@ -33,6 +34,7 @@ while is_true or count > 0 {
                 primitive: (number))))))))
   (statement
     (while_loop
+      (kw_while)
       condition: (expression
         (binary_expression
           left: (expression
@@ -68,8 +70,10 @@ for mut count = 0; count <= 9; count = count + 1 {
 (program
   (statement
     (for_loop
+      (kw_for)
       (variable_definition
-        (variable_binding)
+        (variable_binding
+          (kw_mut))
         (identifier)
         (assign)
         (expression
@@ -115,8 +119,10 @@ for cell in (b.cells) {}
 (program
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier))
+      (kw_in)
       range: (expression
         (identifier))
       body: (block
@@ -129,8 +135,10 @@ for cell in (b.cells) {}
                   (identifier)))))))))
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier))
+      (kw_in)
       range: (expression
         (paren_expression
           expr: (expression

@@ -19,6 +19,7 @@ let people: [Person] = [
 (program
   (statement
     (struct_definition
+      (kw_struct)
       name: (identifier)
       field: (struct_property
         name: (identifier)
@@ -37,7 +38,8 @@ let people: [Person] = [
             (bool))))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       (assign)
       value: (expression
@@ -61,7 +63,8 @@ let people: [Person] = [
                 primitive: (boolean))))))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (list_type
@@ -114,6 +117,7 @@ impl (mut self: Person) {
 (program
   (statement
     (implements_definition
+      (kw_impl)
       (parameters
         (param_def
           (identifier)
@@ -190,6 +194,7 @@ impl (mut self: Person) {
                                     (identifier))))))))))))))))))
   (statement
     (implements_definition
+      (kw_impl)
       (parameters
         (param_def
           (identifier)

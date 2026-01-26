@@ -11,6 +11,7 @@ private extern fn _print(string: Str) Void = "Print"
 (program
   (statement
     (external_function
+      (kw_extern)
       name: (identifier)
       parameters: (parameters)
       return: (type
@@ -22,6 +23,7 @@ private extern fn _print(string: Str) Void = "Print"
   (statement
     (external_function
       (private)
+      (kw_extern)
       name: (identifier)
       parameters: (parameters
         parameter: (param_def

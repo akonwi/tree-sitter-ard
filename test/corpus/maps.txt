@@ -9,7 +9,8 @@ let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
 (program
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (map_type
@@ -24,7 +25,8 @@ let initialized: [Str:Bool] = [ "John": true, "Jane": false, ]
         (map_value))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (map_type

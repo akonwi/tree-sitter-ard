@@ -10,7 +10,8 @@ mut age: Int? = 25
 (program
   (statement
     (variable_definition
-      (variable_binding)
+      (variable_binding
+        (kw_let))
       (identifier)
       (type
         (primitive_type
@@ -26,7 +27,8 @@ mut age: Int? = 25
             (paren_arguments))))))
   (statement
     (variable_definition
-      (variable_binding)
+      (variable_binding
+        (kw_mut))
       (identifier)
       (type
         (primitive_type

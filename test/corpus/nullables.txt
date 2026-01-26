@@ -16,10 +16,12 @@ match name {
 
 (program
   (import
+    (kw_use)
     (module_path))
   (statement
     (variable_definition
-      (variable_binding)
+      (variable_binding
+        (kw_mut))
       (identifier)
       (type
         (primitive_type
@@ -52,6 +54,7 @@ match name {
   (statement
     (expression
       (match_expression
+        (kw_match)
         (expression
           (identifier))
         (match_case

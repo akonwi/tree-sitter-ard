@@ -25,8 +25,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "use"
+          "type": "SYMBOL",
+          "name": "kw_use"
         },
         {
           "type": "FIELD",
@@ -127,8 +127,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "type"
+          "type": "SYMBOL",
+          "name": "kw_type"
         },
         {
           "type": "FIELD",
@@ -190,7 +190,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_struct"
+          "name": "kw_struct"
         },
         {
           "type": "FIELD",
@@ -288,8 +288,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "impl"
+          "type": "SYMBOL",
+          "name": "kw_impl"
         },
         {
           "type": "SYMBOL",
@@ -317,8 +317,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "trait"
+          "type": "SYMBOL",
+          "name": "kw_trait"
         },
         {
           "type": "FIELD",
@@ -386,8 +386,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "impl"
+          "type": "SYMBOL",
+          "name": "kw_impl"
         },
         {
           "type": "FIELD",
@@ -497,7 +497,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_enum"
+          "name": "kw_enum"
         },
         {
           "type": "FIELD",
@@ -641,12 +641,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "let"
+          "type": "SYMBOL",
+          "name": "kw_let"
         },
         {
-          "type": "STRING",
-          "value": "mut"
+          "type": "SYMBOL",
+          "name": "kw_mut"
         }
       ]
     },
@@ -727,8 +727,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "extern"
+          "type": "SYMBOL",
+          "name": "kw_extern"
         },
         {
           "type": "SYMBOL",
@@ -804,8 +804,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "while"
+          "type": "SYMBOL",
+          "name": "kw_while"
         },
         {
           "type": "FIELD",
@@ -829,8 +829,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "for"
+          "type": "SYMBOL",
+          "name": "kw_for"
         },
         {
           "type": "FIELD",
@@ -878,8 +878,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "for"
+          "type": "SYMBOL",
+          "name": "kw_for"
         },
         {
           "type": "FIELD",
@@ -890,8 +890,8 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "in"
+          "type": "SYMBOL",
+          "name": "kw_in"
         },
         {
           "type": "FIELD",
@@ -949,8 +949,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "if"
+          "type": "SYMBOL",
+          "name": "kw_if"
         },
         {
           "type": "FIELD",
@@ -990,8 +990,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "else"
+          "type": "SYMBOL",
+          "name": "kw_else"
         },
         {
           "type": "CHOICE",
@@ -1729,7 +1729,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_match"
+          "name": "kw_match"
         },
         {
           "type": "FIELD",
@@ -1867,8 +1867,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "STRING",
-                "value": "try"
+                "type": "SYMBOL",
+                "name": "kw_try"
               },
               {
                 "type": "FIELD",
@@ -1884,8 +1884,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "STRING",
-                "value": "try"
+                "type": "SYMBOL",
+                "name": "kw_try"
               },
               {
                 "type": "FIELD",
@@ -1896,8 +1896,8 @@
                 }
               },
               {
-                "type": "STRING",
-                "value": "->"
+                "type": "SYMBOL",
+                "name": "kw_arrow"
               },
               {
                 "type": "FIELD",
@@ -2601,6 +2601,74 @@
     "decrement": {
       "type": "STRING",
       "value": "=-"
+    },
+    "kw_if": {
+      "type": "STRING",
+      "value": "if"
+    },
+    "kw_else": {
+      "type": "STRING",
+      "value": "else"
+    },
+    "kw_while": {
+      "type": "STRING",
+      "value": "while"
+    },
+    "kw_for": {
+      "type": "STRING",
+      "value": "for"
+    },
+    "kw_in": {
+      "type": "STRING",
+      "value": "in"
+    },
+    "kw_let": {
+      "type": "STRING",
+      "value": "let"
+    },
+    "kw_mut": {
+      "type": "STRING",
+      "value": "mut"
+    },
+    "kw_use": {
+      "type": "STRING",
+      "value": "use"
+    },
+    "kw_extern": {
+      "type": "STRING",
+      "value": "extern"
+    },
+    "kw_try": {
+      "type": "STRING",
+      "value": "try"
+    },
+    "kw_impl": {
+      "type": "STRING",
+      "value": "impl"
+    },
+    "kw_type": {
+      "type": "STRING",
+      "value": "type"
+    },
+    "kw_trait": {
+      "type": "STRING",
+      "value": "trait"
+    },
+    "kw_match": {
+      "type": "STRING",
+      "value": "match"
+    },
+    "kw_enum": {
+      "type": "STRING",
+      "value": "enum"
+    },
+    "kw_struct": {
+      "type": "STRING",
+      "value": "struct"
+    },
+    "kw_arrow": {
+      "type": "STRING",
+      "value": "->"
     },
     "type": {
       "type": "PREC_LEFT",

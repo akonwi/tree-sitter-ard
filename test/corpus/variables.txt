@@ -12,7 +12,8 @@ mut negative = -1
 (program
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       type: (type
         (primitive_type
@@ -24,7 +25,8 @@ mut negative = -1
             chunk: (string_content))))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_mut))
       name: (identifier)
       type: (type
         (primitive_type
@@ -35,7 +37,8 @@ mut negative = -1
           primitive: (number)))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       (assign)
       value: (expression
@@ -43,7 +46,8 @@ mut negative = -1
           primitive: (boolean)))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_mut))
       name: (identifier)
       (assign)
       value: (expression

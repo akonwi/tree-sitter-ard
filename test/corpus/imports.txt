@@ -12,14 +12,19 @@ use github.com/tree-sitter/go-tree-sitter as ts
 
 (program
   (import
+    (kw_use)
     (module_path))
   (import
+    (kw_use)
     (module_path))
   (import
+    (kw_use)
     (module_path))
   (import
+    (kw_use)
     (module_path))
   (import
+    (kw_use)
     (module_path))
   (statement
     (expression

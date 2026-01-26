@@ -12,6 +12,7 @@ trait Person {
 (program
   (statement
     (trait_definition
+      (kw_trait)
       name: (identifier)
       function: (trait_function
         name: (identifier)
@@ -45,6 +46,7 @@ impl Str::ToString for Person {
 (program
   (statement
     (trait_implementation
+      (kw_impl)
       trait: (member_access
         target: (expression
           (identifier))

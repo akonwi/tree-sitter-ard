@@ -189,6 +189,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_else",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -217,9 +227,13 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
+        {
+          "type": "kw_enum",
+          "named": true
+        },
         {
           "type": "private",
           "named": true
@@ -372,6 +386,10 @@
           "named": true
         },
         {
+          "type": "kw_extern",
+          "named": true
+        },
+        {
           "type": "private",
           "named": true
         }
@@ -427,6 +445,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_for",
+          "named": true
+        },
+        {
+          "type": "kw_in",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -473,6 +505,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_for",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -627,6 +669,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_if",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -639,6 +691,10 @@
       "types": [
         {
           "type": "block",
+          "named": true
+        },
+        {
+          "type": "kw_impl",
           "named": true
         },
         {
@@ -662,6 +718,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_use",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -679,6 +745,16 @@
         ]
       }
     }
+  },
+  {
+    "type": "kw_for",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kw_mut",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "less_than",
@@ -858,6 +934,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_match",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1386,9 +1472,13 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
+        {
+          "type": "kw_struct",
+          "named": true
+        },
         {
           "type": "private",
           "named": true
@@ -1500,9 +1590,13 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
+        {
+          "type": "kw_trait",
+          "named": true
+        },
         {
           "type": "private",
           "named": true
@@ -1584,6 +1678,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_impl",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1666,6 +1770,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_arrow",
+          "named": true
+        },
+        {
+          "type": "kw_try",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1746,6 +1864,10 @@
           "named": true
         },
         {
+          "type": "kw_type",
+          "named": true
+        },
+        {
           "type": "private",
           "named": true
         },
@@ -1804,7 +1926,21 @@
   {
     "type": "variable_binding",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_let",
+          "named": true
+        },
+        {
+          "type": "kw_mut",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "variable_definition",
@@ -1886,6 +2022,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kw_while",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1910,10 +2056,6 @@
   },
   {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "->",
     "named": false
   },
   {
@@ -1989,24 +2131,12 @@
     "named": true
   },
   {
-    "type": "else",
-    "named": false
-  },
-  {
-    "type": "enum",
-    "named": false
-  },
-  {
     "type": "equal",
     "named": true
   },
   {
     "type": "escape_sequence",
     "named": true
-  },
-  {
-    "type": "extern",
-    "named": false
   },
   {
     "type": "false",
@@ -2033,18 +2163,6 @@
     "named": true
   },
   {
-    "type": "if",
-    "named": false
-  },
-  {
-    "type": "impl",
-    "named": false
-  },
-  {
-    "type": "in",
-    "named": false
-  },
-  {
     "type": "inclusive_range",
     "named": true
   },
@@ -2057,16 +2175,68 @@
     "named": true
   },
   {
-    "type": "less_than_or_equal",
+    "type": "kw_arrow",
     "named": true
   },
   {
-    "type": "let",
-    "named": false
+    "type": "kw_else",
+    "named": true
   },
   {
-    "type": "match",
-    "named": false
+    "type": "kw_enum",
+    "named": true
+  },
+  {
+    "type": "kw_extern",
+    "named": true
+  },
+  {
+    "type": "kw_if",
+    "named": true
+  },
+  {
+    "type": "kw_impl",
+    "named": true
+  },
+  {
+    "type": "kw_in",
+    "named": true
+  },
+  {
+    "type": "kw_let",
+    "named": true
+  },
+  {
+    "type": "kw_match",
+    "named": true
+  },
+  {
+    "type": "kw_struct",
+    "named": true
+  },
+  {
+    "type": "kw_trait",
+    "named": true
+  },
+  {
+    "type": "kw_try",
+    "named": true
+  },
+  {
+    "type": "kw_type",
+    "named": true
+  },
+  {
+    "type": "kw_use",
+    "named": true
+  },
+  {
+    "type": "kw_while",
+    "named": true
+  },
+  {
+    "type": "less_than_or_equal",
+    "named": true
   },
   {
     "type": "minus",
@@ -2125,36 +2295,12 @@
     "named": true
   },
   {
-    "type": "struct",
-    "named": false
-  },
-  {
-    "type": "trait",
-    "named": false
-  },
-  {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "try",
-    "named": false
-  },
-  {
-    "type": "type",
-    "named": false
-  },
-  {
-    "type": "use",
     "named": false
   },
   {
     "type": "void",
     "named": true
-  },
-  {
-    "type": "while",
-    "named": false
   },
   {
     "type": "wildcard",

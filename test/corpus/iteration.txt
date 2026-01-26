@@ -14,8 +14,10 @@ for i in 1..(something - other) {
 (program
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier))
+      (kw_in)
       range: (expression
         (range_expression
           left: (expression
@@ -45,8 +47,10 @@ for i in 1..(something - other) {
                         arguments: (paren_arguments))))))))))))
   (statement
     (for_in_loop
+      (kw_for)
       items: (for_in_items
         (identifier))
+      (kw_in)
       range: (expression
         (range_expression
           left: (expression

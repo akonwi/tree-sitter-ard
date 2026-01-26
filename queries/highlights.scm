@@ -1,20 +1,25 @@
 ;; imports
 (import (module_path) @string.special)
 
-; ;; Basic types
+;; Basic types
 (primitive_type) @type.builtin
 (type (identifier)) @type.builtin
-; (generic_type) @type
-; (generic_type name: (identifier) @type)
-; (result_type) @type.builtin
-; (list_type) @type.builtin
+(generic_type name: (identifier) @type)
+(result_type) @type.builtin
 (list_type element_type: (type (identifier))) @type.builtin
-; (map_type) @type.builtin
+(map_type) @type.builtin
 
-; ;; Identifiers
+;; Result type error annotation (Type!ErrorType)
+(type error_type: (identifier) @type)
+(type error_type: (member_access_type) @type)
+
+;; Identifiers
 (identifier) @variable
 (wildcard) @variable.special
-; "@" @variable.special
+(instance_property name: (identifier) @property)
+
+;; Try expressions
+(try_expression catch_var: (identifier) @variable.parameter)
 
 ; Assume uppercase names are types/enum-constructors
 ((identifier) @type
@@ -25,9 +30,11 @@
 (struct_instance name: (identifier) @type)
 (enum_definition name: (identifier) @type)
 (function_definition name: (identifier) @function.definition)
+(external_function name: (identifier) @function.definition)
 (param_def name: (identifier) @variable.parameter)
 (anonymous_parameter name: (identifier) @variable.parameter)
 (trait_function name: (identifier) @function.definition)
+(trait_implementation_function name: (identifier) @function.definition)
 
 (function_call target: (identifier) @function)
 (member_access (function_call) @function)
@@ -36,7 +43,7 @@
 ;; Named arguments
 (named_argument name: (identifier) @variable.parameter)
 
-; ;; Attributes
+;; Attributes
 (struct_property name: (identifier) @property)
 (struct_prop_pair name: (identifier) @property)
 
@@ -45,7 +52,6 @@
   (string)
   (string_content)
 ] @string
-; (escape_sequence) @string.escape
 (number) @number
 (boolean) @boolean
 
@@ -66,36 +72,20 @@
 (greater_than_or_equal) @operator
 (inclusive_range) @operator
 "=>" @operator
+"!" @operator
 
-;; Keywords
-[
-  "if"
-  "else"
-  "while"
-  "for"
-  "in"
-  (break)
-  "match"
-  "let"
-  "mut"
-  "use"
-  "fn"
-  "struct"
-  "enum"
-  "impl"
-  "type"
-  "trait"
-  (private)
- ] @keyword
+;; Keywords/operators that have grammar nodes
+(break) @keyword
+(private) @keyword
+(and) @operator
+(not) @operator
+(or) @operator
 
-[
-  (and)
-  (not)
-  (or)
-] @operator
+;; Note: Keywords like 'if', 'else', 'while', 'for', 'let', 'mut', etc. are defined as inline 
+;; string literals in the grammar rather than named rules. Editor implementations apply default
+;; keyword styling to these automatically.
 
-
-; ;; Punctuation
+;; Punctuation
 [
   (period)
   ";"

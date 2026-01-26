@@ -19,6 +19,7 @@ enum Option {
 (program
   (statement
     (enum_definition
+      (kw_enum)
       name: (identifier)
       variant: (enum_variant
         variant: (identifier))
@@ -26,7 +27,8 @@ enum Option {
         variant: (identifier))))
   (statement
     (variable_definition
-      binding: (variable_binding)
+      binding: (variable_binding
+        (kw_let))
       name: (identifier)
       (assign)
       value: (expression
@@ -37,6 +39,7 @@ enum Option {
           member: (identifier)))))
   (statement
     (enum_definition
+      (kw_enum)
       name: (identifier)
       variant: (enum_variant
         variant: (identifier))
