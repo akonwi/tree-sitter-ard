@@ -176,10 +176,23 @@ module.exports = grammar({
       seq(
         optional($.private),
         $._fn,
-        field("name", $.identifier),
+        field("name", $._function_name),
         field("parameters", $.parameters),
         field("return", optional($.type)),
         field("body", $.block),
+      ),
+
+    // Function name: identifier or Namespace::function_name
+    _function_name: ($) =>
+      choice(
+        $.identifier,
+        prec.left(
+          seq(
+            $.identifier,
+            $.double_colon,
+            $.identifier,
+          ),
+        ),
       ),
 
     external_function: ($) =>

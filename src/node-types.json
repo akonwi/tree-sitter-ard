@@ -558,9 +558,13 @@
         ]
       },
       "name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "double_colon",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
