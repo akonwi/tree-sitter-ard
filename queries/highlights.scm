@@ -81,10 +81,6 @@
 (not) @operator
 (or) @operator
 
-;; Note: Keywords like 'if', 'else', 'while', 'for', 'let', 'mut', etc. are defined as inline 
-;; string literals in the grammar rather than named rules. Editor implementations apply default
-;; keyword styling to these automatically.
-
 ;; Punctuation
 [
   (period)

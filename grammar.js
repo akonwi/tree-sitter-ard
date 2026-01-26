@@ -49,6 +49,7 @@ module.exports = grammar({
     [$.anonymous_parameter, $.expression],
     [$.anonymous_function, $.parameters],
     [$.anonymous_parameter, $.param_def],
+    [$.struct_instance, $.member_access],
   ],
 
   extras: ($) => [/\s/, $.comment],
@@ -255,9 +256,9 @@ module.exports = grammar({
         $.map_value,
         $.unary_expression,
         $.binary_expression,
-        $.member_access,
-        $.function_call,
         $.struct_instance,
+        $.function_call,
+        $.member_access,
         $.paren_expression,
         $.match_expression,
         $.try_expression,
@@ -401,7 +402,7 @@ module.exports = grammar({
 
     struct_instance: ($) =>
       seq(
-        field("name", $.identifier),
+        field("name", choice($.identifier, $.member_access)),
         $._left_brace,
         sepByComma(field("field", $.struct_prop_pair)),
         $._right_brace,

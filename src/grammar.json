@@ -1104,7 +1104,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "member_access"
+          "name": "struct_instance"
         },
         {
           "type": "SYMBOL",
@@ -1112,7 +1112,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "struct_instance"
+          "name": "member_access"
         },
         {
           "type": "SYMBOL",
@@ -1931,8 +1931,17 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "member_access"
+              }
+            ]
           }
         },
         {
@@ -3448,6 +3457,10 @@
     [
       "anonymous_parameter",
       "param_def"
+    ],
+    [
+      "struct_instance",
+      "member_access"
     ]
   ],
   "precedences": [
