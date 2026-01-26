@@ -674,7 +674,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "_qualified_identifier"
+            "name": "qualified_identifier"
           }
         },
         {
@@ -711,7 +711,7 @@
         }
       ]
     },
-    "_qualified_identifier": {
+    "qualified_identifier": {
       "type": "CHOICE",
       "members": [
         {

@@ -9,7 +9,8 @@ fn hello() Result<Int, Str> {}
 (program
   (statement
     (function_definition
-      (identifier)
+      (qualified_identifier
+        (identifier))
       (parameters)
       (type
         (result_type

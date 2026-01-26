@@ -176,14 +176,14 @@ module.exports = grammar({
       seq(
         optional($.private),
         $._fn,
-        field("name", $._qualified_identifier),
+        field("name", $.qualified_identifier),
         field("parameters", $.parameters),
         field("return", optional($.type)),
         field("body", $.block),
       ),
 
-    // Identifier or Namespace::identifier (hidden to keep tests passing)
-    _qualified_identifier: ($) =>
+    // Identifier or Namespace::identifier
+    qualified_identifier: ($) =>
       choice(
         $.identifier,
         prec.left(

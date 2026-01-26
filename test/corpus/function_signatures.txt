@@ -16,7 +16,8 @@ apply(increment, 5)
 (program
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
@@ -46,7 +47,8 @@ apply(increment, 5)
                   (identifier)))))))))
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
@@ -95,7 +97,8 @@ apply_binary(add, 5, 3)
 (program
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
@@ -135,7 +138,8 @@ apply_binary(add, 5, 3)
                   (identifier)))))))))
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)

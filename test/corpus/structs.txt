@@ -126,7 +126,8 @@ impl (mut self: Person) {
       (block
         (statement
           (function_definition
-            (identifier)
+            (qualified_identifier
+              (identifier))
             (parameters)
             (type
               (primitive_type
@@ -203,7 +204,8 @@ impl (mut self: Person) {
       (block
         (statement
           (function_definition
-            (identifier)
+            (qualified_identifier
+              (identifier))
             (parameters)
             (block
               (statement

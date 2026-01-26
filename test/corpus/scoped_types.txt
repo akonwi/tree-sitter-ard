@@ -10,7 +10,8 @@ fn show(item: Str::ToString) {
 (program
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)

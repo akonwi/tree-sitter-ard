@@ -13,7 +13,8 @@ get_hello()
   (statement
     (function_definition
       (private)
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters)
       return: (type
         (primitive_type
@@ -45,7 +46,8 @@ greet(get_hello())
 (program
   (statement
     (function_definition
-      (identifier)
+      (qualified_identifier
+        (identifier))
       (parameters
         (param_def
           (identifier)
@@ -99,7 +101,8 @@ add(1, 2)
 (program
   (statement
     (function_definition
-      (identifier)
+      (qualified_identifier
+        (identifier))
       (parameters
         (param_def
           (identifier)
@@ -228,7 +231,8 @@ fn grow(mut t: Thing, size: Int) Int {
 (program
   (statement
     (function_definition
-      (identifier)
+      (qualified_identifier
+        (identifier))
       (parameters
         (param_def
           (identifier)
@@ -275,7 +279,8 @@ map([1,2,3], fn(i: Int) Int { i*2 })
 (program
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
@@ -356,7 +361,8 @@ greet(age: 30, name: "Bob")
 (program
   (statement
     (function_definition
-      name: (identifier)
+      name: (qualified_identifier
+        (identifier))
       parameters: (parameters
         parameter: (param_def
           name: (identifier)
