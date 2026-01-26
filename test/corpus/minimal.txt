@@ -1,0 +1,37 @@
+==================
+Basics
+==================
+use ard/fs as fs
+fn greet(person: Str) Str {}
+struct Person { name: Str, age: Int }
+enum Color { Red, Green }
+---
+(source_file
+  (import_statement
+    path: (module_path)
+    alias: (identifier))
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (nullable_type
+          (primitive_type))))
+    return_type: (nullable_type
+      (primitive_type))
+    body: (block))
+  (struct_declaration
+    name: (identifier)
+    body: (struct_body
+      (struct_field
+        name: (identifier)
+        type: (nullable_type
+          (primitive_type)))
+      (struct_field
+        name: (identifier)
+        type: (nullable_type
+          (primitive_type)))))
+  (enum_declaration
+    name: (identifier)
+    (enum_variant name: (identifier))
+    (enum_variant name: (identifier))))
