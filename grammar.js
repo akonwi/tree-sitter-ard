@@ -57,10 +57,11 @@ module.exports = grammar({
     string: ($) =>
       seq(
         '"',
-        repeat(choice($.string_content, $.interpolation)),
+        repeat(choice($.string_content, $.escape_sequence, $.string_interpolation)),
         '"'
       ),
-    string_content: ($) => token.immediate(/[^"\\{]+|\\./),
+    string_content: ($) => token.immediate(/[^"\\{]+/),
+    escape_sequence: ($) => token.immediate(seq("\\", /./)),
     boolean: ($) => choice("true", "false"),
     void: ($) => seq("(", ")"),
 
@@ -303,6 +304,8 @@ module.exports = grammar({
     unary_expression: ($) =>
       choice(
         prec(PREC.unary, seq(choice("-", "not"), $.unary_expression)),
+        $.call_expression,
+        $.member_expression,
         $.primary_expression
       ),
 
@@ -338,8 +341,6 @@ module.exports = grammar({
         $.void,
         $.identifier,
         $.self_expression,
-        $.member_expression,
-        $.call_expression,
         $.list_literal,
         $.map_literal,
         $.struct_literal,
@@ -353,7 +354,8 @@ module.exports = grammar({
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
 
     self_expression: ($) => seq("@", $.identifier),
-    interpolation: ($) => seq("{", $.expression, "}"),
+    string_interpolation: ($) =>
+      seq("{", field("expression", $.expression), "}"),
 
     list_literal: ($) => seq("[", optional(sep1($.expression, ",")), optional(","), "]"),
 

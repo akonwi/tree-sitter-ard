@@ -791,21 +791,6 @@
     }
   },
   {
-    "type": "interpolation",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "list_literal",
     "named": true,
     "fields": {},
@@ -1166,10 +1151,6 @@
           "named": true
         },
         {
-          "type": "call_expression",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
@@ -1183,10 +1164,6 @@
         },
         {
           "type": "match_expression",
-          "named": true
-        },
-        {
-          "type": "member_expression",
           "named": true
         },
         {
@@ -1342,14 +1319,34 @@
       "required": false,
       "types": [
         {
-          "type": "interpolation",
+          "type": "escape_sequence",
           "named": true
         },
         {
           "type": "string_content",
           "named": true
+        },
+        {
+          "type": "string_interpolation",
+          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "string_interpolation",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1632,6 +1629,14 @@
       "required": true,
       "types": [
         {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "member_expression",
+          "named": true
+        },
+        {
           "type": "primary_expression",
           "named": true
         },
@@ -1868,6 +1873,10 @@
   {
     "type": "enum",
     "named": false
+  },
+  {
+    "type": "escape_sequence",
+    "named": true
   },
   {
     "type": "extern",

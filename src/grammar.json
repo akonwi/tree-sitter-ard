@@ -65,7 +65,11 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "interpolation"
+                "name": "escape_sequence"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "string_interpolation"
               }
             ]
           }
@@ -80,7 +84,23 @@
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\"\\\\{]+|\\\\."
+        "value": "[^\"\\\\{]+"
+      }
+    },
+    "escape_sequence": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\"
+          },
+          {
+            "type": "PATTERN",
+            "value": "."
+          }
+        ]
       }
     },
     "boolean": {
@@ -1654,6 +1674,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "call_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "member_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "primary_expression"
         }
       ]
@@ -1855,14 +1883,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "member_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "call_expression"
-        },
-        {
-          "type": "SYMBOL",
           "name": "list_literal"
         },
         {
@@ -1925,7 +1945,7 @@
         }
       ]
     },
-    "interpolation": {
+    "string_interpolation": {
       "type": "SEQ",
       "members": [
         {
@@ -1933,8 +1953,12 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "FIELD",
+          "name": "expression",
+          "content": {
+            "type": "SYMBOL",
+            "name": "expression"
+          }
         },
         {
           "type": "STRING",

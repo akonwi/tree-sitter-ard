@@ -1,1 +1,1 @@
-; minimal bootstrap query (intentionally empty)
+; intentionally empty (bootstrap)
