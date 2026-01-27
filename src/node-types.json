@@ -239,25 +239,6 @@
     "fields": {}
   },
   {
-    "type": "call_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "member_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "catch_clause",
     "named": true,
     "fields": {
@@ -426,35 +407,48 @@
     }
   },
   {
+    "type": "for_binding",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_in_loop",
     "named": true,
     "fields": {
+      "bindings": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "for_binding",
+            "named": true
+          }
+        ]
+      },
       "body": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "block",
-            "named": true
-          }
-        ]
-      },
-      "cursor": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "cursor2": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
             "named": true
           }
         ]
@@ -949,29 +943,6 @@
     }
   },
   {
-    "type": "member_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "generic_suffix",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "primary_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "multiplicative_expression",
     "named": true,
     "fields": {},
@@ -1131,6 +1102,48 @@
     }
   },
   {
+    "type": "postfix",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "generic_suffix",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "postfix_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "postfix",
+          "named": true
+        },
+        {
+          "type": "primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primary_expression",
     "named": true,
     "fields": {},
@@ -1172,6 +1185,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
           "named": true
         },
         {
@@ -1452,7 +1469,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "struct_literal_field",
@@ -1629,11 +1646,7 @@
       "required": true,
       "types": [
         {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "member_expression",
+          "type": "postfix_expression",
           "named": true
         },
         {

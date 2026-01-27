@@ -43,6 +43,12 @@ module.exports = grammar({
     [$.primary_expression, $.match_case],
     [$.nullable_type],
     [$.trait_method],
+    [$.for_loop, $.for_in_loop],
+    [$.for_in_loop, $.struct_literal],
+  ],
+
+  precedences: ($) => [
+    [$.for_in_loop, $.struct_literal],
   ],
 
   rules: {
@@ -83,8 +89,8 @@ module.exports = grammar({
         $.impl_block,
         $.if_statement,
         $.while_loop,
+        prec.dynamic(1, $.for_in_loop),
         $.for_loop,
-        $.for_in_loop,
         $.break_statement,
         $.expression_statement
       ),
@@ -154,7 +160,8 @@ module.exports = grammar({
         field("body", $.struct_body)
       ),
 
-    struct_body: ($) => seq("{", optional(sep1($.struct_field, ",")), optional(","), "}"),
+    struct_body: ($) =>
+      seq("{", repeat(seq($.struct_field, optional(","))), "}"),
 
     struct_field: ($) =>
       seq(field("name", $.identifier), ":", field("type", $.type)),
@@ -218,12 +225,13 @@ module.exports = grammar({
     for_in_loop: ($) =>
       seq(
         "for",
-        field("cursor", $.identifier),
-        optional(seq(",", field("cursor2", $.identifier))),
+        field("bindings", sep1($.for_binding, ",")),
         "in",
         field("iterable", $.expression),
         field("body", $.block)
       ),
+
+    for_binding: ($) => choice($.identifier, $.wildcard),
 
     for_loop: ($) =>
       seq(
@@ -304,22 +312,21 @@ module.exports = grammar({
     unary_expression: ($) =>
       choice(
         prec(PREC.unary, seq(choice("-", "not"), $.unary_expression)),
-        $.call_expression,
-        $.member_expression,
+        $.postfix_expression,
         $.primary_expression
       ),
 
-    call_expression: ($) =>
-      prec.left(PREC.call, seq($.member_expression, $.argument_list)),
-
-    member_expression: ($) =>
+    postfix_expression: ($) =>
       prec.left(
-        PREC.member,
-        seq(
-          $.primary_expression,
-          repeat(seq(choice(".", "::"), $.identifier)),
-          optional($.generic_suffix)
-        )
+        PREC.call,
+        seq($.primary_expression, repeat1($.postfix))
+      ),
+
+    postfix: ($) =>
+      choice(
+        $.argument_list,
+        $.generic_suffix,
+        seq(".", $.identifier)
       ),
 
     argument_list: ($) => seq("(", optional(sep1($.argument, ",")), ")"),
@@ -340,6 +347,7 @@ module.exports = grammar({
         $.boolean,
         $.void,
         $.identifier,
+        $.qualified_identifier,
         $.self_expression,
         $.list_literal,
         $.map_literal,
@@ -371,21 +379,13 @@ module.exports = grammar({
     map_entry: ($) => seq(field("key", $.expression), ":", field("value", $.expression)),
 
     struct_literal: ($) =>
-      prec(
-        PREC.call,
-        seq(
+      seq(
         field("name", choice($.qualified_identifier, $.identifier)),
         field("body", $.struct_literal_body)
-        )
       ),
 
     struct_literal_body: ($) =>
-      seq(
-        "{",
-        optional(sep1($.struct_literal_field, ",")),
-        optional(","),
-        "}"
-      ),
+      seq("{", sep1($.struct_literal_field, ","), optional(","), "}"),
 
     struct_literal_field: ($) =>
       seq(field("name", $.identifier), ":", field("value", $.expression)),
