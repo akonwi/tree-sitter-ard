@@ -54,7 +54,13 @@ module.exports = grammar({
     module_path: ($) => /[A-Za-z0-9_][A-Za-z0-9_\/\.-]*/,
 
     number: ($) => /[0-9][0-9_]*(\.[0-9_]+)?/,
-    string: ($) => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
+    string: ($) =>
+      seq(
+        '"',
+        repeat(choice($.string_content, $.interpolation)),
+        '"'
+      ),
+    string_content: ($) => token.immediate(/[^"\\{]+|\\./),
     boolean: ($) => choice("true", "false"),
     void: ($) => seq("(", ")"),
 
@@ -297,19 +303,20 @@ module.exports = grammar({
     unary_expression: ($) =>
       choice(
         prec(PREC.unary, seq(choice("-", "not"), $.unary_expression)),
-        $.call_expression
+        $.primary_expression
       ),
 
     call_expression: ($) =>
-      choice(
-        prec.left(PREC.call, seq($.member_expression, $.argument_list)),
-        $.member_expression
-      ),
+      prec.left(PREC.call, seq($.member_expression, $.argument_list)),
 
     member_expression: ($) =>
       prec.left(
         PREC.member,
-        seq($.primary_expression, repeat(seq(choice(".", "::"), $.identifier)))
+        seq(
+          $.primary_expression,
+          repeat(seq(choice(".", "::"), $.identifier)),
+          optional($.generic_suffix)
+        )
       ),
 
     argument_list: ($) => seq("(", optional(sep1($.argument, ",")), ")"),
@@ -331,6 +338,8 @@ module.exports = grammar({
         $.void,
         $.identifier,
         $.self_expression,
+        $.member_expression,
+        $.call_expression,
         $.list_literal,
         $.map_literal,
         $.struct_literal,
@@ -344,6 +353,7 @@ module.exports = grammar({
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
 
     self_expression: ($) => seq("@", $.identifier),
+    interpolation: ($) => seq("{", $.expression, "}"),
 
     list_literal: ($) => seq("[", optional(sep1($.expression, ",")), optional(","), "]"),
 
@@ -436,6 +446,9 @@ module.exports = grammar({
       seq(choice($.qualified_identifier, $.identifier), field("type_args", $.type_arguments)),
 
     type_arguments: ($) => seq("<", sep1($.type, ","), ">"),
+
+    // Minimal generic call suffix for expressions (avoids '<' vs comparison ambiguity).
+    generic_suffix: ($) => token(seq("<", /[^>\\n]+/, ">")),
 
     list_type: ($) => seq("[", field("element", $.type), "]"),
 
