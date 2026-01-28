@@ -32,19 +32,11 @@ module.exports = grammar({
   supertypes: ($) => [$.statement, $.expression, $.type],
 
   conflicts: ($) => [
-    [$.list_literal, $.map_literal],
-    [$.function_declaration, $.anonymous_function],
     [$.primary_expression, $.struct_literal],
-    [$.primary_expression, $.qualified_identifier],
     [$.while_loop, $.primary_expression],
     [$.block, $.match_expression],
-    [$.try_expression],
-    [$.catch_clause],
     [$.primary_expression, $.match_case],
-    [$.nullable_type],
     [$.trait_method],
-    [$.for_loop, $.for_in_loop],
-    [$.for_in_loop, $.struct_literal],
     [$.postfix],
   ],
 
