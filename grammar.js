@@ -45,13 +45,11 @@ module.exports = grammar({
     [$.trait_method],
     [$.for_loop, $.for_in_loop],
     [$.for_in_loop, $.struct_literal],
-    [$.argument_list, $.parenthesized_expression],
     [$.postfix],
   ],
 
   precedences: ($) => [
     [$.for_in_loop, $.struct_literal],
-    [$.argument_list, $.parenthesized_expression],
   ],
 
   rules: {

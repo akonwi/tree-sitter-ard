@@ -2816,10 +2816,6 @@
       "struct_literal"
     ],
     [
-      "argument_list",
-      "parenthesized_expression"
-    ],
-    [
       "postfix"
     ]
   ],
@@ -2832,16 +2828,6 @@
       {
         "type": "SYMBOL",
         "name": "struct_literal"
-      }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "argument_list"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "parenthesized_expression"
       }
     ]
   ],
