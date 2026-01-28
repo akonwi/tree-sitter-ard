@@ -263,6 +263,10 @@
           {
             "type": "qualified_identifier",
             "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
           }
         ]
       }
@@ -1106,7 +1110,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -1201,10 +1205,6 @@
         },
         {
           "type": "struct_literal",
-          "named": true
-        },
-        {
-          "type": "try_expression",
           "named": true
         },
         {
@@ -1575,7 +1575,7 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "postfix_expression",
             "named": true
           }
         ]
@@ -1651,6 +1651,10 @@
         },
         {
           "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "try_expression",
           "named": true
         },
         {

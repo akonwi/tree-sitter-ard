@@ -45,10 +45,13 @@ module.exports = grammar({
     [$.trait_method],
     [$.for_loop, $.for_in_loop],
     [$.for_in_loop, $.struct_literal],
+    [$.argument_list, $.parenthesized_expression],
+    [$.postfix],
   ],
 
   precedences: ($) => [
     [$.for_in_loop, $.struct_literal],
+    [$.argument_list, $.parenthesized_expression],
   ],
 
   rules: {
@@ -69,7 +72,7 @@ module.exports = grammar({
     string_content: ($) => token.immediate(/[^"\\{]+/),
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
     boolean: ($) => choice("true", "false"),
-    void: ($) => seq("(", ")"),
+    void: ($) => prec(-1, seq("(", ")")),
 
     import_statement: ($) =>
       seq(
@@ -312,12 +315,13 @@ module.exports = grammar({
     unary_expression: ($) =>
       choice(
         prec(PREC.unary, seq(choice("-", "not"), $.unary_expression)),
+        $.try_expression,
         $.postfix_expression,
         $.primary_expression
       ),
 
     postfix_expression: ($) =>
-      prec.left(
+      prec.right(
         PREC.call,
         seq($.primary_expression, repeat1($.postfix))
       ),
@@ -326,6 +330,7 @@ module.exports = grammar({
       choice(
         $.argument_list,
         $.generic_suffix,
+        prec.right(seq(".", $.identifier, $.argument_list)),
         seq(".", $.identifier)
       ),
 
@@ -355,11 +360,10 @@ module.exports = grammar({
         $.block,
         $.parenthesized_expression,
         $.anonymous_function,
-        $.match_expression,
-        $.try_expression
+        $.match_expression
       ),
 
-    parenthesized_expression: ($) => seq("(", $.expression, ")"),
+    parenthesized_expression: ($) => prec(-1, seq("(", $.expression, ")")),
 
     self_expression: ($) => seq("@", $.identifier),
     string_interpolation: ($) =>
@@ -410,13 +414,17 @@ module.exports = grammar({
     wildcard: ($) => "_",
 
     try_expression: ($) =>
-      seq("try", field("expression", $.expression), optional($.catch_clause)),
+      seq(
+        "try",
+        field("expression", $.postfix_expression),
+        optional($.catch_clause)
+      ),
 
     catch_clause: ($) =>
       prec.right(
         seq(
           "->",
-          field("target", choice($.qualified_identifier, $.identifier)),
+          field("target", choice($.qualified_identifier, $.identifier, $.wildcard)),
           optional(field("body", $.block))
         )
       ),
