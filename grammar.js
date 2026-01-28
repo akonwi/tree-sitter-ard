@@ -385,7 +385,7 @@ module.exports = grammar({
       ),
 
     struct_literal_body: ($) =>
-      seq("{", sep1($.struct_literal_field, ","), optional(","), "}"),
+      seq("{", optional(sep1($.struct_literal_field, ",")), optional(","), "}"),
 
     struct_literal_field: ($) =>
       seq(field("name", $.identifier), ":", field("value", $.expression)),
