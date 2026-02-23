@@ -6,6 +6,7 @@ fn greet(person: Str) Str {}
 struct Person { name: Str, age: Int }
 enum Color { Red, Green }
 ---
+
 (source_file
   (import_statement
     path: (module_path)
@@ -33,5 +34,74 @@ enum Color { Red, Green }
           (primitive_type)))))
   (enum_declaration
     name: (identifier)
-    (enum_variant name: (identifier))
-    (enum_variant name: (identifier))))
+    (enum_variant
+      name: (identifier))
+    (enum_variant
+      name: (identifier))))
+
+==================
+Impl self alias
+==================
+impl Person as p {
+  fn age() Int {
+    self.age
+  }
+}
+
+impl Display for Person as person {
+  fn to_str() Str {
+    person.name
+  }
+}
+---
+
+(source_file
+  (impl_block
+    (identifier)
+    (identifier)
+    (impl_body
+      (function_declaration
+        (identifier)
+        (parameter_list)
+        (nullable_type
+          (primitive_type))
+        (block
+          (expression_statement
+            (assignment_expression
+              (range_expression
+                (or_expression
+                  (and_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (unary_expression
+                            (postfix_expression
+                              (primary_expression
+                                (self_expression))
+                              (postfix
+                                (identifier))))))))))))))))
+  (impl_block
+    (identifier)
+    (identifier)
+    (identifier)
+    (impl_body
+      (function_declaration
+        (identifier)
+        (parameter_list)
+        (nullable_type
+          (primitive_type))
+        (block
+          (expression_statement
+            (assignment_expression
+              (range_expression
+                (or_expression
+                  (and_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (unary_expression
+                            (postfix_expression
+                              (primary_expression
+                                (identifier))
+                              (postfix
+                                (identifier)))))))))))))))))

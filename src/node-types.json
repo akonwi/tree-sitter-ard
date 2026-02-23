@@ -731,6 +731,16 @@
           }
         ]
       },
+      "receiver": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "target": {
         "multiple": false,
         "required": true,
@@ -1293,21 +1303,6 @@
     }
   },
   {
-    "type": "self_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -1836,10 +1831,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "Bool",
     "named": false
   },
@@ -1962,6 +1953,10 @@
   {
     "type": "private",
     "named": false
+  },
+  {
+    "type": "self_expression",
+    "named": true
   },
   {
     "type": "string_content",

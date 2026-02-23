@@ -196,6 +196,7 @@ module.exports = grammar({
         "impl",
         field("target", choice($.qualified_identifier, $.identifier)),
         optional(seq("for", field("for_type", $.identifier))),
+        optional(seq("as", field("receiver", $.identifier))),
         field("body", $.impl_body)
       ),
 
@@ -341,9 +342,9 @@ module.exports = grammar({
         $.string,
         $.boolean,
         $.void,
+        $.self_expression,
         $.identifier,
         $.qualified_identifier,
-        $.self_expression,
         $.list_literal,
         $.map_literal,
         $.struct_literal,
@@ -355,7 +356,7 @@ module.exports = grammar({
 
     parenthesized_expression: ($) => prec(-1, seq("(", $.expression, ")")),
 
-    self_expression: ($) => seq("@", $.identifier),
+    self_expression: ($) => "self",
     string_interpolation: ($) =>
       seq("{", field("expression", $.expression), "}"),
 
