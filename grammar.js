@@ -103,7 +103,7 @@ module.exports = grammar({
 
     function_declaration: ($) =>
       seq(
-        optional("private"),
+        optional(choice("private", "test")),
         "fn",
         field("name", choice($.qualified_identifier, $.identifier)),
         optional(field("type_params", $.type_parameters)),
