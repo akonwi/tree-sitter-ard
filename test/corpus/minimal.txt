@@ -105,3 +105,22 @@ impl Display for Person as person {
                                 (identifier))
                               (postfix
                                 (identifier)))))))))))))))))
+
+==================
+Mutable reference type
+==================
+struct Context {
+  tree: mut Tree,
+}
+---
+
+(source_file
+  (struct_declaration
+    name: (identifier)
+    body: (struct_body
+      (struct_field
+        name: (identifier)
+        type: (nullable_type
+          (mutable_type
+            inner: (nullable_type
+              (identifier))))))))

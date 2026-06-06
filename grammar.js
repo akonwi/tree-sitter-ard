@@ -433,6 +433,7 @@ module.exports = grammar({
     _type_primary: ($) =>
       choice(
         $.primitive_type,
+        $.mutable_type,
         $.function_type,
         $.list_type,
         $.map_type,
@@ -442,6 +443,8 @@ module.exports = grammar({
       ),
 
     primitive_type: ($) => choice("Int", "Float", "Str", "Bool", "Void"),
+
+    mutable_type: ($) => seq("mut", field("inner", $.type)),
 
     generic_type: ($) =>
       seq(choice($.qualified_identifier, $.identifier), field("type_args", $.type_arguments)),

@@ -976,6 +976,22 @@
     }
   },
   {
+    "type": "mutable_type",
+    "named": true,
+    "fields": {
+      "inner": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "named_argument",
     "named": true,
     "fields": {
@@ -1027,6 +1043,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "mutable_type",
           "named": true
         },
         {
@@ -1285,6 +1305,10 @@
         },
         {
           "type": "map_type",
+          "named": true
+        },
+        {
+          "type": "mutable_type",
           "named": true
         },
         {

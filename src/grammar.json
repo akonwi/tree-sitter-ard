@@ -2535,6 +2535,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "mutable_type"
+        },
+        {
+          "type": "SYMBOL",
           "name": "function_type"
         },
         {
@@ -2581,6 +2585,23 @@
         {
           "type": "STRING",
           "value": "Void"
+        }
+      ]
+    },
+    "mutable_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "mut"
+        },
+        {
+          "type": "FIELD",
+          "name": "inner",
+          "content": {
+            "type": "SYMBOL",
+            "name": "type"
+          }
         }
       ]
     },
