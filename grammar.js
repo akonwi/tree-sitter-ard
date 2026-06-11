@@ -150,6 +150,7 @@ module.exports = grammar({
         optional("private"),
         "struct",
         field("name", $.identifier),
+        optional(field("type_params", $.type_parameters)),
         field("body", $.struct_body)
       ),
 

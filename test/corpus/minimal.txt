@@ -40,6 +40,24 @@ enum Color { Red, Green }
       name: (identifier))))
 
 ==================
+Generic struct declaration
+==================
+struct State<$T> { handle: StateHandle }
+---
+
+(source_file
+  (struct_declaration
+    name: (identifier)
+    type_params: (type_parameters
+      (type_parameter
+        (identifier)))
+    body: (struct_body
+      (struct_field
+        name: (identifier)
+        type: (nullable_type
+          (identifier))))))
+
+==================
 Impl self alias
 ==================
 impl Person as p {
