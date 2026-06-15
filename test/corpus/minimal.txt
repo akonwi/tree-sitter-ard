@@ -142,3 +142,49 @@ struct Context {
           (mutable_type
             inner: (nullable_type
               (identifier))))))))
+
+==================
+Rune literals
+==================
+let slash = '/'
+let newline = '\n'
+let quote = '\''
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (rune)))))))))))
+  (variable_declaration
+    (identifier)
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (rune)))))))))))
+  (variable_declaration
+    (identifier)
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (rune))))))))))))

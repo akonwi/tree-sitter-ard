@@ -1226,6 +1226,10 @@
           "named": true
         },
         {
+          "type": "rune",
+          "named": true
+        },
+        {
           "type": "self_expression",
           "named": true
         },
@@ -1987,6 +1991,10 @@
   {
     "type": "private",
     "named": false
+  },
+  {
+    "type": "rune",
+    "named": true
   },
   {
     "type": "self_expression",

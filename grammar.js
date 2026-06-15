@@ -61,6 +61,7 @@ module.exports = grammar({
       ),
     string_content: ($) => token.immediate(/[^"\\{]+/),
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
+    rune: ($) => token(seq("'", repeat(choice(/[^'\\\n]/, seq("\\", /./))), "'")),
     boolean: ($) => choice("true", "false"),
     void: ($) => prec(-1, seq("(", ")")),
 
@@ -341,6 +342,7 @@ module.exports = grammar({
       choice(
         $.number,
         $.string,
+        $.rune,
         $.boolean,
         $.void,
         $.self_expression,
