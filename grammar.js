@@ -286,7 +286,7 @@ module.exports = grammar({
           PREC.compare,
           seq(
             $.additive_expression,
-            choice("<", "<=", ">", ">=", "=="),
+            choice("<", "<=", ">", ">=", "==", "!="),
             $.additive_expression
           )
         ),

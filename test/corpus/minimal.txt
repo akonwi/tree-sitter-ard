@@ -188,3 +188,27 @@ let quote = '\''
                   (unary_expression
                     (primary_expression
                       (rune))))))))))))
+
+==================
+Not equal expression
+==================
+1 != 2
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (number)))))
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (number))))))))))))
