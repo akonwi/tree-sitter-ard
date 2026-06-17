@@ -355,6 +355,74 @@
     }
   },
   {
+    "type": "extern_binding",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "extern_binding_block",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extern_binding_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "extern_binding_entry",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extern_binding_entry",
+    "named": true,
+    "fields": {
+      "binding": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "qualified_identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "extern_binding_target",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "extern_function",
     "named": true,
     "fields": {
@@ -363,7 +431,7 @@
         "required": true,
         "types": [
           {
-            "type": "string",
+            "type": "extern_binding",
             "named": true
           }
         ]
@@ -1050,6 +1118,10 @@
           "named": true
         },
         {
+          "type": "parenthesized_type",
+          "named": true
+        },
+        {
           "type": "primitive_type",
           "named": true
         },
@@ -1130,6 +1202,21 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parenthesized_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -1313,6 +1400,10 @@
         },
         {
           "type": "mutable_type",
+          "named": true
+        },
+        {
+          "type": "parenthesized_type",
           "named": true
         },
         {
@@ -1931,6 +2022,10 @@
   {
     "type": "extern",
     "named": false
+  },
+  {
+    "type": "extern_binding_target",
+    "named": true
   },
   {
     "type": "false",

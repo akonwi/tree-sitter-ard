@@ -50,7 +50,7 @@ module.exports = grammar({
     comment: ($) => token(seq("//", /[^\n]*/)),
 
     identifier: ($) => /[A-Za-z_$][A-Za-z0-9_]*/,
-    module_path: ($) => /[A-Za-z0-9_][A-Za-z0-9_\/\.-]*/,
+    module_path: ($) => /[A-Za-z0-9_][A-Za-z0-9_\/\.\-:~]*/,
 
     number: ($) => /[0-9][0-9_]*(\.[0-9_]+)?/,
     string: ($) =>
@@ -123,8 +123,33 @@ module.exports = grammar({
         field("parameters", $.parameter_list),
         optional(field("return_type", $.type)),
         "=",
-        field("binding", $.string)
+        field("binding", $.extern_binding)
       ),
+
+    extern_binding: ($) =>
+      choice(
+        $.string,
+        $.qualified_identifier,
+        $.extern_binding_block
+      ),
+
+    extern_binding_block: ($) =>
+      seq(
+        "{",
+        $.extern_binding_entry,
+        repeat(seq(optional(","), $.extern_binding_entry)),
+        optional(","),
+        "}"
+      ),
+
+    extern_binding_entry: ($) =>
+      seq(
+        field("target", $.extern_binding_target),
+        "=",
+        field("binding", choice($.string, $.qualified_identifier))
+      ),
+
+    extern_binding_target: ($) => /[A-Za-z_][A-Za-z0-9_]*(\-[A-Za-z_][A-Za-z0-9_]*)*/,
 
     anonymous_function: ($) =>
       seq(
@@ -437,6 +462,7 @@ module.exports = grammar({
       choice(
         $.primitive_type,
         $.mutable_type,
+        $.parenthesized_type,
         $.function_type,
         $.list_type,
         $.map_type,
@@ -448,6 +474,8 @@ module.exports = grammar({
     primitive_type: ($) => choice("Int", "Float", "Str", "Bool", "Void"),
 
     mutable_type: ($) => seq("mut", field("inner", $.type)),
+
+    parenthesized_type: ($) => seq("(", $.type, ")"),
 
     generic_type: ($) =>
       seq(choice($.qualified_identifier, $.identifier), field("type_args", $.type_arguments)),

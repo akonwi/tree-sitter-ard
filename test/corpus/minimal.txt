@@ -212,3 +212,98 @@ Not equal expression
                   (unary_expression
                     (primary_expression
                       (number))))))))))))
+
+==================
+Direct Go imports and extern bindings
+==================
+use go:math
+use go:git.sr.ht/~rockorager/vaxis as vaxis
+extern fn floor(value: Float) Float = math::Floor
+extern fn close(file: mut os::File) Void!Str = {
+  go = os::File::Close
+  wasm-js = "close"
+}
+---
+
+(source_file
+  (import_statement
+    (module_path))
+  (import_statement
+    (module_path)
+    (identifier))
+  (extern_function
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (nullable_type
+          (primitive_type))))
+    (nullable_type
+      (primitive_type))
+    (extern_binding
+      (qualified_identifier
+        (identifier)
+        (identifier))))
+  (extern_function
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (nullable_type
+          (mutable_type
+            (nullable_type
+              (qualified_identifier
+                (identifier)
+                (identifier)))))))
+    (result_type
+      (primitive_type)
+      (nullable_type
+        (primitive_type)))
+    (extern_binding
+      (extern_binding_block
+        (extern_binding_entry
+          (extern_binding_target)
+          (qualified_identifier
+            (identifier)
+            (identifier)
+            (identifier)))
+        (extern_binding_entry
+          (extern_binding_target)
+          (string
+            (string_content)))))))
+
+==================
+Grouped mutable result type
+==================
+use go:os
+extern fn create_temp(dir: Str, pattern: Str) (mut os::File)!Str = os::CreateTemp
+---
+
+(source_file
+  (import_statement
+    (module_path))
+  (extern_function
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (nullable_type
+          (primitive_type)))
+      (parameter
+        (identifier)
+        (nullable_type
+          (primitive_type))))
+    (result_type
+      (parenthesized_type
+        (nullable_type
+          (mutable_type
+            (nullable_type
+              (qualified_identifier
+                (identifier)
+                (identifier))))))
+      (nullable_type
+        (primitive_type)))
+    (extern_binding
+      (qualified_identifier
+        (identifier)
+        (identifier)))))
