@@ -371,6 +371,7 @@ module.exports = grammar({
         $.boolean,
         $.void,
         $.self_expression,
+        $.unsafe_block,
         $.identifier,
         $.qualified_identifier,
         $.list_literal,
@@ -413,6 +414,9 @@ module.exports = grammar({
     struct_literal_field: ($) =>
       seq(field("name", $.identifier), ":", field("value", $.expression)),
 
+    unsafe_block: ($) =>
+      seq("unsafe", field("body", $.block)),
+
     match_expression: ($) =>
       seq(
         "match",
@@ -433,10 +437,13 @@ module.exports = grammar({
     wildcard: ($) => "_",
 
     try_expression: ($) =>
-      seq(
-        "try",
-        field("expression", $.postfix_expression),
-        optional($.catch_clause)
+      prec(
+        PREC.unary,
+        seq(
+          "try",
+          field("expression", choice($.postfix_expression, $.unsafe_block)),
+          optional($.catch_clause)
+        )
       ),
 
     catch_clause: ($) =>

@@ -1329,6 +1329,10 @@
           "named": true
         },
         {
+          "type": "unsafe_block",
+          "named": true
+        },
+        {
           "type": "void",
           "named": true
         }
@@ -1701,6 +1705,10 @@
           {
             "type": "postfix_expression",
             "named": true
+          },
+          {
+            "type": "unsafe_block",
+            "named": true
           }
         ]
       }
@@ -1786,6 +1794,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "unsafe_block",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2121,6 +2145,10 @@
   },
   {
     "type": "try",
+    "named": false
+  },
+  {
+    "type": "unsafe",
     "named": false
   },
   {
