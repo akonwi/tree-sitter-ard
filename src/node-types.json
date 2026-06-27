@@ -1317,6 +1317,10 @@
           "named": true
         },
         {
+          "type": "select_expression",
+          "named": true
+        },
+        {
           "type": "self_expression",
           "named": true
         },
@@ -1420,6 +1424,65 @@
         },
         {
           "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_case",
+    "named": true,
+    "fields": {
+      "binding": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "operation": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "select_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "select_case",
           "named": true
         }
       ]
@@ -2118,6 +2181,10 @@
   {
     "type": "rune",
     "named": true
+  },
+  {
+    "type": "select",
+    "named": false
   },
   {
     "type": "self_expression",

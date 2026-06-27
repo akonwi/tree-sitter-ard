@@ -36,6 +36,7 @@ module.exports = grammar({
     [$.while_loop, $.primary_expression],
     [$.block, $.match_expression],
     [$.primary_expression, $.match_case],
+    [$.primary_expression, $.select_case],
     [$.trait_method],
     [$.postfix],
   ],
@@ -380,7 +381,8 @@ module.exports = grammar({
         $.block,
         $.parenthesized_expression,
         $.anonymous_function,
-        $.match_expression
+        $.match_expression,
+        $.select_expression
       ),
 
     parenthesized_expression: ($) => prec(-1, seq("(", $.expression, ")")),
@@ -429,6 +431,23 @@ module.exports = grammar({
     match_case: ($) =>
       seq(
         field("pattern", choice($.expression, $.wildcard)),
+        "=>",
+        field("body", choice($.block, $.expression)),
+        optional(",")
+      ),
+
+    select_expression: ($) =>
+      seq(
+        "select",
+        "{",
+        repeat($.select_case),
+        "}"
+      ),
+
+    select_case: ($) =>
+      seq(
+        optional(seq("let", field("binding", $.identifier), "=")),
+        field("operation", choice($.expression, $.wildcard)),
         "=>",
         field("body", choice($.block, $.expression)),
         optional(",")
