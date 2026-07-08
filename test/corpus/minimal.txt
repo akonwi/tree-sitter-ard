@@ -307,3 +307,50 @@ extern fn create_temp(dir: Str, pattern: Str) (mut os::File)!Str = os::CreateTem
       (qualified_identifier
         (identifier)
         (identifier)))))
+
+==================
+Defer statements
+==================
+fn main() {
+  defer cleanup()
+  defer {
+    cleanup()
+  }
+}
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (block
+      (defer_statement
+        body: (assignment_expression
+          (range_expression
+            (or_expression
+              (and_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (unary_expression
+                        (postfix_expression
+                          (primary_expression
+                            (identifier))
+                          (postfix
+                            (argument_list))))))))))))
+      (defer_statement
+        body: (block
+          (expression_statement
+            (assignment_expression
+              (range_expression
+                (or_expression
+                  (and_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (unary_expression
+                            (postfix_expression
+                              (primary_expression
+                                (identifier))
+                              (postfix
+                                (argument_list)))))))))))))))))

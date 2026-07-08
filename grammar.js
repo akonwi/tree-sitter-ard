@@ -37,6 +37,7 @@ module.exports = grammar({
     [$.block, $.match_expression],
     [$.primary_expression, $.match_case],
     [$.primary_expression, $.select_case],
+    [$.defer_statement, $.primary_expression],
     [$.trait_method],
     [$.postfix],
   ],
@@ -87,12 +88,19 @@ module.exports = grammar({
         prec.dynamic(1, $.for_in_loop),
         $.for_loop,
         $.break_statement,
+        $.defer_statement,
         $.expression_statement
       ),
 
     expression_statement: ($) => $.expression,
 
     break_statement: ($) => "break",
+
+    defer_statement: ($) =>
+      seq(
+        "defer",
+        field("body", choice($.block, $.expression))
+      ),
 
     variable_declaration: ($) =>
       seq(

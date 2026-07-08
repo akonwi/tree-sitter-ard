@@ -273,6 +273,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "defer_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "expression_statement"
         }
       ]
@@ -284,6 +288,32 @@
     "break_statement": {
       "type": "STRING",
       "value": "break"
+    },
+    "defer_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "defer"
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "block"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            ]
+          }
+        }
+      ]
     },
     "variable_declaration": {
       "type": "SEQ",
@@ -3172,6 +3202,10 @@
     [
       "primary_expression",
       "select_case"
+    ],
+    [
+      "defer_statement",
+      "primary_expression"
     ],
     [
       "trait_method"
