@@ -354,3 +354,22 @@ fn main() {
                                 (identifier))
                               (postfix
                                 (argument_list)))))))))))))))))
+
+==================
+Fixed array type
+==================
+fn digest(bytes: [Byte; 32]) {}
+---
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (nullable_type
+          (fixed_array_type
+            element: (nullable_type
+              (identifier))
+            length: (integer)))))
+    body: (block)))

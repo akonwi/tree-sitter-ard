@@ -503,6 +503,32 @@
     }
   },
   {
+    "type": "fixed_array_type",
+    "named": true,
+    "fields": {
+      "element": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "length": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "for_binding",
     "named": true,
     "fields": {},
@@ -1118,6 +1144,10 @@
       "required": true,
       "types": [
         {
+          "type": "fixed_array_type",
+          "named": true
+        },
+        {
           "type": "function_type",
           "named": true
         },
@@ -1410,6 +1440,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "fixed_array_type",
+          "named": true
+        },
         {
           "type": "function_type",
           "named": true
@@ -2173,6 +2207,10 @@
   {
     "type": "in",
     "named": false
+  },
+  {
+    "type": "integer",
+    "named": true
   },
   {
     "type": "let",

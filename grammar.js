@@ -54,6 +54,7 @@ module.exports = grammar({
     identifier: ($) => /[A-Za-z_$][A-Za-z0-9_]*/,
     module_path: ($) => /[A-Za-z0-9_][A-Za-z0-9_\/\.\-:~]*/,
 
+    integer: ($) => /[0-9][0-9_]*/,
     number: ($) => /[0-9][0-9_]*(\.[0-9_]+)?/,
     string: ($) =>
       seq(
@@ -498,6 +499,7 @@ module.exports = grammar({
         $.mutable_type,
         $.parenthesized_type,
         $.function_type,
+        $.fixed_array_type,
         $.list_type,
         $.map_type,
         $.generic_type,
@@ -520,6 +522,8 @@ module.exports = grammar({
     generic_suffix: ($) => token(seq("<", /[^>\\n]+/, ">")),
 
     list_type: ($) => seq("[", field("element", $.type), "]"),
+
+    fixed_array_type: ($) => seq("[", field("element", $.type), ";", field("length", $.integer), "]"),
 
     map_type: ($) =>
       seq("[", field("key", $.type), ":", field("value", $.type), "]"),
