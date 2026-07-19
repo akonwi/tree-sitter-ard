@@ -373,3 +373,25 @@ fn digest(bytes: [Byte; 32]) {}
               (identifier))
             length: (integer)))))
     body: (block)))
+
+==================
+Mut keyword method names
+==================
+impl Value {
+  fn mut() {}
+  fn mut mut() {}
+}
+---
+
+(source_file
+  (impl_block
+    target: (identifier)
+    body: (impl_body
+      (function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (block))
+      (function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (block)))))

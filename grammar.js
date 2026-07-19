@@ -116,7 +116,8 @@ module.exports = grammar({
       seq(
         optional(choice("private", "test")),
         "fn",
-        field("name", choice($.qualified_identifier, $.identifier)),
+        optional("mut"),
+        field("name", choice($.qualified_identifier, $.identifier, alias("mut", $.identifier))),
         optional(field("type_params", $.type_parameters)),
         field("parameters", $.parameter_list),
         optional(field("return_type", $.type)),
