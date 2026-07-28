@@ -380,6 +380,7 @@ Mut keyword method names
 impl Value {
   fn mut() {}
   fn mut mut() {}
+  fn deref() {}
 }
 ---
 
@@ -387,6 +388,10 @@ impl Value {
   (impl_block
     target: (identifier)
     body: (impl_body
+      (function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (block))
       (function_declaration
         name: (identifier)
         parameters: (parameter_list)

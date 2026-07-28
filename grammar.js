@@ -104,13 +104,13 @@ module.exports = grammar({
       ),
 
     variable_declaration: ($) =>
-      seq(
+      prec(1, seq(
         choice("let", "mut"),
         field("name", $.identifier),
         optional(seq(":", field("type", $.type))),
         "=",
         field("value", $.expression)
-      ),
+      )),
 
     function_declaration: ($) =>
       seq(
@@ -291,12 +291,18 @@ module.exports = grammar({
 
     assignment_expression: ($) =>
       choice(
+        $.not_expression,
         prec.right(
           PREC.assign,
           seq($.range_expression, choice("=", "=+", "=-"), $.assignment_expression)
         ),
         $.range_expression
       ),
+
+    // `not` is intentionally broad in Ard: it consumes a complete expression
+    // rather than binding like arithmetic unary operators.
+    not_expression: ($) =>
+      prec.right(seq("not", $.assignment_expression)),
 
     range_expression: ($) =>
       choice(
@@ -343,7 +349,7 @@ module.exports = grammar({
 
     unary_expression: ($) =>
       choice(
-        prec(PREC.unary, seq(choice("-", "not"), $.unary_expression)),
+        prec(PREC.unary, seq(choice("-", "mut", "deref"), $.unary_expression)),
         $.try_expression,
         $.postfix_expression,
         $.primary_expression

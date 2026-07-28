@@ -1,0 +1,109 @@
+==================
+Deref unary expression
+==================
+deref reference
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (unary_expression
+                      (primary_expression
+                        (identifier)))))))))))))
+
+==================
+Deref and mut compose one layer at a time
+==================
+deref mut value
+mut deref reference
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (unary_expression
+                      (unary_expression
+                        (primary_expression
+                          (identifier)))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (unary_expression
+                      (unary_expression
+                        (primary_expression
+                          (identifier))))))))))))))
+
+==================
+Deref binds below postfix and above addition
+==================
+deref reference.field + value
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (unary_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (identifier))))))
+                (additive_expression
+                  (multiplicative_expression
+                    (unary_expression
+                      (primary_expression
+                        (identifier)))))))))))))
+
+==================
+Not consumes a dereference comparison
+==================
+not deref reference == value
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (not_expression
+        (assignment_expression
+          (range_expression
+            (or_expression
+              (and_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (unary_expression
+                        (unary_expression
+                          (primary_expression
+                            (identifier))))))
+                  (additive_expression
+                    (multiplicative_expression
+                      (unary_expression
+                        (primary_expression
+                          (identifier))))))))))))))
