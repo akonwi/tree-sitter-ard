@@ -1,0 +1,76 @@
+==================
+Doubled braces are literal string escapes
+==================
+"Hello, {{name}}"
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (string
+                        (string_content)
+                        (brace_escape)
+                        (string_content)
+                        (brace_escape)))))))))))))
+
+==================
+A single closing brace remains string content
+==================
+"closing } brace"
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (string
+                        (string_content)
+                        (string_content)
+                        (string_content)))))))))))))
+
+==================
+Doubled braces surround interpolation
+==================
+"{{{name}}}"
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (string
+                        (brace_escape)
+                        (string_interpolation
+                          expression: (assignment_expression
+                            (range_expression
+                              (or_expression
+                                (and_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (unary_expression
+                                          (primary_expression
+                                            (identifier)))))))))))
+                        (brace_escape)))))))))))))

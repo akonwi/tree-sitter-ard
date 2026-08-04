@@ -73,6 +73,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "brace_escape"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "string_interpolation"
               }
             ]
@@ -87,8 +91,17 @@
     "string_content": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "[^\"\\\\{]+"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^\"\\\\{}]+"
+          },
+          {
+            "type": "STRING",
+            "value": "}"
+          }
+        ]
       }
     },
     "escape_sequence": {
@@ -103,6 +116,22 @@
           {
             "type": "PATTERN",
             "value": "."
+          }
+        ]
+      }
+    },
+    "brace_escape": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "{{"
+          },
+          {
+            "type": "STRING",
+            "value": "}}"
           }
         ]
       }

@@ -1594,6 +1594,10 @@
       "required": false,
       "types": [
         {
+          "type": "brace_escape",
+          "named": true
+        },
+        {
           "type": "escape_sequence",
           "named": true
         },
@@ -2162,6 +2166,10 @@
   {
     "type": "as",
     "named": false
+  },
+  {
+    "type": "brace_escape",
+    "named": true
   },
   {
     "type": "break_statement",

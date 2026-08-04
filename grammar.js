@@ -59,11 +59,12 @@ module.exports = grammar({
     string: ($) =>
       seq(
         '"',
-        repeat(choice($.string_content, $.escape_sequence, $.string_interpolation)),
+        repeat(choice($.string_content, $.escape_sequence, $.brace_escape, $.string_interpolation)),
         '"'
       ),
-    string_content: ($) => token.immediate(/[^"\\{]+/),
+    string_content: ($) => token.immediate(choice(/[^"\\{}]+/, "}")),
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
+    brace_escape: ($) => token.immediate(choice("{{", "}}")),
     rune: ($) => token(seq("'", repeat(choice(/[^'\\\n]/, seq("\\", /./))), "'")),
     boolean: ($) => choice("true", "false"),
     void: ($) => prec(-1, seq("(", ")")),
