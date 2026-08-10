@@ -1386,6 +1386,10 @@
           "named": true
         },
         {
+          "type": "raw_string",
+          "named": true
+        },
+        {
           "type": "rune",
           "named": true
         },
@@ -1446,6 +1450,29 @@
       "types": [
         {
           "type": "or_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "raw_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "brace_escape",
+          "named": true
+        },
+        {
+          "type": "raw_string_content",
+          "named": true
+        },
+        {
+          "type": "string_interpolation",
           "named": true
         }
       ]
@@ -2160,6 +2187,10 @@
     "named": false
   },
   {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "and",
     "named": false
   },
@@ -2274,6 +2305,10 @@
   {
     "type": "private",
     "named": false
+  },
+  {
+    "type": "raw_string_content",
+    "named": true
   },
   {
     "type": "rune",

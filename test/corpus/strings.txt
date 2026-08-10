@@ -74,3 +74,194 @@ Doubled braces surround interpolation
                                           (primary_expression
                                             (identifier)))))))))))
                         (brace_escape)))))))))))))
+
+==================
+Raw string preserves backslashes and quotes
+==================
+`C:\Users\name "quoted"`
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (raw_string
+                        (raw_string_content)))))))))))))
+
+==================
+Raw string interpolation and doubled braces
+==================
+`SELECT '{{column}}' FROM {table}`
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (raw_string
+                        (raw_string_content)
+                        (brace_escape)
+                        (raw_string_content)
+                        (brace_escape)
+                        (raw_string_content)
+                        (string_interpolation
+                          (assignment_expression
+                            (range_expression
+                              (or_expression
+                                (and_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (unary_expression
+                                          (primary_expression
+                                            (identifier)))))))))))))))))))))))
+
+==================
+Multiline raw string
+==================
+`
+  SELECT id
+  FROM users
+  `
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (raw_string
+                        (raw_string_content)
+                        (raw_string_content)))))))))))))
+
+==================
+Single-line raw string rejects a later newline
+:error
+==================
+`first
+second`
+---
+
+(source_file)
+
+==================
+Multiline raw string rejects a closing backtick after content
+:error
+==================
+`
+  value`
+---
+
+(source_file)
+
+==================
+Multiline raw string interpolation and doubled braces
+==================
+`
+  SELECT {{column}}
+  FROM {table}
+  `
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (raw_string
+                        (raw_string_content)
+                        (brace_escape)
+                        (raw_string_content)
+                        (brace_escape)
+                        (raw_string_content)
+                        (string_interpolation
+                          (assignment_expression
+                            (range_expression
+                              (or_expression
+                                (and_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (unary_expression
+                                          (primary_expression
+                                            (identifier)))))))))))))))))))))))
+
+==================
+Multiline raw text that looks like a comment still interpolates
+==================
+`
+  // value = {name}
+  `
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (raw_string
+                        (raw_string_content)
+                        (string_interpolation
+                          (assignment_expression
+                            (range_expression
+                              (or_expression
+                                (and_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (unary_expression
+                                          (primary_expression
+                                            (identifier)))))))))))))))))))))))
+
+==================
+Raw text comment cannot swallow a backtick
+:error
+==================
+`
+  // value `
+  `
+---
+
+(source_file)
+
+==================
+Single-line raw string cannot skip a newline before interpolation
+:error
+==================
+`first
+{name}`
+---
+
+(source_file)
