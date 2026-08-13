@@ -575,6 +575,14 @@ module.exports = grammar({
       seq("[", field("key", $.type), ":", field("value", $.type), "]"),
 
     function_type: ($) =>
-      seq("fn", "(", optional(sep1($.type, ",")), ")", field("return", $.type)),
+      seq("fn", "(", optional($._function_type_parameters), ")", field("return", $.type)),
+
+    _function_type_parameters: ($) =>
+      seq(
+        repeat(seq(field("parameter", $.type), ",")),
+        choice(field("parameter", $.type), field("variadic", $.variadic_type))
+      ),
+
+    variadic_type: ($) => seq("...", field("element", $.type)),
   },
 });
