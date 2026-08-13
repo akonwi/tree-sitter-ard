@@ -1,0 +1,28 @@
+==================
+Variadic callable type
+==================
+let join: fn(Str, ...Str) Str = value
+---
+
+(source_file
+  (variable_declaration
+    name: (identifier)
+    type: (nullable_type
+      (function_type
+        parameter: (nullable_type
+          (primitive_type))
+        variadic: (variadic_type
+          element: (nullable_type
+            (primitive_type)))
+        return: (nullable_type
+          (primitive_type))))
+    value: (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (identifier))))))))))))

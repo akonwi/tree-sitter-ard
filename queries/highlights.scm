@@ -70,10 +70,13 @@
 ; Literals
 (number) @number
 (string) @string
+(raw_string) @string
 (rune) @string
 (string_interpolation "{" @punctuation.bracket "}" @punctuation.bracket)
 (string_content) @string
+(raw_string_content) @string
 (escape_sequence) @string.escape
+(brace_escape) @string.escape
 (boolean) @boolean
 (void) @constant.builtin
 (wildcard) @variable.special
@@ -119,4 +122,5 @@
   "!"
   "?"
   ".."
+  "..."
 ] @operator

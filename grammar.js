@@ -59,11 +59,49 @@ module.exports = grammar({
     string: ($) =>
       seq(
         '"',
-        repeat(choice($.string_content, $.escape_sequence, $.string_interpolation)),
+        repeat(choice($.string_content, $.escape_sequence, $.brace_escape, $.string_interpolation)),
         '"'
       ),
-    string_content: ($) => token.immediate(/[^"\\{]+/),
+    string_content: ($) => token.immediate(choice(/[^"\\{}]+/, "}")),
+    raw_string: ($) =>
+      choice(
+        seq(
+          token(prec(1, seq("`", /\r\n|\n|\r/))),
+          repeat($._raw_string_line),
+          "`"
+        ),
+        seq(
+          "`",
+          repeat(choice($.raw_string_content, $.brace_escape, alias($._raw_string_interpolation, $.string_interpolation))),
+          token.immediate("`")
+        )
+      ),
+    _raw_string_line: ($) =>
+      seq(
+        repeat(choice(
+          $._raw_multiline_content,
+          $._raw_multiline_brace_escape,
+          $._raw_multiline_closing_brace,
+          $._raw_multiline_interpolation
+        )),
+        token(prec(1, /\r\n|\n|\r/))
+      ),
+    _raw_multiline_content: ($) =>
+      alias(token.immediate(prec(1, /[ \t]*[^\s`{}][^`\r\n{}]*/)), $.raw_string_content),
+    _raw_multiline_brace_escape: ($) =>
+      alias(token(choice("{{", "}}")), $.brace_escape),
+    _raw_multiline_closing_brace: ($) =>
+      alias(token("}"), $.raw_string_content),
+    _raw_multiline_interpolation: ($) =>
+      alias($._raw_multiline_interpolation_body, $.string_interpolation),
+    _raw_multiline_interpolation_body: ($) =>
+      seq("{", field("expression", $.expression), "}"),
+    _raw_string_interpolation: ($) =>
+      seq(token.immediate("{"), field("expression", $.expression), "}"),
+    raw_string_content: ($) =>
+      token.immediate(choice(prec(1, /[^`\r\n{}]+/), "}")),
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
+    brace_escape: ($) => token.immediate(choice("{{", "}}")),
     rune: ($) => token(seq("'", repeat(choice(/[^'\\\n]/, seq("\\", /./))), "'")),
     boolean: ($) => choice("true", "false"),
     void: ($) => prec(-1, seq("(", ")")),
@@ -384,6 +422,7 @@ module.exports = grammar({
       choice(
         $.number,
         $.string,
+        $.raw_string,
         $.rune,
         $.boolean,
         $.void,
@@ -536,6 +575,14 @@ module.exports = grammar({
       seq("[", field("key", $.type), ":", field("value", $.type), "]"),
 
     function_type: ($) =>
-      seq("fn", "(", optional(sep1($.type, ",")), ")", field("return", $.type)),
+      seq("fn", "(", optional($._function_type_parameters), ")", field("return", $.type)),
+
+    _function_type_parameters: ($) =>
+      seq(
+        repeat(seq(field("parameter", $.type), ",")),
+        choice(field("parameter", $.type), field("variadic", $.variadic_type))
+      ),
+
+    variadic_type: ($) => seq("...", field("element", $.type)),
   },
 });
