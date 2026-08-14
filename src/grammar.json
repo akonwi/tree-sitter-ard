@@ -2348,15 +2348,20 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "IMMEDIATE_TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "PREC",
-            "value": 1,
+            "type": "IMMEDIATE_TOKEN",
             "content": {
-              "type": "PATTERN",
-              "value": "[ \\t]*\\("
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[ \\t]*\\("
+              }
             }
-          }
+          },
+          "named": false,
+          "value": "("
         },
         {
           "type": "CHOICE",

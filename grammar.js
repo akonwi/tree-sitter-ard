@@ -413,8 +413,14 @@ module.exports = grammar({
     // Calls may use horizontal spacing before `(`, but a newline terminates the
     // expression in the compiler parser. Keeping the opener immediate prevents
     // Tree-sitter from joining two source statements into one postfix chain.
+    // Alias the combined token back to `(` so highlight and bracket queries
+    // capture call openers just like every other parenthesis.
     argument_list: ($) =>
-      seq(token.immediate(prec(1, /[ \t]*\(/)), optional(sep1($.argument, ",")), ")"),
+      seq(
+        alias(token.immediate(prec(1, /[ \t]*\(/)), "("),
+        optional(sep1($.argument, ",")),
+        ")"
+      ),
 
     argument: ($) =>
       seq(

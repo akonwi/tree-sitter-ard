@@ -290,7 +290,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_deref] = "deref",
   [anon_sym_DOT] = ".",
   [sym_dereference_operator] = "dereference_operator",
-  [aux_sym_argument_list_token1] = "argument_list_token1",
+  [aux_sym_argument_list_token1] = "(",
   [sym_self_expression] = "self_expression",
   [anon_sym_LBRACK] = "[",
   [anon_sym_RBRACK] = "]",
@@ -496,7 +496,7 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_deref] = anon_sym_deref,
   [anon_sym_DOT] = anon_sym_DOT,
   [sym_dereference_operator] = sym_dereference_operator,
-  [aux_sym_argument_list_token1] = aux_sym_argument_list_token1,
+  [aux_sym_argument_list_token1] = anon_sym_LPAREN,
   [sym_self_expression] = sym_self_expression,
   [anon_sym_LBRACK] = anon_sym_LBRACK,
   [anon_sym_RBRACK] = anon_sym_RBRACK,
@@ -910,7 +910,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [aux_sym_argument_list_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [sym_self_expression] = {
