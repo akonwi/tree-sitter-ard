@@ -394,20 +394,27 @@ module.exports = grammar({
       ),
 
     postfix_expression: ($) =>
-      prec.right(
-        PREC.call,
-        seq($.primary_expression, repeat1($.postfix))
+      choice(
+        prec.left(PREC.call, seq($.primary_expression, $.postfix)),
+        prec.left(PREC.call, seq($.postfix_expression, $.postfix))
       ),
 
     postfix: ($) =>
       choice(
-        $.argument_list,
+        prec(PREC.call, $.argument_list),
         $.generic_suffix,
+        $.dereference_operator,
         prec.right(seq(".", $.identifier, $.argument_list)),
         seq(".", $.identifier)
       ),
 
-    argument_list: ($) => seq("(", optional(sep1($.argument, ",")), ")"),
+    dereference_operator: ($) => token(".@"),
+
+    // Calls may use horizontal spacing before `(`, but a newline terminates the
+    // expression in the compiler parser. Keeping the opener immediate prevents
+    // Tree-sitter from joining two source statements into one postfix chain.
+    argument_list: ($) =>
+      seq(token.immediate(prec(1, /[ \t]*\(/)), optional(sep1($.argument, ",")), ")"),
 
     argument: ($) =>
       seq(

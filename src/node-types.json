@@ -1318,6 +1318,10 @@
           "named": true
         },
         {
+          "type": "dereference_operator",
+          "named": true
+        },
+        {
           "type": "generic_suffix",
           "named": true
         },
@@ -1338,6 +1342,10 @@
       "types": [
         {
           "type": "postfix",
+          "named": true
+        },
+        {
+          "type": "postfix_expression",
           "named": true
         },
         {
@@ -2247,6 +2255,10 @@
   {
     "type": "deref",
     "named": false
+  },
+  {
+    "type": "dereference_operator",
+    "named": true
   },
   {
     "type": "else",
