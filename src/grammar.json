@@ -2429,8 +2429,28 @@
               "name": "expression"
             }
           ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "spread",
+              "content": {
+                "type": "SYMBOL",
+                "name": "spread_operator"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
+    },
+    "spread_operator": {
+      "type": "STRING",
+      "value": "..."
     },
     "named_argument": {
       "type": "SEQ",

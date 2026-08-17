@@ -172,7 +172,18 @@
   {
     "type": "argument",
     "named": true,
-    "fields": {},
+    "fields": {
+      "spread": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "spread_operator",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1629,6 +1640,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "spread_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string",

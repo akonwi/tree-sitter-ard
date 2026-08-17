@@ -425,8 +425,11 @@ module.exports = grammar({
     argument: ($) =>
       seq(
         optional("mut"),
-        choice($.named_argument, $.expression)
+        choice($.named_argument, $.expression),
+        optional(field("spread", $.spread_operator))
       ),
+
+    spread_operator: ($) => "...",
 
     named_argument: ($) =>
       seq(field("name", $.identifier), ":", field("value", $.expression)),
