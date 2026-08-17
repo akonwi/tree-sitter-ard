@@ -2244,35 +2244,62 @@
       ]
     },
     "postfix_expression": {
-      "type": "PREC_RIGHT",
-      "value": 9,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "primary_expression"
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SYMBOL",
-              "name": "postfix"
-            }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC_LEFT",
+          "value": 9,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "primary_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "postfix"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 9,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "postfix_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "postfix"
+              }
+            ]
+          }
+        }
+      ]
     },
     "postfix": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "argument_list"
+          "type": "PREC",
+          "value": 9,
+          "content": {
+            "type": "SYMBOL",
+            "name": "argument_list"
+          }
         },
         {
           "type": "SYMBOL",
           "name": "generic_suffix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dereference_operator"
         },
         {
           "type": "PREC_RIGHT",
@@ -2310,11 +2337,30 @@
         }
       ]
     },
+    "dereference_operator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ".@"
+      }
+    },
     "argument_list": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[ \\t]*\\("
+              }
+            }
+          },
+          "named": false,
           "value": "("
         },
         {
@@ -2383,8 +2429,28 @@
               "name": "expression"
             }
           ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "spread",
+              "content": {
+                "type": "SYMBOL",
+                "name": "spread_operator"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
+    },
+    "spread_operator": {
+      "type": "STRING",
+      "value": "..."
     },
     "named_argument": {
       "type": "SEQ",

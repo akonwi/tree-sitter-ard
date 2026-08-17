@@ -172,7 +172,18 @@
   {
     "type": "argument",
     "named": true,
-    "fields": {},
+    "fields": {
+      "spread": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "spread_operator",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1318,6 +1329,10 @@
           "named": true
         },
         {
+          "type": "dereference_operator",
+          "named": true
+        },
+        {
           "type": "generic_suffix",
           "named": true
         },
@@ -1338,6 +1353,10 @@
       "types": [
         {
           "type": "postfix",
+          "named": true
+        },
+        {
+          "type": "postfix_expression",
           "named": true
         },
         {
@@ -1621,6 +1640,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "spread_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "string",
@@ -2247,6 +2271,10 @@
   {
     "type": "deref",
     "named": false
+  },
+  {
+    "type": "dereference_operator",
+    "named": true
   },
   {
     "type": "else",

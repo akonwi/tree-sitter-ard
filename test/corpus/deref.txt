@@ -1,5 +1,212 @@
 ==================
-Deref unary expression
+Postfix value-at dereference
+==================
+reference.@
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (identifier))
+                      (postfix
+                        (dereference_operator)))))))))))))
+
+==================
+Postfix dereference composes left to right
+==================
+reference.@.field
+reference.field.@
+reference.@.@
+load().@
+reference.@()
+reference.@().field
+foo()()
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))
+                      (postfix
+                        (identifier))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (identifier)))
+                      (postfix
+                        (dereference_operator))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))
+                      (postfix
+                        (dereference_operator))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (argument_list)))
+                      (postfix
+                        (dereference_operator))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))
+                      (postfix
+                        (argument_list))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (postfix_expression
+                          (primary_expression
+                            (identifier))
+                          (postfix
+                            (dereference_operator)))
+                        (postfix
+                          (argument_list)))
+                      (postfix
+                        (identifier))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (argument_list)))
+                      (postfix
+                        (argument_list)))))))))))))
+
+==================
+Postfix dereference composes with mut
+==================
+(mut value).@
+mut reference.@
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (parenthesized_expression
+                          (assignment_expression
+                            (range_expression
+                              (or_expression
+                                (and_expression
+                                  (comparison_expression
+                                    (additive_expression
+                                      (multiplicative_expression
+                                        (unary_expression
+                                          (unary_expression
+                                            (primary_expression
+                                              (identifier)))))))))))))
+                      (postfix
+                        (dereference_operator))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (unary_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator))))))))))))))
+
+==================
+Legacy deref unary expression
 ==================
 deref reference
 ---
@@ -107,3 +314,89 @@ not deref reference == value
                       (unary_expression
                         (primary_expression
                           (identifier))))))))))))))
+
+==================
+Postfix dereference requires adjacency
+:error
+==================
+reference. @
+---
+
+(source_file)
+
+==================
+Calls stay on the same source line
+==================
+reference.@ ()
+foo () ()
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))
+                      (postfix
+                        (argument_list))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (argument_list)))
+                      (postfix
+                        (argument_list)))))))))))))
+
+==================
+A newline terminates before a call
+==================
+reference.@
+()
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (identifier))
+                      (postfix
+                        (dereference_operator))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (void))))))))))))

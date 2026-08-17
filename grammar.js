@@ -394,26 +394,42 @@ module.exports = grammar({
       ),
 
     postfix_expression: ($) =>
-      prec.right(
-        PREC.call,
-        seq($.primary_expression, repeat1($.postfix))
+      choice(
+        prec.left(PREC.call, seq($.primary_expression, $.postfix)),
+        prec.left(PREC.call, seq($.postfix_expression, $.postfix))
       ),
 
     postfix: ($) =>
       choice(
-        $.argument_list,
+        prec(PREC.call, $.argument_list),
         $.generic_suffix,
+        $.dereference_operator,
         prec.right(seq(".", $.identifier, $.argument_list)),
         seq(".", $.identifier)
       ),
 
-    argument_list: ($) => seq("(", optional(sep1($.argument, ",")), ")"),
+    dereference_operator: ($) => token(".@"),
+
+    // Calls may use horizontal spacing before `(`, but a newline terminates the
+    // expression in the compiler parser. Keeping the opener immediate prevents
+    // Tree-sitter from joining two source statements into one postfix chain.
+    // Alias the combined token back to `(` so highlight and bracket queries
+    // capture call openers just like every other parenthesis.
+    argument_list: ($) =>
+      seq(
+        alias(token.immediate(prec(1, /[ \t]*\(/)), "("),
+        optional(sep1($.argument, ",")),
+        ")"
+      ),
 
     argument: ($) =>
       seq(
         optional("mut"),
-        choice($.named_argument, $.expression)
+        choice($.named_argument, $.expression),
+        optional(field("spread", $.spread_operator))
       ),
+
+    spread_operator: ($) => "...",
 
     named_argument: ($) =>
       seq(field("name", $.identifier), ":", field("value", $.expression)),
