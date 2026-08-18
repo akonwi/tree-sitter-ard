@@ -63,6 +63,13 @@ module.exports = grammar({
         '"'
       ),
     string_content: ($) => token.immediate(choice(/[^"\\{}]+/, "}")),
+    _attribute_string: ($) =>
+      seq(
+        '"',
+        repeat(choice(alias($._attribute_string_content, $.string_content), $.escape_sequence, $.brace_escape)),
+        '"'
+      ),
+    _attribute_string_content: ($) => token.immediate(choice(/[^"\\{}]+/, "}")),
     raw_string: ($) =>
       choice(
         seq(
@@ -83,6 +90,28 @@ module.exports = grammar({
           $._raw_multiline_brace_escape,
           $._raw_multiline_closing_brace,
           $._raw_multiline_interpolation
+        )),
+        token(prec(1, /\r\n|\n|\r/))
+      ),
+    _attribute_raw_string: ($) =>
+      choice(
+        seq(
+          token(prec(1, seq("`", /\r\n|\n|\r/))),
+          repeat($._attribute_raw_string_line),
+          "`"
+        ),
+        seq(
+          "`",
+          repeat(choice($.raw_string_content, $.brace_escape)),
+          token.immediate("`")
+        )
+      ),
+    _attribute_raw_string_line: ($) =>
+      seq(
+        repeat(choice(
+          $._raw_multiline_content,
+          $._raw_multiline_brace_escape,
+          $._raw_multiline_closing_brace
         )),
         token(prec(1, /\r\n|\n|\r/))
       ),
@@ -233,7 +262,45 @@ module.exports = grammar({
       seq("{", repeat(seq($.struct_field, optional(","))), "}"),
 
     struct_field: ($) =>
-      seq(field("name", $.identifier), ":", field("type", $.type)),
+      seq(
+        repeat(field("attribute", $.attribute)),
+        field("name", $.identifier),
+        ":",
+        field("type", $.type)
+      ),
+
+    attribute: ($) =>
+      seq(
+        "#",
+        field("name", $.identifier),
+        optional(field("arguments", $.attribute_arguments))
+      ),
+
+    attribute_arguments: ($) =>
+      seq(
+        "(",
+        optional(choice(
+          seq(sep1($.attribute_named_argument, ","), optional(",")),
+          seq(sep1($.attribute_value, ","), optional(","))
+        )),
+        ")"
+      ),
+
+    attribute_named_argument: ($) =>
+      seq(field("name", $.identifier), ":", field("value", $.attribute_value)),
+
+    attribute_value: ($) =>
+      choice(
+        alias($._attribute_string, $.string),
+        alias($._attribute_raw_string, $.raw_string),
+        seq(optional("-"), $.integer),
+        $.boolean,
+        $.identifier,
+        $.attribute_list
+      ),
+
+    attribute_list: ($) =>
+      seq("[", optional(seq(sep1($.attribute_value, ","), optional(","))), "]"),
 
     enum_declaration: ($) =>
       seq(

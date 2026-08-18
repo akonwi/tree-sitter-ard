@@ -1,0 +1,147 @@
+==================
+JSON field attributes
+==================
+
+struct User {
+  #json(name: "displayName", omit: none)
+  display_name: Str?,
+  #json(skip: true)
+  password_hash: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (attribute_named_argument
+              (identifier)
+              (attribute_value
+                (string
+                  (string_content))))
+            (attribute_named_argument
+              (identifier)
+              (attribute_value
+                (identifier)))))
+        (identifier)
+        (nullable_type
+          (primitive_type)))
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (attribute_named_argument
+              (identifier)
+              (attribute_value
+                (boolean)))))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
+Static attribute values
+==================
+
+struct Value {
+  #metadata("text", -2, true, symbol, [1, false])
+  field: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (attribute_value
+              (string
+                (string_content)))
+            (attribute_value
+              (integer))
+            (attribute_value
+              (boolean))
+            (attribute_value
+              (identifier))
+            (attribute_value
+              (attribute_list
+                (attribute_value
+                  (integer))
+                (attribute_value
+                  (boolean))))))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
+Attribute strings reject interpolation
+==================
+
+struct Value {
+  #json(name: "{field}")
+  field: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (attribute_named_argument
+              (identifier)
+              (ERROR)
+              (attribute_value
+                (identifier)))
+            (ERROR)))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
+Comma-only attribute forms are invalid
+==================
+
+struct Value {
+  #metadata(,)
+  first: Str,
+  #metadata([,])
+  second: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (ERROR)))
+        (identifier)
+        (nullable_type
+          (primitive_type)))
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_arguments
+            (attribute_value
+              (attribute_list
+                (ERROR)))))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
