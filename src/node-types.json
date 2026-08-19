@@ -2003,6 +2003,16 @@
     "type": "trait_method",
     "named": true,
     "fields": {
+      "mutating": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "mut",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,

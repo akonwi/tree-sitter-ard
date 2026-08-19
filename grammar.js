@@ -329,7 +329,8 @@ module.exports = grammar({
     trait_method: ($) =>
       seq(
         "fn",
-        field("name", $.identifier),
+        optional(field("mutating", "mut")),
+        field("name", choice($.identifier, alias("mut", $.identifier))),
         field("parameters", $.parameter_list),
         optional(field("return_type", $.type))
       ),
