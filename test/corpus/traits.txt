@@ -1,0 +1,26 @@
+==================
+Trait receiver mutability
+==================
+trait Counter {
+  fn mut set(value: Int)
+  fn mut()
+  fn mut mut()
+}
+---
+
+(source_file
+  (trait_declaration
+    name: (identifier)
+    (trait_method
+      name: (identifier)
+      parameters: (parameter_list
+        (parameter
+          name: (identifier)
+          type: (nullable_type
+            (primitive_type)))))
+    (trait_method
+      name: (identifier)
+      parameters: (parameter_list))
+    (trait_method
+      name: (identifier)
+      parameters: (parameter_list))))
