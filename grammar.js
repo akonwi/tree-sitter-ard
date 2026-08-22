@@ -455,7 +455,7 @@ module.exports = grammar({
 
     unary_expression: ($) =>
       choice(
-        prec(PREC.unary, seq(choice("-", "mut", "deref"), $.unary_expression)),
+        prec(PREC.unary, seq(choice("-", "mut"), $.unary_expression)),
         $.try_expression,
         $.postfix_expression,
         $.primary_expression
