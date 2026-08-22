@@ -2419,10 +2419,6 @@
     "named": false
   },
   {
-    "type": "deref",
-    "named": false
-  },
-  {
     "type": "dereference_operator",
     "named": true
   },

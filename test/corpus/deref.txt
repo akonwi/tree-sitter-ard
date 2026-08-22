@@ -206,13 +206,20 @@ mut reference.@
                           (dereference_operator))))))))))))))
 
 ==================
-Legacy deref unary expression
+Deref is an ordinary identifier
 ==================
-deref reference
+let deref = 1
+fn deref(deref: Int) Int {
+  deref
+}
+struct Value {
+  deref: Int,
+}
 ---
 
 (source_file
-  (expression_statement
+  (variable_declaration
+    (identifier)
     (assignment_expression
       (range_expression
         (or_expression
@@ -221,83 +228,19 @@ deref reference
               (additive_expression
                 (multiplicative_expression
                   (unary_expression
-                    (unary_expression
-                      (primary_expression
-                        (identifier)))))))))))))
-
-==================
-Deref and mut compose one layer at a time
-==================
-deref mut value
-mut deref reference
----
-
-(source_file
-  (expression_statement
-    (assignment_expression
-      (range_expression
-        (or_expression
-          (and_expression
-            (comparison_expression
-              (additive_expression
-                (multiplicative_expression
-                  (unary_expression
-                    (unary_expression
-                      (unary_expression
-                        (primary_expression
-                          (identifier)))))))))))))
-  (expression_statement
-    (assignment_expression
-      (range_expression
-        (or_expression
-          (and_expression
-            (comparison_expression
-              (additive_expression
-                (multiplicative_expression
-                  (unary_expression
-                    (unary_expression
-                      (unary_expression
-                        (primary_expression
-                          (identifier))))))))))))))
-
-==================
-Deref binds below postfix and above addition
-==================
-deref reference.field + value
----
-
-(source_file
-  (expression_statement
-    (assignment_expression
-      (range_expression
-        (or_expression
-          (and_expression
-            (comparison_expression
-              (additive_expression
-                (multiplicative_expression
-                  (unary_expression
-                    (unary_expression
-                      (postfix_expression
-                        (primary_expression
-                          (identifier))
-                        (postfix
-                          (identifier))))))
-                (additive_expression
-                  (multiplicative_expression
-                    (unary_expression
-                      (primary_expression
-                        (identifier)))))))))))))
-
-==================
-Not consumes a dereference comparison
-==================
-not deref reference == value
----
-
-(source_file
-  (expression_statement
-    (assignment_expression
-      (not_expression
+                    (primary_expression
+                      (number)))))))))))
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (nullable_type
+          (primitive_type))))
+    (nullable_type
+      (primitive_type))
+    (block
+      (expression_statement
         (assignment_expression
           (range_expression
             (or_expression
@@ -306,14 +249,15 @@ not deref reference == value
                   (additive_expression
                     (multiplicative_expression
                       (unary_expression
-                        (unary_expression
-                          (primary_expression
-                            (identifier))))))
-                  (additive_expression
-                    (multiplicative_expression
-                      (unary_expression
                         (primary_expression
-                          (identifier))))))))))))))
+                          (identifier)))))))))))))
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
 
 ==================
 Postfix dereference requires adjacency
