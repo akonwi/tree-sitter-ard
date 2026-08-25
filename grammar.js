@@ -272,7 +272,14 @@ module.exports = grammar({
     attribute: ($) =>
       seq(
         "#",
-        field("name", $.identifier),
+        choice(
+          field("name", $.identifier),
+          seq(
+            field("namespace", $.identifier),
+            alias(token.immediate(/[ \t]*:[ \t]*/), $.attribute_namespace_separator),
+            field("name", alias(token.immediate(/(?:[A-Za-z_][A-Za-z0-9_]*|\$[A-Za-z_][A-Za-z0-9_]*)/), $.identifier))
+          )
+        ),
         optional(field("arguments", $.attribute_arguments))
       ),
 
