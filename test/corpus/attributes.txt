@@ -44,6 +44,105 @@ struct User {
           (primitive_type))))))
 
 ==================
+Namespaced Go field attributes
+==================
+
+struct Config {
+  #go:yaml("global_context,omitempty")
+  #go:validate("required")
+  #go:type("kind")
+  global_context: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier)
+          (attribute_namespace_separator)
+          (identifier)
+          (attribute_arguments
+            (attribute_value
+              (string
+                (string_content)))))
+        (attribute
+          (identifier)
+          (attribute_namespace_separator)
+          (identifier)
+          (attribute_arguments
+            (attribute_value
+              (string
+                (string_content)))))
+        (attribute
+          (identifier)
+          (attribute_namespace_separator)
+          (identifier)
+          (attribute_arguments
+            (attribute_value
+              (string
+                (string_content)))))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
+Namespaced attributes cannot cross lines
+==================
+
+struct Config {
+  #go:
+    yaml("value")
+  value: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier))
+        (ERROR
+          (attribute_namespace_separator)
+          (identifier)
+          (identifier))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
+Namespaced tag keys require complete identifiers
+==================
+
+struct Config {
+  #go:$("value")
+  value: Str,
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_body
+      (struct_field
+        (attribute
+          (identifier))
+        (ERROR
+          (attribute_namespace_separator)
+          (identifier)
+          (identifier))
+        (identifier)
+        (nullable_type
+          (primitive_type))))))
+
+==================
 Static attribute values
 ==================
 

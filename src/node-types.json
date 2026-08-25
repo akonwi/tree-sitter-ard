@@ -260,7 +260,27 @@
             "named": true
           }
         ]
+      },
+      "namespace": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "attribute_namespace_separator",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2401,6 +2421,10 @@
   {
     "type": "as",
     "named": false
+  },
+  {
+    "type": "attribute_namespace_separator",
+    "named": true
   },
   {
     "type": "brace_escape",
