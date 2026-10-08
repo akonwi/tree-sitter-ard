@@ -1,0 +1,42 @@
+==================
+Struct literal field shorthand
+==================
+Person{
+  name
+  // preserved
+  age,
+  email: email,
+}
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (struct_literal
+                        (identifier)
+                        (struct_literal_body
+                          (struct_literal_field
+                            (identifier))
+                          (comment)
+                          (struct_literal_field
+                            (identifier))
+                          (struct_literal_field
+                            (identifier)
+                            (assignment_expression
+                              (range_expression
+                                (or_expression
+                                  (and_expression
+                                    (comparison_expression
+                                      (additive_expression
+                                        (multiplicative_expression
+                                          (unary_expression
+                                            (primary_expression
+                                              (identifier))))))))))))))))))))))))

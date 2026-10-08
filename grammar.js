@@ -557,10 +557,13 @@ module.exports = grammar({
       ),
 
     struct_literal_body: ($) =>
-      seq("{", optional(sep1($.struct_literal_field, ",")), optional(","), "}"),
+      seq("{", repeat(seq($.struct_literal_field, optional(","))), "}"),
 
     struct_literal_field: ($) =>
-      seq(field("name", $.identifier), ":", field("value", $.expression)),
+      choice(
+        seq(field("name", $.identifier), ":", field("value", $.expression)),
+        field("name", $.identifier)
+      ),
 
     unsafe_block: ($) =>
       seq("unsafe", field("body", $.block)),
