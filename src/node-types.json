@@ -105,6 +105,32 @@
     }
   },
   {
+    "type": "address_of_expression",
+    "named": true,
+    "fields": {
+      "mutable": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "mut",
+            "named": false
+          }
+        ]
+      },
+      "operand": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "and_expression",
     "named": true,
     "fields": {},
@@ -1357,6 +1383,10 @@
           "named": true
         },
         {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
           "type": "primitive_type",
           "named": true
         },
@@ -1455,6 +1485,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "pointer_type",
+    "named": true,
+    "fields": {
+      "inner": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "mutable": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "mut",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -1686,6 +1742,10 @@
         },
         {
           "type": "parenthesized_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
           "named": true
         },
         {
@@ -2149,6 +2209,10 @@
       "required": true,
       "types": [
         {
+          "type": "address_of_expression",
+          "named": true
+        },
+        {
           "type": "postfix_expression",
           "named": true
         },
@@ -2284,6 +2348,10 @@
   },
   {
     "type": "%",
+    "named": false
+  },
+  {
+    "type": "&",
     "named": false
   },
   {

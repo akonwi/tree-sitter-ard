@@ -1,0 +1,149 @@
+==================
+Pointer types
+==================
+fn rename(user: *mut User, view: *User) *mut User? {}
+---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)
+        (nullable_type
+          (pointer_type
+            (nullable_type
+              (identifier)))))
+      (parameter
+        (identifier)
+        (nullable_type
+          (pointer_type
+            (nullable_type
+              (identifier))))))
+    (nullable_type
+      (pointer_type
+        (nullable_type
+          (identifier))))
+    (block)))
+
+==================
+Address-of expressions
+==================
+&mut User{name: "Ada"}
+&user
+&mut 1 + 2
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (address_of_expression
+                      (unary_expression
+                        (primary_expression
+                          (struct_literal
+                            (identifier)
+                            (struct_literal_body
+                              (struct_literal_field
+                                (identifier)
+                                (assignment_expression
+                                  (range_expression
+                                    (or_expression
+                                      (and_expression
+                                        (comparison_expression
+                                          (additive_expression
+                                            (multiplicative_expression
+                                              (unary_expression
+                                                (primary_expression
+                                                  (string
+                                                    (string_content))))))))))))))))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (address_of_expression
+                      (unary_expression
+                        (primary_expression
+                          (identifier)))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (address_of_expression
+                      (unary_expression
+                        (primary_expression
+                          (number))))))
+                (additive_expression
+                  (multiplicative_expression
+                    (unary_expression
+                      (primary_expression
+                        (number)))))))))))))
+
+==================
+Postfix pointer dereference
+==================
+user.* = view.*
+user.*.name
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (identifier))
+                      (postfix
+                        (dereference_operator))))))))))
+      (assignment_expression
+        (range_expression
+          (or_expression
+            (and_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (unary_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))))))))))))
+  (expression_statement
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (postfix_expression
+                        (primary_expression
+                          (identifier))
+                        (postfix
+                          (dereference_operator)))
+                      (postfix
+                        (identifier)))))))))))))

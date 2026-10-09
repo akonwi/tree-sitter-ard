@@ -2764,6 +2764,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "address_of_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "try_expression"
         },
         {
@@ -2870,11 +2874,57 @@
         }
       ]
     },
+    "address_of_expression": {
+      "type": "PREC",
+      "value": 9,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "&"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "mutable",
+                "content": {
+                  "type": "STRING",
+                  "value": "mut"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "operand",
+            "content": {
+              "type": "SYMBOL",
+              "name": "unary_expression"
+            }
+          }
+        ]
+      }
+    },
     "dereference_operator": {
       "type": "TOKEN",
       "content": {
-        "type": "STRING",
-        "value": ".@"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": ".*"
+          },
+          {
+            "type": "STRING",
+            "value": ".@"
+          }
+        ]
       }
     },
     "argument_list": {
@@ -3807,6 +3857,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "pointer_type"
+        },
+        {
+          "type": "SYMBOL",
           "name": "mutable_type"
         },
         {
@@ -3867,6 +3921,43 @@
           "value": "Void"
         }
       ]
+    },
+    "pointer_type": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "*"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "mutable",
+                "content": {
+                  "type": "STRING",
+                  "value": "mut"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "inner",
+            "content": {
+              "type": "SYMBOL",
+              "name": "type"
+            }
+          }
+        ]
+      }
     },
     "mutable_type": {
       "type": "SEQ",
