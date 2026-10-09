@@ -660,10 +660,10 @@ module.exports = grammar({
 
     primitive_type: ($) => choice("Int", "Float", "Str", "Bool", "Void"),
 
-    // `*T` and `*mut T` (ADR 0073). `mut T` remains for `mut Trait` and the
+    // `&T` and `&mut T` (ADR 0073). `mut T` remains for `mut Trait` and the
     // legacy pointer spelling.
     pointer_type: ($) =>
-      prec(1, seq("*", optional(field("mutable", "mut")), field("inner", $.type))),
+      prec(1, seq("&", optional(field("mutable", "mut")), field("inner", $.type))),
 
     mutable_type: ($) => seq("mut", field("inner", $.type)),
 

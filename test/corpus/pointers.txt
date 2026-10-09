@@ -1,7 +1,7 @@
 ==================
 Pointer types
 ==================
-fn rename(user: *mut User, view: *User) *mut User? {}
+fn rename(user: &mut User, view: &User) &mut User? {}
 ---
 
 (source_file
