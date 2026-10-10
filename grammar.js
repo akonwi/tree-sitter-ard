@@ -463,6 +463,7 @@ module.exports = grammar({
     unary_expression: ($) =>
       choice(
         prec(PREC.unary, seq(choice("-", "mut"), $.unary_expression)),
+        $.address_of_expression,
         $.try_expression,
         $.postfix_expression,
         $.primary_expression
@@ -483,7 +484,16 @@ module.exports = grammar({
         seq(".", $.identifier)
       ),
 
-    dereference_operator: ($) => token(".@"),
+    // `&x` and `&mut x` (ADR 0073). The `mut` belongs to the operator, so
+    // `&mut x` never parses as `&` applied to the legacy `mut x` borrow.
+    address_of_expression: ($) =>
+      prec(
+        PREC.unary + 1,
+        seq("&", optional(field("mutable", "mut")), field("operand", $.unary_expression))
+      ),
+
+    // `.*` dereferences a pointer (ADR 0073); `.@` is the legacy spelling.
+    dereference_operator: ($) => token(choice(".*", ".@")),
 
     // Calls may use horizontal spacing before `(`, but a newline terminates the
     // expression in the compiler parser. Keeping the opener immediate prevents
@@ -636,6 +646,7 @@ module.exports = grammar({
     _type_primary: ($) =>
       choice(
         $.primitive_type,
+        $.pointer_type,
         $.mutable_type,
         $.parenthesized_type,
         $.function_type,
@@ -648,6 +659,11 @@ module.exports = grammar({
       ),
 
     primitive_type: ($) => choice("Int", "Float", "Str", "Bool", "Void"),
+
+    // `&T` and `&mut T` (ADR 0073). `mut T` remains for `mut Trait` and the
+    // legacy pointer spelling.
+    pointer_type: ($) =>
+      prec(1, seq("&", optional(field("mutable", "mut")), field("inner", $.type))),
 
     mutable_type: ($) => seq("mut", field("inner", $.type)),
 
