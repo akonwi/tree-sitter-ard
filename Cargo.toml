@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-ard"
 description = "Ard grammar for tree-sitter"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Akonwi Ngoh"]
 license = "MIT"
 readme = "README.md"

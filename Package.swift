@@ -7,7 +7,7 @@ let package = Package(
         .library(name: "TreeSitterArd", targets: ["TreeSitterArd"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", from: "0.8.0"),
+        .package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", from: "0.25.0"),
     ],
     targets: [
         .target(
@@ -15,8 +15,10 @@ let package = Package(
             dependencies: [],
             path: ".",
             sources: [
+                // Listed explicitly (not probed with FileManager) so SwiftPM
+                // finds them regardless of the working directory. Add
+                // "src/scanner.c" here if the grammar gains an external scanner.
                 "src/parser.c",
-                // NOTE: if your language has an external scanner, add it here.
             ],
             resources: [
                 .copy("queries")
