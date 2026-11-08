@@ -492,8 +492,8 @@ module.exports = grammar({
         seq("&", optional(field("mutable", "mut")), field("operand", $.unary_expression))
       ),
 
-    // `.*` dereferences a pointer (ADR 0073); `.@` is the legacy spelling.
-    dereference_operator: ($) => token(choice(".*", ".@")),
+    // `.*` dereferences a pointer (ADR 0073).
+    dereference_operator: ($) => token(".*"),
 
     // Calls may use horizontal spacing before `(`, but a newline terminates the
     // expression in the compiler parser. Keeping the opener immediate prevents

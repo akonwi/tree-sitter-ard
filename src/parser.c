@@ -4041,9 +4041,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 101:
       ACCEPT_TOKEN(anon_sym_DOT);
+      if (lookahead == '*') ADVANCE(103);
       if (lookahead == '.') ADVANCE(91);
-      if (lookahead == '*' ||
-          lookahead == '@') ADVANCE(103);
       END_STATE();
     case 102:
       ACCEPT_TOKEN(anon_sym_AMP);

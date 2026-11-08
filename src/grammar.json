@@ -2914,17 +2914,8 @@
     "dereference_operator": {
       "type": "TOKEN",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": ".*"
-          },
-          {
-            "type": "STRING",
-            "value": ".@"
-          }
-        ]
+        "type": "STRING",
+        "value": ".*"
       }
     },
     "argument_list": {
