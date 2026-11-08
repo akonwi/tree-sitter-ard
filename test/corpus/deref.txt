@@ -1,7 +1,7 @@
 ==================
-Postfix value-at dereference
+Postfix dereference
 ==================
-reference.@
+reference.*
 ---
 
 (source_file
@@ -23,12 +23,12 @@ reference.@
 ==================
 Postfix dereference composes left to right
 ==================
-reference.@.field
-reference.field.@
-reference.@.@
-load().@
-reference.@()
-reference.@().field
+reference.*.field
+reference.field.*
+reference.*.*
+load().*
+reference.*()
+reference.*().field
 foo()()
 ---
 
@@ -157,10 +157,10 @@ foo()()
                         (argument_list)))))))))))))
 
 ==================
-Postfix dereference composes with mut
+Postfix dereference composes with address-of
 ==================
-(mut value).@
-mut reference.@
+(&mut value).*
+&mut reference.*
 ---
 
 (source_file
@@ -184,9 +184,10 @@ mut reference.@
                                     (additive_expression
                                       (multiplicative_expression
                                         (unary_expression
-                                          (unary_expression
-                                            (primary_expression
-                                              (identifier)))))))))))))
+                                          (address_of_expression
+                                            (unary_expression
+                                              (primary_expression
+                                                (identifier))))))))))))))
                       (postfix
                         (dereference_operator))))))))))))
   (expression_statement
@@ -198,12 +199,13 @@ mut reference.@
               (additive_expression
                 (multiplicative_expression
                   (unary_expression
-                    (unary_expression
-                      (postfix_expression
-                        (primary_expression
-                          (identifier))
-                        (postfix
-                          (dereference_operator))))))))))))))
+                    (address_of_expression
+                      (unary_expression
+                        (postfix_expression
+                          (primary_expression
+                            (identifier))
+                          (postfix
+                            (dereference_operator)))))))))))))))
 
 ==================
 Deref is an ordinary identifier
@@ -263,7 +265,16 @@ struct Value {
 Postfix dereference requires adjacency
 :error
 ==================
-reference. @
+reference. *
+---
+
+(source_file)
+
+==================
+Removed at-sign dereference is an error
+:error
+==================
+reference.@
 ---
 
 (source_file)
@@ -271,7 +282,7 @@ reference. @
 ==================
 Calls stay on the same source line
 ==================
-reference.@ ()
+reference.* ()
 foo () ()
 ---
 
@@ -314,7 +325,7 @@ foo () ()
 ==================
 A newline terminates before a call
 ==================
-reference.@
+reference.*
 ()
 ---
 
