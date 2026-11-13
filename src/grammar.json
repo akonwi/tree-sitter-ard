@@ -845,10 +845,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "("
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -885,22 +881,6 @@
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": ","
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
         }
       ]
     },
@@ -4479,10 +4459,6 @@
     ],
     [
       "postfix"
-    ],
-    [
-      "tuple_pattern",
-      "primary_expression"
     ]
   ],
   "precedences": [

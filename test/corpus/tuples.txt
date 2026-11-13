@@ -164,8 +164,8 @@ Tuple expressions
 ==================
 Tuple destructuring
 ==================
-let (low, high) = bounds()
-mut (_, count,) = totals()
+let low, high = bounds()
+mut _, count, rest = totals()
 let pair: (Int, Str) = (1, "a")
 ---
 
@@ -190,6 +190,7 @@ let pair: (Int, Str) = (1, "a")
   (variable_declaration
     (tuple_pattern
       (wildcard)
+      (identifier)
       (identifier))
     (assignment_expression
       (range_expression

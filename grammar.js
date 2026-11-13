@@ -40,7 +40,6 @@ module.exports = grammar({
     [$.defer_statement, $.primary_expression],
     [$.trait_method],
     [$.postfix],
-    [$.tuple_pattern, $.primary_expression],
   ],
 
   precedences: ($) => [
@@ -185,14 +184,11 @@ module.exports = grammar({
         field("value", $.expression)
       )),
 
-    // `let (a, _) = pair` binds each tuple element to a name.
+    // `let a, _ = pair` binds each tuple element to a name.
     tuple_pattern: ($) =>
       seq(
-        "(",
         choice($.identifier, $.wildcard),
-        repeat1(seq(",", choice($.identifier, $.wildcard))),
-        optional(","),
-        ")"
+        repeat1(seq(",", choice($.identifier, $.wildcard)))
       ),
 
     function_declaration: ($) =>
