@@ -3571,8 +3571,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 20:
       if (lookahead == '>') ADVANCE(112);
       if (lookahead != 0 &&
-          lookahead != '\\' &&
-          lookahead != 'n') ADVANCE(20);
+          lookahead != '\n') ADVANCE(20);
       END_STATE();
     case 21:
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -4019,10 +4018,9 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_LT);
       if (lookahead == '=') ADVANCE(93);
       if (lookahead != 0 &&
+          lookahead != '\n' &&
           lookahead != '=' &&
-          lookahead != '>' &&
-          lookahead != '\\' &&
-          lookahead != 'n') ADVANCE(20);
+          lookahead != '>') ADVANCE(20);
       END_STATE();
     case 78:
       ACCEPT_TOKEN(anon_sym_LT);
@@ -4083,8 +4081,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_LT_EQ);
       if (lookahead == '>') ADVANCE(112);
       if (lookahead != 0 &&
-          lookahead != '\\' &&
-          lookahead != 'n') ADVANCE(20);
+          lookahead != '\n') ADVANCE(20);
       END_STATE();
     case 94:
       ACCEPT_TOKEN(anon_sym_GT_EQ);

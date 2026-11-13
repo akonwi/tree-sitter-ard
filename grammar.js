@@ -709,7 +709,7 @@ module.exports = grammar({
     type_arguments: ($) => seq("<", sep1($.type, ","), ">"),
 
     // Minimal generic call suffix for expressions (avoids '<' vs comparison ambiguity).
-    generic_suffix: ($) => token(seq("<", /[^>\\n]+/, ">")),
+    generic_suffix: ($) => token(seq("<", /[^>\n]+/, ">")),
 
     list_type: ($) => seq("[", field("element", $.type), "]"),
 
