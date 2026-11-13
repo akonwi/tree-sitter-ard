@@ -244,3 +244,61 @@ let pair: (Int, Str) = (1, "a")
                                         (primary_expression
                                           (string
                                             (string_content)))))))))))))))))))))))
+
+==================
+Tuple destructuring with redundant syntax
+==================
+let (low, high) = bounds()
+mut (count, _,) = totals()
+let a, b, = pair
+---
+
+(source_file
+  (variable_declaration
+    (tuple_pattern
+      (identifier)
+      (identifier))
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (identifier))
+                      (postfix
+                        (argument_list))))))))))))
+  (variable_declaration
+    (tuple_pattern
+      (identifier)
+      (wildcard))
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (postfix_expression
+                      (primary_expression
+                        (identifier))
+                      (postfix
+                        (argument_list))))))))))))
+  (variable_declaration
+    (tuple_pattern
+      (identifier)
+      (identifier))
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (identifier))))))))))))

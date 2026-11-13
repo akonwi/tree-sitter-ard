@@ -842,6 +842,32 @@
       }
     },
     "tuple_pattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_tuple_pattern_names"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_tuple_pattern_names"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
+    "_tuple_pattern_names": {
       "type": "SEQ",
       "members": [
         {
@@ -881,6 +907,18 @@
               }
             ]
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -4459,6 +4497,10 @@
     ],
     [
       "postfix"
+    ],
+    [
+      "_tuple_pattern_names",
+      "primary_expression"
     ]
   ],
   "precedences": [
