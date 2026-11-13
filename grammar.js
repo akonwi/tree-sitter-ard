@@ -40,6 +40,7 @@ module.exports = grammar({
     [$.defer_statement, $.primary_expression],
     [$.trait_method],
     [$.postfix],
+    [$.tuple_pattern, $.primary_expression],
   ],
 
   precedences: ($) => [
@@ -173,11 +174,26 @@ module.exports = grammar({
     variable_declaration: ($) =>
       prec(1, seq(
         choice("let", "mut"),
-        field("name", $.identifier),
-        optional(seq(":", field("type", $.type))),
+        choice(
+          seq(
+            field("name", $.identifier),
+            optional(seq(":", field("type", $.type)))
+          ),
+          field("pattern", $.tuple_pattern)
+        ),
         "=",
         field("value", $.expression)
       )),
+
+    // `let (a, _) = pair` binds each tuple element to a name.
+    tuple_pattern: ($) =>
+      seq(
+        "(",
+        choice($.identifier, $.wildcard),
+        repeat1(seq(",", choice($.identifier, $.wildcard))),
+        optional(","),
+        ")"
+      ),
 
     function_declaration: ($) =>
       seq(
@@ -536,12 +552,23 @@ module.exports = grammar({
         $.struct_literal,
         $.block,
         $.parenthesized_expression,
+        $.tuple_expression,
         $.anonymous_function,
         $.match_expression,
         $.select_expression
       ),
 
     parenthesized_expression: ($) => prec(-1, seq("(", $.expression, ")")),
+
+    // A tuple has at least two elements: `()` is void and `(x)` is grouping.
+    tuple_expression: ($) =>
+      prec(-1, seq(
+        "(",
+        $.expression,
+        repeat1(seq(",", $.expression)),
+        optional(","),
+        ")"
+      )),
 
     self_expression: ($) => "self",
     string_interpolation: ($) =>
@@ -649,6 +676,7 @@ module.exports = grammar({
         $.pointer_type,
         $.mutable_type,
         $.parenthesized_type,
+        $.tuple_type,
         $.function_type,
         $.fixed_array_type,
         $.list_type,
@@ -668,6 +696,9 @@ module.exports = grammar({
     mutable_type: ($) => seq("mut", field("inner", $.type)),
 
     parenthesized_type: ($) => seq("(", $.type, ")"),
+
+    tuple_type: ($) =>
+      seq("(", $.type, repeat1(seq(",", $.type)), optional(","), ")"),
 
     generic_type: ($) =>
       seq(choice($.qualified_identifier, $.identifier), field("type_args", $.type_arguments)),
