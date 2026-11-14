@@ -467,21 +467,27 @@ module.exports = grammar({
         $.additive_expression
       ),
 
+    // Bitwise operators follow Go's precedence ladder: `|` and `^` bind like
+    // `+`, and `&`, `<<` and `>>` bind like `*` (Ard ADR 0080). A binary `&`
+    // must be on the operand's line: on the next line, `&x` starts a new
+    // statement with the address-of operator, as in the compiler.
     additive_expression: ($) =>
       choice(
-        prec.left(PREC.add, seq($.multiplicative_expression, choice("+", "-"), $.additive_expression)),
+        prec.left(PREC.add, seq($.multiplicative_expression, choice("+", "-", "|", "^"), $.additive_expression)),
         $.multiplicative_expression
       ),
 
     multiplicative_expression: ($) =>
       choice(
-        prec.left(PREC.multiply, seq($.unary_expression, choice("*", "/", "%"), $.multiplicative_expression)),
+        prec.left(PREC.multiply, seq($.unary_expression, choice("*", "/", "%", $._binary_ampersand, "<<", ">>"), $.multiplicative_expression)),
         $.unary_expression
       ),
 
+    _binary_ampersand: ($) => alias(token.immediate(prec(1, /[ \t]*&/)), "&"),
+
     unary_expression: ($) =>
       choice(
-        prec(PREC.unary, seq(choice("-", "mut"), $.unary_expression)),
+        prec(PREC.unary, seq(choice("-", "~", "mut"), $.unary_expression)),
         $.address_of_expression,
         $.try_expression,
         $.postfix_expression,
@@ -709,7 +715,8 @@ module.exports = grammar({
     type_arguments: ($) => seq("<", sep1($.type, ","), ">"),
 
     // Minimal generic call suffix for expressions (avoids '<' vs comparison ambiguity).
-    generic_suffix: ($) => token(seq("<", /[^>\n]+/, ">")),
+    // Type arguments never start with `<`, so `a << b` is a shift.
+    generic_suffix: ($) => token(seq("<", /[^<>\n][^>\n]*/, ">")),
 
     list_type: ($) => seq("[", field("element", $.type), "]"),
 
