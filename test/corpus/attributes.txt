@@ -244,3 +244,151 @@ struct Value {
         (identifier)
         (nullable_type
           (primitive_type))))))
+
+==================
+Platform attributes on use lines
+==================
+
+use go:os
+#platform(unix)
+use go:syscall
+
+---
+
+(source_file
+  (import_statement
+    (module_path))
+  (import_statement
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (module_path)))
+
+==================
+Platform attributes on declarations
+==================
+
+#platform(unix, darwin_arm64)
+fn watched() Int {
+  1
+}
+
+#platform(windows)
+private fn hidden() {}
+
+#platform(unix)
+test fn works() {}
+
+#platform(unix)
+let size: Int = 1
+
+#platform(unix)
+struct Fd {}
+
+#platform(unix)
+enum Mode { raw }
+
+#platform(unix)
+trait Closer {}
+
+#platform(unix)
+impl Fd {}
+
+---
+
+(source_file
+  (function_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (parameter_list)
+    (nullable_type
+      (primitive_type))
+    (block
+      (expression_statement
+        (assignment_expression
+          (range_expression
+            (or_expression
+              (and_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (unary_expression
+                        (primary_expression
+                          (number)))))))))))))
+  (function_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (parameter_list)
+    (block))
+  (function_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (parameter_list)
+    (block))
+  (variable_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (nullable_type
+      (primitive_type))
+    (assignment_expression
+      (range_expression
+        (or_expression
+          (and_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (unary_expression
+                    (primary_expression
+                      (number)))))))))))
+  (struct_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (struct_body))
+  (enum_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (enum_variant
+      (identifier)))
+  (trait_declaration
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier))
+  (impl_block
+    (attribute
+      (identifier)
+      (attribute_arguments
+        (attribute_value
+          (identifier))))
+    (identifier)
+    (impl_body)))

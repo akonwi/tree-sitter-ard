@@ -138,6 +138,7 @@ module.exports = grammar({
 
     import_statement: ($) =>
       seq(
+        optional($._attributes),
         "use",
         field("path", $.module_path),
         optional(seq("as", field("alias", $.identifier)))
@@ -173,6 +174,7 @@ module.exports = grammar({
 
     variable_declaration: ($) =>
       prec(1, seq(
+        optional($._attributes),
         choice("let", "mut"),
         choice(
           seq(
@@ -200,6 +202,7 @@ module.exports = grammar({
 
     function_declaration: ($) =>
       seq(
+        optional($._attributes),
         optional(choice("private", "test")),
         "fn",
         optional("mut"),
@@ -212,6 +215,7 @@ module.exports = grammar({
 
     extern_function: ($) =>
       seq(
+        optional($._attributes),
         optional("private"),
         "extern",
         "fn",
@@ -270,6 +274,7 @@ module.exports = grammar({
 
     struct_declaration: ($) =>
       seq(
+        optional($._attributes),
         optional("private"),
         "struct",
         field("name", $.identifier),
@@ -287,6 +292,10 @@ module.exports = grammar({
         ":",
         field("type", $.type)
       ),
+
+    // Attributes written on the lines before a top-level declaration or
+    // `use`, such as `#platform(unix)`.
+    _attributes: ($) => repeat1(field("attribute", $.attribute)),
 
     attribute: ($) =>
       seq(
@@ -330,6 +339,7 @@ module.exports = grammar({
 
     enum_declaration: ($) =>
       seq(
+        optional($._attributes),
         optional("private"),
         "enum",
         field("name", $.identifier),
@@ -344,6 +354,7 @@ module.exports = grammar({
 
     trait_declaration: ($) =>
       seq(
+        optional($._attributes),
         optional("private"),
         "trait",
         field("name", $.identifier),
@@ -363,6 +374,7 @@ module.exports = grammar({
 
     impl_block: ($) =>
       seq(
+        optional($._attributes),
         "impl",
         field("target", choice($.qualified_identifier, $.identifier)),
         optional(seq("for", field("for_type", $.identifier))),
